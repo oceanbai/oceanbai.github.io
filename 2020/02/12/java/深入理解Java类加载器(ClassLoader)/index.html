@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>深入理解java类加载器(ClassLoader) | 失败是成功之母</title>
+  <meta name="keywords" content=" 类加载器 ">
+  <meta name="description" content="深入理解java类加载器(ClassLoader) | 失败是成功之母">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。加油！加油！！加油！！！ Never give up ！！！！｜｜永不放弃｜｜ 古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;about&#x2F;index.html">
+<meta property="og:site_name" content="失败是成功之母">
+<meta property="og:description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。加油！加油！！加油！！！ Never give up ！！！！｜｜永不放弃｜｜ 古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-12T02:53:51.255Z">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Ocean Bai</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/oceanbai" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(8)</small></div></li>
+    
+        
+            
+            <li><div data-rel="java基础">java基础<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="java">java<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="面试">面试<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="8">
+<input type="hidden" id="yelog_site_word_count" value="42.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color3">垃圾</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">类加载器</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">反射</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">设计</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">面试</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="java基础 "
+           href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8(ClassLoader)/"
+           data-tag="类加载器"
+           data-author="" >
+            <span class="post-title" title="深入理解java类加载器(ClassLoader)">深入理解java类加载器(ClassLoader)</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF(Class%E5%AF%B9%E8%B1%A1)%E4%B8%8E%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"
+           data-tag="反射"
+           data-author="" >
+            <span class="post-title" title="深入理解Java类型信息(Class对象)与反射机制">深入理解Java类型信息(Class对象)与反射机制</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="java "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%96%87%E6%95%B0/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="回文数">回文数</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计"
+           data-author="" >
+            <span class="post-title" title="工厂方法模式--二">工厂方法模式--二</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/11/java/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"
+           data-tag="垃圾"
+           data-author="" >
+            <span class="post-title" title="垃圾回收">垃圾回收</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="模式"
+           data-author="" >
+            <span class="post-title" title="简单工厂模式--一">简单工厂模式--一</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="java "
+           href="/2019/11/30/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E5%A0%86/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="二叉堆">二叉堆</span>
+            <span class="post-date" title="2019-11-30 21:49:13">2019/11/30</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2019/11/30/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E8%A6%81%E6%B1%82/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="别人面试要求">别人面试要求</span>
+            <span class="post-date" title="2019-11-30 21:41:31">2019/11/30</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-java/深入理解Java类加载器(ClassLoader)" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">深入理解java类加载器(ClassLoader)</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="java基础">java基础</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">类加载器</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-12 21:35:13'>2020-02-12 21:41</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:9.5k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#深入理解Java类加载器-ClassLoader"><span class="toc-text">深入理解Java类加载器(ClassLoader)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载的机制的层次结构"><span class="toc-text">类加载的机制的层次结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动（Bootstrap）类加载器"><span class="toc-text">启动（Bootstrap）类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展（Extension）类加载器"><span class="toc-text">扩展（Extension）类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统（System）类加载器"><span class="toc-text">系统（System）类加载器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#理解双亲委派模式"><span class="toc-text">理解双亲委派模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#双亲委派模式工作原理"><span class="toc-text">双亲委派模式工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双亲委派模式优势"><span class="toc-text">双亲委派模式优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载器间的关系"><span class="toc-text">类加载器间的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类与类加载器"><span class="toc-text">类与类加载器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#类与类加载器-1"><span class="toc-text">类与类加载器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#了解class文件的显示加载与隐式加载的概念"><span class="toc-text">了解class文件的显示加载与隐式加载的概念</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写自己的类加载器"><span class="toc-text">编写自己的类加载器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义File类加载器"><span class="toc-text">自定义File类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义网络类加载器"><span class="toc-text">自定义网络类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#热部署类加载器"><span class="toc-text">热部署类加载器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#双亲委派模型的破坏者-线程上下文类加载器"><span class="toc-text">双亲委派模型的破坏者-线程上下文类加载器</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本篇博文主要是探讨类加载器，同时在本篇中列举的源码都基于Java8版本，不同的版本可能有些许差异。主要内容如下</p>
+<p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#深入理解Java类加载器-ClassLoader"><span class="toc-text">深入理解Java类加载器(ClassLoader)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载的机制的层次结构"><span class="toc-text">类加载的机制的层次结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动（Bootstrap）类加载器"><span class="toc-text">启动（Bootstrap）类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展（Extension）类加载器"><span class="toc-text">扩展（Extension）类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统（System）类加载器"><span class="toc-text">系统（System）类加载器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#理解双亲委派模式"><span class="toc-text">理解双亲委派模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#双亲委派模式工作原理"><span class="toc-text">双亲委派模式工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双亲委派模式优势"><span class="toc-text">双亲委派模式优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载器间的关系"><span class="toc-text">类加载器间的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类与类加载器"><span class="toc-text">类与类加载器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#类与类加载器-1"><span class="toc-text">类与类加载器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#了解class文件的显示加载与隐式加载的概念"><span class="toc-text">了解class文件的显示加载与隐式加载的概念</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写自己的类加载器"><span class="toc-text">编写自己的类加载器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义File类加载器"><span class="toc-text">自定义File类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义网络类加载器"><span class="toc-text">自定义网络类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#热部署类加载器"><span class="toc-text">热部署类加载器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#双亲委派模型的破坏者-线程上下文类加载器"><span class="toc-text">双亲委派模型的破坏者-线程上下文类加载器</span></a></li></ol></li></ol></div></p>
+<h1 id="深入理解Java类加载器-ClassLoader"><a href="#深入理解Java类加载器-ClassLoader" class="headerlink" title="深入理解Java类加载器(ClassLoader)"></a>深入理解Java类加载器(ClassLoader)</h1><h2 id="类加载的机制的层次结构"><a href="#类加载的机制的层次结构" class="headerlink" title="类加载的机制的层次结构"></a>类加载的机制的层次结构</h2><p>每个编写的”.java”拓展名类文件都存储着需要执行的程序逻辑，这些”.java”文件经过Java编译器编译成拓展名为”.class”的文件，”.class”文件中保存着Java代码经转换后的虚拟机指令，当需要使用某个类时，虚拟机将会加载它的”.class”文件，并创建对应的class对象，<strong>将class文件加载到虚拟机的内存，</strong>这个过程称为类加载，这里我们需要了解一下类加载的过程，如下：</p>
+<p><img src="/imag/javabases/image-20200126151351148.png" alt="image-20200126151351148"></p>
+<ul>
+<li><p>加载：类加载过程的一个阶段：<strong>通过一个类的完全限定查找此类字节码文件，并利用字节码文件创建一个Class对象</strong></p>
+</li>
+<li><p>验证：目的在于确保Class文件的字节流中包含信息符合当前虚拟机要求，不会危害虚拟机自身安全。主要包括四种验证，文件格式验证，元数据验证，字节码验证，符号引用验证。</p>
+</li>
+<li><p>准备：<strong>为类变量(即static修饰的字段变量)分配内存并且设置该类变量的初始值即0</strong>(如static int i=5;这里只将i初始化为0，至于5的值将在初始化时赋值)，这里不包含用final修饰的static，因为<strong>final在编译的时候就会分配了</strong>，注意这里不会为实例变量分配初始化，<code>类变量</code>会分配在方法区中，而<code>实例变量</code>是会随着对象一起分配到<code>Java堆</code>中。</p>
+</li>
+<li><p>解析：<strong>主要将常量池中的符号引用替换为直接引用的过程。</strong>符号引用就是一组符号来描述目标，可以是任何字面量，而直接引用就是直接指向目标的指针、相对偏移量或一个间接定位到目标的句柄。有类或接口的解析，字段解析，类方法解析，接口方法解析(这里涉及到字节码变量的引用，如需更详细了解，可参考《深入Java虚拟机》)。</p>
+</li>
+<li><p>初始化：类加载最后阶段，若该类具有超类，则对其进行初始化，执行静态初始化器和静态初始化成员变量(如前面只初始化了默认值的static变量将会在这个阶段赋值，<strong>成员变量也将被初始化</strong>)。</p>
+</li>
+</ul>
+<p>这便是类加载的5个过程，而类加载器的任务是根据一个类的全限定名来读取此类的二进制字节流到JVM中，然后转换为一个与目标类对应的java.lang.Class对象实例，在虚拟机提供了3种类加载器，引导（Bootstrap）类加载器、扩展（Extension）类加载器、系统（System）类加载器（也称应用类加载器），下面分别介绍</p>
+<h3 id="启动（Bootstrap）类加载器"><a href="#启动（Bootstrap）类加载器" class="headerlink" title="启动（Bootstrap）类加载器"></a>启动（Bootstrap）类加载器</h3><p>启动类加载器主要加载的是<strong>JVM自身需要的类</strong>，这个类加载使用C++语言实现的，是虚拟机自身的一部分，它负责将 <code>&lt;JAVA_HOME&gt;/lib</code>路径下的核心类库或<code>-Xbootclasspath</code>参数指定的路径下的jar包加载到内存中，注意必由于虚拟机是按照文件名识别加载jar包的，如rt.jar，如果文件名不被虚拟机识别，即使把jar包丢到lib目录下也是没有作用的(出于安全考虑，Bootstrap启动类加载器只加载包名为java、javax、sun等开头的类)。</p>
+<h3 id="扩展（Extension）类加载器"><a href="#扩展（Extension）类加载器" class="headerlink" title="扩展（Extension）类加载器"></a>扩展（Extension）类加载器</h3><p>扩展类加载器是指Sun公司(已被Oracle收购)实现的<code>sun.misc.Launcher$ExtClassLoader</code>类，由Java语言实现的，是Launcher的静态内部类，它负责加载<code>&lt;JAVA_HOME&gt;/lib/ext</code>目录下或者由系统变量<code>-Djava.ext.dir</code>指定位路径中的类库，开发者可以直接使用标准扩展类加载器。</p>
+<pre><code class="java">//ExtClassLoader类中获取路径的代码
+private static File[] getExtDirs() {
+     //加载&lt;JAVA_HOME&gt;/lib/ext目录中的类库
+     String s = System.getProperty(&quot;java.ext.dirs&quot;);
+     File[] dirs;
+     if (s != null) {
+         StringTokenizer st =
+             new StringTokenizer(s, File.pathSeparator);
+         int count = st.countTokens();
+         dirs = new File[count];
+         for (int i = 0; i &lt; count; i++) {
+             dirs[i] = new File(st.nextToken());
+         }
+     } else {
+         dirs = new File[0];
+     }
+     return dirs;
+ }</code></pre>
+<h3 id="系统（System）类加载器"><a href="#系统（System）类加载器" class="headerlink" title="系统（System）类加载器"></a>系统（System）类加载器</h3><p>也称应用程序加载器是指 Sun公司实现的<code>sun.misc.Launcher$AppClassLoader</code>。它负责加载系统类路径<code>java -classpath</code>或<code>-D java.class.path</code>指定路径下的类库，也就是我们经常用到的classpath路径，开发者可以直接使用系统类加载器，一般情况下该类加载是程序中默认的类加载器，通过<code>ClassLoader#getSystemClassLoader()</code>方法可以获取到该类加载器。</p>
+<p>在Java的日常应用程序开发中，类的加载几乎是由上述3种类加载器相互配合执行的，在必要时，我们还可以自定义类加载器。</p>
+<p><strong>需要注意的是，Java虚拟机对class文件采用的是按需加载的方式，也就是说当需要使用该类时才会将它的class文件加载到内存生成class对象，而且加载某个类的class文件时，Java虚拟机采用的是双亲委派模式即把请求交由父类处理，它一种任务委派模式，下面我们进一步了解它。</strong></p>
+<h2 id="理解双亲委派模式"><a href="#理解双亲委派模式" class="headerlink" title="理解双亲委派模式"></a>理解双亲委派模式</h2><h3 id="双亲委派模式工作原理"><a href="#双亲委派模式工作原理" class="headerlink" title="双亲委派模式工作原理"></a>双亲委派模式工作原理</h3><p>双亲委派模式要求除了顶层的启动类加载器外，其余的类加载器都应当有自己的父类加载器，请注意双亲委派模式中的父子关系并非通常所说的类继承关系，而是采用组合关系来复用父类加载器的相关代码，类加载器间的关系如下：</p>
+<p><img src="/imag/javabases/image-20200126154627343.png" alt="image-20200126154627343"></p>
+<p>双亲委派模式是在Java 1.2后引入的，其工作原理的是：<strong>如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行，如果父类加载器还存在其父类加载器，则进一步向上委托，依次递归，请求最终将到达顶层的启动类加载器，如果父类加载器可以完成类加载任务，就成功返回，倘若父类加载器无法完成此加载任务，子加载器才会尝试自己去加载，这就是双亲委派模式</strong>。即每个儿子都很懒，每次有活就丢给父亲去干，直到父亲说这件事我也干不了时，儿子自己想办法去完成，这不就是传说中的实力坑爹啊？那么采用这种模式有啥用呢?</p>
+<h3 id="双亲委派模式优势"><a href="#双亲委派模式优势" class="headerlink" title="双亲委派模式优势"></a>双亲委派模式优势</h3><p>采用双亲委派模式的是好处是Java类<strong>随着它的类加载器一起具备了一种带有优先级的层次关系</strong>，通过这种层级关可以<strong>避免类的重复加载</strong>，当父亲已经加载了该类时，就没有必要子ClassLoader再加载一次。其次是考虑到安全因素，java核心api中定义类型不会被随意替换，假设通过网络传递一个名为<code>java.lang.Integer</code>的类，通过双亲委托模式传递到启动类加载器，而启动类加载器在核心Java API发现这个名字的类，发现该类已被加载，并不会重新加载网络传递的过来的<code>java.lang.Integer</code>，而直接返回已加载过的<code>Integer.class</code>，这样便可以防止核心API库被随意篡改。可能你会想，如果我们在classpath路径下自定义一个名为<code>java.lang.SingleInterge</code>类(该类是胡编的)呢？该类并不存在<code>java.lang</code>中，经过双亲委托模式，传递到启动类加载器中，由于父类加载器路径下并没有该类，所以不会加载，将反向委托给子类加载器加载，最终会通过系统类加载器加载该类。但是这样做是不允许，因为<code>java.lang</code>是核心API包，需要访问权限，强制加载将会报出如下异常</p>
+<pre><code class="java">java.lang.SecurityException: Prohibited package name: java.lang</code></pre>
+<p>所以无论如何都无法加载成功的。下面我们从代码层面了解几个Java中定义的类加载器及其双亲委派模式的实现，它们类图关系如下</p>
+<p><img src="/imag/javabases/image-20200126155114087.png" alt="image-20200126155114087"></p>
+<p>从图可以看出顶层的类加载器是ClassLoader类，它是一个抽象类，其后所有的类加载器都继承自ClassLoader（不包括启动类加载器），这里我们主要介绍ClassLoader中几个比较重要的方法。</p>
+<ul>
+<li><p><strong>loadClass(String)</strong></p>
+<p>该方法加载指定名称（包括包名）的二进制类型，该方法在JDK1.2之后不再建议用户重写但用户可以直接调用该方法，<strong>loadClass()方法是ClassLoader类自己实现的，该方法中的逻辑就是双亲委派模式的实现，</strong>其源码如下，loadClass(String name, boolean resolve)是一个重载方法，resolve参数代表是否生成class对象的同时进行解析相关操作。</p>
+<pre><code class="java">protected Class&lt;?&gt; loadClass(String name, boolean resolve)
+      throws ClassNotFoundException
+  {
+      synchronized (getClassLoadingLock(name)) {
+          // 先从缓存查找该class对象，找到就不用重新加载
+          Class&lt;?&gt; c = findLoadedClass(name);
+          if (c == null) {
+              long t0 = System.nanoTime();
+              try {
+                  if (parent != null) {
+                      //如果找不到，则委托给父类加载器去加载
+                      c = parent.loadClass(name, false);
+                  } else {
+                  //如果没有父类，则委托给启动加载器去加载
+                      c = findBootstrapClassOrNull(name);
+                  }
+              } catch (ClassNotFoundException e) {
+                  // ClassNotFoundException thrown if class not found
+                  // from the non-null parent class loader
+              }
+
+              if (c == null) {
+                  // If still not found, then invoke findClass in order
+                  // 如果都没有找到，则通过自定义实现的findClass去查找并加载
+                  c = findClass(name);
+
+                  // this is the defining class loader; record the stats
+                  sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);
+                  sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);
+                  sun.misc.PerfCounter.getFindClasses().increment();
+              }
+          }
+          if (resolve) {//是否需要在加载时进行解析
+              resolveClass(c);
+          }
+          return c;
+      }
+  }</code></pre>
+<p>正如loadClass方法所展示的，当类加载请求到来时：</p>
+<ol>
+<li>先从缓存中查找该类对象，如果存在直接返回，如果不存在则交给该类加载的父加载器去加载。</li>
+<li>倘若没有父加载则交给顶级启动类加载器去加载。</li>
+<li>最后倘若仍没有找到，则使用findClass()方法去加载（关于findClass()稍后会进一步介绍）。</li>
+<li>从loadClass实现也可以知道如果不想重新定义加载类的规则，也没有复杂的逻辑，只想在运行时加载自己指定的类，那么我们可以直接使用this.getClass().getClassLoder.loadClass(“className”)，这样就可以直接调用ClassLoader的loadClass方法获取到class对象。</li>
+</ol>
+</li>
+<li><p><strong>findClass(String)</strong></p>
+<p>在JDK1.2之前，在自定义类加载时，总会去继承ClassLoader类并重写loadClass方法，从而实现自定义的类加载类，但是在JDK1.2之后已不再建议用户去覆盖loadClass()方法，而是建议把自定义的类加载逻辑写在findClass()方法中，从前面的分析可知，findClass()方法是在loadClass()方法中被调用的，当loadClass()方法中父加载器加载失败后，则会调用自己的findClass()方法来完成类加载，<strong>这样就可以保证自定义的类加载器也符合双亲委托模式。</strong>需要注意的是ClassLoader类中并没有实现findClass()方法的具体代码逻辑，取而代之的是抛出ClassNotFoundException异常，同时应该知道的是findClass方法通常是和defineClass方法一起使用的(稍后会分析)，ClassLoader类中findClass()方法源码如下：</p>
+<pre><code class="java">//直接抛出异常
+protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {
+        throw new ClassNotFoundException(name);
+}</code></pre>
+</li>
+<li><p><strong>defineClass(byte[] b, int off, int len)</strong></p>
+<p><code>defineClass()</code>方法是用来将<code>byte字节流</code>解析成JVM能够识别的Class对象(ClassLoader中已实现该方法逻辑)，通过这个方法不仅能够通过class文件实例化class对象，也可以通过其他方式实例化class对象，如通过网络接收一个类的字节码，然后转换为byte字节流创建对应的Class对象，defineClass()方法通常与findClass()方法一起使用。</p>
+<p>一般情况下，<strong>在自定义类加载器时，会直接覆盖ClassLoader的findClass()方法并编写加载规则，</strong>取得要加载类的字节码后转换成流，然后调用defineClass()方法生成类的Class对象，简单例子如下：</p>
+<pre><code class="java">protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {
+      // 获取类的字节数组
+      byte[] classData = getClassData(name);  
+      if (classData == null) {
+          throw new ClassNotFoundException();
+      } else {
+          //使用defineClass生成class对象
+          return defineClass(name, classData, 0, classData.length);
+      }
+  }</code></pre>
+<p><strong>需要注意的是，如果直接调用defineClass()方法生成类的Class对象，这个类的Class对象并没有解析(也可以理解为链接阶段，毕竟解析是链接的最后一步)，其解析操作需要等待初始化阶段进行。</strong></p>
+</li>
+<li><p><strong>resolveClass(Class≺?≻ c)</strong></p>
+<p>使用该方法可以使<strong>类的Class对象创建完成</strong>也同时被<strong>解析</strong>。</p>
+<p>前面我们说<strong>链接</strong>阶段主要是：</p>
+<ul>
+<li>字节码进行验证</li>
+<li>为类变量分配内存并设置初始值</li>
+<li>同时将字节码文件中的符号引用转换为直接引用。</li>
+</ul>
+</li>
+</ul>
+<p>上述4个方法是ClassLoader类中的比较重要的方法，也是我们可能会经常用到的方法。</p>
+<p>接看<code>SercureClassLoader</code>扩展了<code>ClassLoader</code>，新增了几个与使用相关的<strong>代码源</strong>(对代码源的位置及其证书的验证)和<strong>权限定义类验证</strong>(主要指对class源码的访问权限)的方法。一般我们不会直接跟这个类打交道，更多是与它的子类URLClassLoader有所关联。</p>
+<p>前面说过，ClassLoader是一个抽象类，很多方法是空的没有实现，比如 findClass()、findResource()等。而<code>URLClassLoader</code>这个实现类为这些方法提供了具体的实现，并新增了<code>URLClassPath</code>类协助取得Class字节码流等功能，在编写自定义类加载器时，如果没有太过于复杂的需求，可以直接继承<code>URLClassLoader</code>类，这样就可以避免自己去编写findClass()方法及其获取字节码流的方式，使自定义类加载器编写更加简洁，下面是<code>URLClassLoader</code>的类图(利用IDEA生成的类图)</p>
+<p><img src="/imag/javabases/image-20200126202655185.png" alt="image-20200126202655185"></p>
+<p>从类图结构看出URLClassLoader中存在一个URLClassPath类，通过这个类就可以找到要加载的字节码流，也就是说URLClassPath类负责找到要加载的字节码，再读取成字节流，最后通过defineClass()方法创建类的Class对象。</p>
+<p>从URLClassLoader类的结构图可以看出其构造方法都有一个必须传递的参数<code>URL[]</code>，<strong>该参数的元素是代表字节码文件的路径</strong>,换句话说在创建URLClassLoader对象时必须要指定这个类加载器到哪个目录下找class文件。</p>
+<p>同时也应该注意<code>URL[]</code>也是URLClassPath类的必传参数，在创建URLClassPath对象时，会根据传递过来的URL数组中的路径判断是文件还是jar包，然后根据不同的路径创建<code>FileLoader</code>或者<code>JarLoader</code>或<code>默认Loader类</code>去加载相应路径下的class文件，而当JVM调用<code>findClass()</code>方法时，就由这3个加载器中的一个将class文件的字节码流加载到内存中，最后利用字节码流创建类的class对象。</p>
+<p>请记住，如果我们在定义类加载器时选择继承<code>ClassLoader</code>类而非<code>URLClassLoader</code>，必须手动编写<code>findclass()</code>方法的加载逻辑以及获取字节码流的逻辑。</p>
+<p>了解完URLClassLoader后接着看看剩余的两个类加载器，即<strong>拓展类加载器</strong><code>ExtClassLoader</code>和<strong>系统类加载器</strong><code>AppClassLoader</code>，这两个类都继承自<code>URLClassLoader</code>，是sun.misc.Launcher的静态内部类。<code>sun.misc.Launcher</code>主要被系统用于启动主应用程序，<code>ExtClassLoader</code>和<code>AppClassLoader</code>都是由<code>sun.misc.Launcher</code>创建的，其类主要类结构如下：</p>
+<p><img src="/imag/javabases/image-20200126203452743.png" alt="image-20200126203452743"></p>
+<p>它们间的关系正如前面所阐述的那样，同时我们发现<code>ExtClassLoader</code>并没有重写<code>loadClass()</code>方法，这足矣说明其遵循双亲委派模式，而<strong>AppClassLoader重载了loadCass()方法，但最终调用的还是父类loadClass()方法</strong>，因此依然遵守双亲委派模式，重载方法源码如下：</p>
+<pre><code class="java">/**
+  * Override loadClass 方法，新增包权限检测功能
+  */
+ public Class loadClass(String name, boolean resolve)
+     throws ClassNotFoundException
+ {
+     int i = name.lastIndexOf(&#39;.&#39;);
+     if (i != -1) {
+         SecurityManager sm = System.getSecurityManager();
+         if (sm != null) {
+             sm.checkPackageAccess(name.substring(0, i));
+         }
+     }
+     //依然调用父类的方法
+     return (super.loadClass(name, resolve));
+ }</code></pre>
+<p>其实无论是ExtClassLoader还是AppClassLoader都继承URLClassLoader类，因此它们都遵守双亲委托模型，这点是毋庸置疑的。</p>
+<p>ok，到此我们对ClassLoader、URLClassLoader、ExtClassLoader、AppClassLoader以及Launcher类间的关系有了比较清晰的了解，同时对一些主要的方法也有一定的认识，这里并没有对这些类的源码进行详细的分析，毕竟没有那个必要，因为我们主要弄得类与类间的关系和常用的方法同时搞清楚双亲委托模式的实现过程，为编写自定义类加载器做铺垫就足够了。ok，前面出现了很多父类加载器的说法，但每个类加载器的父类到底是谁，一直没有阐明，下面我们就通过代码验证的方式来阐明这答案。</p>
+<h2 id="类加载器间的关系"><a href="#类加载器间的关系" class="headerlink" title="类加载器间的关系"></a>类加载器间的关系</h2><p>我们进一步了解类加载器间的关系(并非指继承关系)，主要可以分为以下4点</p>
+<ul>
+<li><p>启动类加载器，由C++实现，没有父类。</p>
+</li>
+<li><p>拓展类加载器(ExtClassLoader)，由Java语言实现，父类加载器为null</p>
+</li>
+<li><p>系统类加载器(AppClassLoader)，由Java语言实现，父类加载器为ExtClassLoader</p>
+</li>
+<li><p>自定义类加载器，父类加载器肯定为AppClassLoader。</p>
+</li>
+</ul>
+<p>下面我们通过程序来验证上述阐述的观点</p>
+<pre><code class="java">/**
+ * Created by zejian on 2017/6/18.
+ * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
+ */
+//自定义ClassLoader，完整代码稍后分析
+class FileClassLoader extends  ClassLoader{
+    private String rootDir;
+
+    public FileClassLoader(String rootDir) {
+        this.rootDir = rootDir;
+    }
+    // 编写获取类的字节码并创建class对象的逻辑
+    @Override
+    protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {
+       //...省略逻辑代码
+    }
+    //编写读取字节流的方法
+    private byte[] getClassData(String className) {
+        // 读取类文件的字节
+        //省略代码....
+    }
+}
+
+public class ClassLoaderTest {
+
+    public static void main(String[] args) throws ClassNotFoundException {
+
+             FileClassLoader loader1 = new FileClassLoader(rootDir);
+
+              System.out.println(&quot;自定义类加载器的父加载器: &quot;+loader1.getParent());
+              System.out.println(&quot;系统默认的AppClassLoader: &quot;+ClassLoader.getSystemClassLoader());
+              System.out.println(&quot;AppClassLoader的父类加载器: &quot;+ClassLoader.getSystemClassLoader().getParent());
+              System.out.println(&quot;ExtClassLoader的父类加载器: &quot;+ClassLoader.getSystemClassLoader().getParent().getParent());
+
+            /**
+            输出结果:
+                自定义类加载器的父加载器: sun.misc.Launcher$AppClassLoader@29453f44
+                系统默认的AppClassLoader: sun.misc.Launcher$AppClassLoader@29453f44
+                AppClassLoader的父类加载器: sun.misc.Launcher$ExtClassLoader@6f94fa3e
+                ExtClassLoader的父类加载器: null
+            */
+
+    }
+}</code></pre>
+<p>代码中，我们自定义了一个FileClassLoader，这里我们继承了ClassLoader而非URLClassLoader,因此需要自己编写findClass()方法逻辑以及加载字节码的逻辑，关于自定义类加载器我们稍后会分析，这里仅需要知道FileClassLoader是自定义加载器即可，接着在main方法中，通过<code>ClassLoader.getSystemClassLoader()</code>获取到<strong>系统默认类加载器</strong>，通过获取其父类加载器及其父父类加载器，同时还获取了自定义类加载器的父类加载器,最终输出结果正如我们所预料的，AppClassLoader的父类加载器为ExtClassLoader，而ExtClassLoader没有父类加载器。如果我们实现自己的类加载器，它的父加载器都只会是AppClassLoader。这里我们不妨看看Lancher的构造器源码</p>
+<pre><code class="java">public Launcher() {
+        // 首先创建拓展类加载器
+        ClassLoader extcl;
+        try {
+            extcl = ExtClassLoader.getExtClassLoader();
+        } catch (IOException e) {
+            throw new InternalError(
+                &quot;Could not create extension class loader&quot;);
+        }
+
+        // Now create the class loader to use to launch the application
+        try {
+            //再创建AppClassLoader并把extcl作为父加载器传递给AppClassLoader
+            loader = AppClassLoader.getAppClassLoader(extcl);
+        } catch (IOException e) {
+            throw new InternalError(
+                &quot;Could not create application class loader&quot;);
+        }
+
+        //设置线程上下文类加载器，稍后分析
+        Thread.currentThread().setContextClassLoader(loader);
+//省略其他没必要的代码......
+        }
+    }</code></pre>
+<p>显然Lancher初始化时首先会创建ExtClassLoader类加载器，然后再创建AppClassLoader并把ExtClassLoader传递给它作为父类加载器，这里还把AppClassLoader默认设置为线程上下文类加载器，关于线程上下文类加载器稍后会分析。那ExtClassLoader类加载器为什么是null呢？看下面的源码创建过程就明白，在创建ExtClassLoader强制设置了其父加载器为null。</p>
+<pre><code class="java">//Lancher中创建ExtClassLoader
+extcl = ExtClassLoader.getExtClassLoader();
+
+//getExtClassLoader()方法
+public static ExtClassLoader getExtClassLoader() throws IOException{
+
+  //........省略其他代码 
+  return new ExtClassLoader(dirs);                     
+  // .........
+}
+
+//构造方法
+public ExtClassLoader(File[] dirs) throws IOException {
+   //调用父类构造URLClassLoader传递null作为parent
+   super(getExtURLs(dirs), null, factory);
+}
+
+//URLClassLoader构造
+public URLClassLoader(URL[] urls, ClassLoader parent,
+                          URLStreamHandlerFactory factory) {</code></pre>
+<p>显然ExtClassLoader的父类为null，而AppClassLoader的父加载器为ExtClassLoader，所有自定义的类加载器其父加载器只会是AppClassLoader，注意这里所指的父类并不是Java继承关系中的那种父子关系。</p>
+<h2 id="类与类加载器"><a href="#类与类加载器" class="headerlink" title="类与类加载器"></a>类与类加载器</h2><h4 id="类与类加载器-1"><a href="#类与类加载器-1" class="headerlink" title="类与类加载器"></a>类与类加载器</h4><p>在JVM中表示两个class对象是否为同一个类对象存在两个必要条件</p>
+<ul>
+<li>类的完整类名必须一致，包括包名。</li>
+<li>加载这个类的ClassLoader(指ClassLoader实例对象)必须相同。</li>
+</ul>
+<p><strong>也就是说，在JVM中，即使这个两个类对象(class对象)来源同一个Class文件，被同一个虚拟机所加载，但只要加载它们的ClassLoader实例对象不同，那么这两个类对象也是不相等的，这是因为不同的ClassLoader实例对象都拥有不同的独立的类名称空间，所以加载的class对象也会存在不同的类名空间中，但前提是覆写loadclass方法。</strong></p>
+<p>从前面双亲委派模式对<code>loadClass()</code>方法的源码分析中可以知，在方法第一步会通过<code>Class&lt;?&gt; c = findLoadedClass(name);</code>从缓存查找，类名完整名称相同则不会再次被加载，因此我们必须绕过缓存查询才能重新加载class对象。当然也可直接调用<code>findClass()</code>方法，这样也避免从缓存查找，如下</p>
+<pre><code class="java">String rootDir=&quot;/Users/zejian/Downloads/Java8_Action/src/main/java/&quot;;
+//创建两个不同的自定义类加载器实例
+FileClassLoader loader1 = new FileClassLoader(rootDir);
+FileClassLoader loader2 = new FileClassLoader(rootDir);
+//通过findClass创建类的Class对象
+Class&lt;?&gt; object1=loader1.findClass(&quot;com.zejian.classloader.DemoObj&quot;);
+Class&lt;?&gt; object2=loader2.findClass(&quot;com.zejian.classloader.DemoObj&quot;);
+
+System.out.println(&quot;findClass-&gt;obj1:&quot;+object1.hashCode());
+System.out.println(&quot;findClass-&gt;obj2:&quot;+object2.hashCode());
+
+/**
+  * 直接调用findClass方法输出结果:
+  * findClass-&gt;obj1:723074861
+    findClass-&gt;obj2:895328852
+    生成不同的实例
+  */</code></pre>
+<p>如果调用父类的loadClass方法，结果如下，除非重写loadClass()方法去掉缓存查找步骤，不过现在一般都不建议重写loadClass()方法。</p>
+<pre><code class="java">//直接调用父类的loadClass()方法
+Class&lt;?&gt; obj1 =loader1.loadClass(&quot;com.zejian.classloader.DemoObj&quot;);
+Class&lt;?&gt; obj2 =loader2.loadClass(&quot;com.zejian.classloader.DemoObj&quot;);
+
+//不同实例对象的自定义类加载器
+System.out.println(&quot;loadClass-&gt;obj1:&quot;+obj1.hashCode());
+System.out.println(&quot;loadClass-&gt;obj2:&quot;+obj2.hashCode());
+//系统类加载器
+System.out.println(&quot;Class-&gt;obj3:&quot;+DemoObj.class.hashCode());
+
+/**
+* 直接调用loadClass方法的输出结果,注意并没有重写loadClass方法
+* loadClass-&gt;obj1:1872034366
+  loadClass-&gt;obj2:1872034366
+  Class-&gt;    obj3:1872034366
+  都是同一个实例
+*/</code></pre>
+<p>所以如果不从缓存查询相同完全类名的class对象，那么只有ClassLoader的实例对象不同，同一字节码文件创建的class对象自然也不会相同。</p>
+<h4 id="了解class文件的显示加载与隐式加载的概念"><a href="#了解class文件的显示加载与隐式加载的概念" class="headerlink" title="了解class文件的显示加载与隐式加载的概念"></a>了解class文件的显示加载与隐式加载的概念</h4><p>所谓class文件的<strong>显示加载</strong>与<strong>隐式加载</strong>的方式是指JVM加载class文件到内存的方式。</p>
+<ul>
+<li><p><strong>显示加载</strong>指的是在代码中通过调用ClassLoader加载class对象，如直接使用<code>Class.forName(name)</code>或<code>this.getClass().getClassLoader().loadClass()</code>加载class对象。</p>
+</li>
+<li><p><strong>隐式加载</strong>则是不直接在代码中调用ClassLoader的方法加载class对象，而是通过虚拟机自动加载到内存中，如在加载某个类的class文件时，该类的class文件中引用了另外一个类的对象，此时额外引用的类将通过JVM自动加载到内存中。</p>
+</li>
+</ul>
+<p>在日常开发以上两种方式一般会混合使用，这里我们知道有这么回事即可。</p>
+<h2 id="编写自己的类加载器"><a href="#编写自己的类加载器" class="headerlink" title="编写自己的类加载器"></a>编写自己的类加载器</h2><p>通过前面的分析可知，实现自定义类加载器需要继承ClassLoader或者URLClassLoader，继承ClassLoader则需要自己重写findClass()方法并编写加载逻辑，继承URLClassLoader则可以省去编写findClass()方法以及class文件加载转换成字节码流的代码。<strong>那么编写自定义类加载器的意义何在呢？</strong></p>
+<ul>
+<li><p>当class文件不在ClassPath路径下，默认系统类加载器无法找到该class文件，在这种情况下我们需要实现一个自定义的ClassLoader来加载特定路径下的class文件生成class对象。</p>
+</li>
+<li><p>当一个class文件是通过网络传输并且可能会进行相应的加密操作时，需要先对class文件进行相应的解密后再加载到JVM内存中，这种情况下也需要编写自定义的ClassLoader并实现相应的逻辑。</p>
+</li>
+<li><p>当需要实现热部署功能时(一个class文件通过不同的类加载器产生不同class对象从而实现热部署功能)，需要实现自定义ClassLoader的逻辑。</p>
+</li>
+</ul>
+<h3 id="自定义File类加载器"><a href="#自定义File类加载器" class="headerlink" title="自定义File类加载器"></a>自定义File类加载器</h3><p>这里我们继承ClassLoader实现自定义的特定路径下的文件类加载器并加载编译后DemoObj.class，源码代码如下</p>
+<pre><code class="java">public class DemoObj {
+    @Override
+    public String toString() {
+        return &quot;I am DemoObj&quot;;
+    }
+}</code></pre>
+<pre><code class="java">package com.zejian.classloader;
+
+import java.io.*;
+
+/**
+ * Created by zejian on 2017/6/21.
+ * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
+ */
+public class FileClassLoader extends ClassLoader {
+    private String rootDir;
+
+    public FileClassLoader(String rootDir) {
+        this.rootDir = rootDir;
+    }
+
+    /**
+     * 编写findClass方法的逻辑
+     * @param name
+     * @return
+     * @throws ClassNotFoundException
+     */
+    @Override
+    protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {
+        // 获取类的class文件字节数组
+        byte[] classData = getClassData(name);
+        if (classData == null) {
+            throw new ClassNotFoundException();
+        } else {
+            //直接生成class对象
+            return defineClass(name, classData, 0, classData.length);
+        }
+    }
+
+    /**
+     * 编写获取class文件并转换为字节码流的逻辑
+     * @param className
+     * @return
+     */
+    private byte[] getClassData(String className) {
+        // 读取类文件的字节
+        String path = classNameToPath(className);
+        try {
+            InputStream ins = new FileInputStream(path);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            int bufferSize = 4096;
+            byte[] buffer = new byte[bufferSize];
+            int bytesNumRead = 0;
+            // 读取类文件的字节码
+            while ((bytesNumRead = ins.read(buffer)) != -1) {
+                baos.write(buffer, 0, bytesNumRead);
+            }
+            return baos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 类文件的完全路径
+     * @param className
+     * @return
+     */
+    private String classNameToPath(String className) {
+        return rootDir + File.separatorChar
+                + className.replace(&#39;.&#39;, File.separatorChar) + &quot;.class&quot;;
+    }
+
+    public static void main(String[] args) throws ClassNotFoundException {
+        String rootDir=&quot;/Users/ocean/JAVA_FORK/java-basic/jdk-ocean/src/main/java&quot;;
+        //创建自定义文件类加载器
+        FileClassLoader loader = new FileClassLoader(rootDir);
+
+        try {
+            //加载指定的class文件
+            Class&lt;?&gt; object1=loader.loadClass(&quot;javaA.classLoader.DemoObj&quot;);
+            System.out.println(object1.hashCode());
+            System.out.println(object1.newInstance().toString());
+            object1 = loader.findClass(&quot;javaA.classLoader.DemoObj&quot;);
+            System.out.println(object1.hashCode());
+            System.out.println(object1.newInstance().toString());
+
+            //输出结果:
+            // 491044090
+            //I am DemoObj
+            //1581781576
+            //I am DemoObj
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+<p>显然我们通过getClassData()方法找到class文件并转换为字节流，并重写findClass()方法，利用defineClass()方法创建了类的class对象。在main方法中调用了loadClass()方法加载指定路径下的class文件，由于启动类加载器、拓展类加载器以及系统类加载器都无法在其路径下找到该类，因此最终将有自定义类加载器加载，即调用findClass()方法进行加载。如果继承URLClassLoader实现，那代码就更简洁了，如下：</p>
+<pre><code class="java">/**
+ * Created by zejian on 2017/6/21.
+ * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
+ */
+public class FileUrlClassLoader extends URLClassLoader {
+
+    public FileUrlClassLoader(URL[] urls, ClassLoader parent) {
+        super(urls, parent);
+    }
+
+    public FileUrlClassLoader(URL[] urls) {
+        super(urls);
+    }
+
+    public FileUrlClassLoader(URL[] urls, ClassLoader parent, URLStreamHandlerFactory factory) {
+        super(urls, parent, factory);
+    }
+
+
+    public static void main(String[] args) throws ClassNotFoundException, MalformedURLException {
+        String rootDir=&quot;/Users/ocean/JAVA_FORK/java-basic/jdk-ocean/src/main/java&quot;;
+        //创建自定义文件类加载器
+        File file = new File(rootDir);
+        //File to URI
+        URI uri=file.toURI();
+        URL[] urls={uri.toURL()};
+
+        FileUrlClassLoader loader = new FileUrlClassLoader(urls);
+
+        try {
+            //加载指定的class文件
+            Class&lt;?&gt; object1=loader.loadClass(&quot;javaA.classLoader.DemoObj&quot;);
+            System.out.println(object1.newInstance().toString());
+
+            //输出结果:I am DemoObj
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+<p>非常简洁除了需要重写构造器外无需编写findClass()方法及其class文件的字节流转换逻辑。</p>
+<h3 id="自定义网络类加载器"><a href="#自定义网络类加载器" class="headerlink" title="自定义网络类加载器"></a>自定义网络类加载器</h3><p>自定义网络类加载器，主要用于读取通过网络传递的class文件（在这里我们省略class文件的解密过程），并将其转换成字节流生成对应的class对象，如下</p>
+<pre><code class="java">public class NetClassLoader extends ClassLoader {
+
+    private String url;//class文件的URL
+
+    public NetClassLoader(String url) {
+        this.url = url;
+    }
+
+    @Override
+    protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {
+        byte[] classData = getClassDataFromNet(name);
+        if (classData == null) {
+            throw new ClassNotFoundException();
+        } else {
+            return defineClass(name, classData, 0, classData.length);
+        }
+    }
+
+    /**
+     * 从网络获取class文件
+     * @param className
+     * @return
+     */
+    private byte[] getClassDataFromNet(String className) {
+        String path = classNameToPath(className);
+        try {
+            URL url = new URL(path);
+            InputStream ins = url.openStream();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            int bufferSize = 4096;
+            byte[] buffer = new byte[bufferSize];
+            int bytesNumRead = 0;
+            // 读取类文件的字节
+            while ((bytesNumRead = ins.read(buffer)) != -1) {
+                baos.write(buffer, 0, bytesNumRead);
+            }
+            //这里省略解密的过程.......
+            return baos.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private String classNameToPath(String className) {
+        // 得到类文件的URL
+        return url + &quot;/&quot; + className.replace(&#39;.&#39;, &#39;/&#39;) + &quot;.class&quot;;
+    }
+
+}</code></pre>
+<p>比较简单，主要是在获取字节码流时的区别，从网络直接获取到字节流再转车字节数组然后利用defineClass方法创建class对象，如果继承URLClassLoader类则和前面文件路径的实现是类似的，无需担心路径是filePath还是Url，因为URLClassLoader内的URLClassPath对象会根据传递过来的URL数组中的路径判断是文件还是jar包，然后根据不同的路径创建FileLoader或者JarLoader或默认类Loader去读取对于的路径或者url下的class文件。</p>
+<h3 id="热部署类加载器"><a href="#热部署类加载器" class="headerlink" title="热部署类加载器"></a>热部署类加载器</h3><p><strong>所谓的热部署就是利用同一个class文件不同的类加载器在内存创建出两个不同的class对象</strong>(关于这点的原因前面已分析过，即利用不同的类加载实例)。</p>
+<p>由于JVM在加载类之前会检测请求的类是否已加载过(即在<code>loadClass()</code>方法中调用<code>findLoadedClass()</code>方法)，如果被加载过，则直接从缓存获取，不会重新加载。</p>
+<p><strong>注意</strong>同一个类加载器的实例和同一个class文件只能被加载器一次，多次加载将报错，因此我们实现的热部署必须让同一个class文件可以根据不同的类加载器重复加载，以实现所谓的热部署。实际上前面的实现的<code>FileClassLoader</code>和<code>FileUrlClassLoader</code>已具备这个功能，但前提是直接调用findClass()方法，而不是调用loadClass()方法，因为ClassLoader中loadClass()方法体中调用findLoadedClass()方法进行了检测是否已被加载，因此我们直接调用findClass()方法就可以绕过这个问题，当然也可以重新loadClass方法，但强烈不建议这么干。利用FileClassLoader类测试代码如下：</p>
+<pre><code class="java">public static void main(String[] args) throws ClassNotFoundException {
+        String rootDir=&quot;/Users/zejian/Downloads/Java8_Action/src/main/java/&quot;;
+        //创建自定义文件类加载器
+        FileClassLoader loader = new FileClassLoader(rootDir);
+        FileClassLoader loader2 = new FileClassLoader(rootDir);
+
+        try {
+            //加载指定的class文件,调用loadClass()
+            Class&lt;?&gt; object1=loader.loadClass(&quot;com.zejian.classloader.DemoObj&quot;);
+            Class&lt;?&gt; object2=loader2.loadClass(&quot;com.zejian.classloader.DemoObj&quot;);
+
+            System.out.println(&quot;loadClass-&gt;obj1:&quot;+object1.hashCode());
+            System.out.println(&quot;loadClass-&gt;obj2:&quot;+object2.hashCode());
+
+            //加载指定的class文件,直接调用findClass(),绕过检测机制，创建不同class对象。
+            Class&lt;?&gt; object3=loader.findClass(&quot;com.zejian.classloader.DemoObj&quot;);
+            Class&lt;?&gt; object4=loader2.findClass(&quot;com.zejian.classloader.DemoObj&quot;);
+
+            System.out.println(&quot;loadClass-&gt;obj3:&quot;+object3.hashCode());
+            System.out.println(&quot;loadClass-&gt;obj4:&quot;+object4.hashCode());
+
+            /**
+             * 输出结果:
+             * loadClass-&gt;obj1:644117698
+               loadClass-&gt;obj2:644117698
+               findClass-&gt;obj3:723074861
+               findClass-&gt;obj4:895328852
+             */
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }</code></pre>
+<h2 id="双亲委派模型的破坏者-线程上下文类加载器"><a href="#双亲委派模型的破坏者-线程上下文类加载器" class="headerlink" title="双亲委派模型的破坏者-线程上下文类加载器"></a>双亲委派模型的破坏者-线程上下文类加载器</h2><p>在Java应用中存在着很多服务提供者接口（Service Provider Interface，SPI），这些接口允许第三方为它们提供实现，如常见的 <code>SPI</code>有<code>JDBC</code>、<code>JNDI</code>等，这些 SPI 的接口属于 Java 核心库，一般存在<code>rt.jar</code>包中，<strong>由Bootstrap类加载器加载</strong>，而 SPI 的第三方实现代码则是作为Java应用所依赖的 jar 包被存放在classpath路径下。</p>
+<p>由于SPI接口中的代码经常需要加载具体的第三方实现类并调用其相关方法，但SPI的核心接口类是由启动(Bootstrap)类加载器来加载的，而Bootstrap类加载器无法直接加载SPI的实现类，同时由于双亲委派模式的存在，Bootstrap类加载器也无法反向委托<code>AppClassLoader</code>加载器SPI的实现类。在这种情况下，我们就需要一种特殊的类加载器来加载第三方的类库，而线程上下文类加载器就是很好的选择。</p>
+<img src="/imag/javabases/image-20200127155219314.png" alt="image-20200127155219314" style="zoom:50%;" />
+
+<p><strong>线程上下文类加载器（contextClassLoader）</strong>是从 JDK 1.2 开始引入的，我们可以通过java.lang.Thread类中的<code>getContextClassLoader()</code>和 <code>setContextClassLoader(ClassLoader cl)</code>方法来获取和设置线程的上下文类加载器。如果没有手动设置上下文类加载器，线程将继承其父线程的上下文类加载器，<strong>初始线程的上下文类加载器是系统类加载器（AppClassLoader）</strong>,在线程中运行的代码可以通过此类加载器来加载类和资源，如下图所示，以<code>jdbc.jar</code>加载为例</p>
+<p><img src="/imag/javabases/image-20200127155741017.png" alt="image-20200127155741017"></p>
+<p>从图可知<code>rt.jar</code>核心包是有Bootstrap类加载器加载的，其内包含SPI核心接口类，由于SPI中的类经常需要调用外部实现类的方法，而<code>jdbc.jar</code>包含外部实现类(jdbc.jar存在于classpath路径)无法通过Bootstrap类加载器加载，<strong>因此只能委派线程上下文类加载器</strong>把<code>jdbc.jar</code>中的实现类加载到内存以便SPI相关类使用。<strong>显然这种线程上下文类加载器的加载方式破坏了“双亲委派模型”</strong>，它在执行过程中抛弃双亲委派加载链模式，使程序可以逆向使用类加载器，<strong>当然这也使得Java类加载器变得更加灵活。</strong></p>
+<p>为了进一步证实这种场景，不妨看看DriverManager类的源码，<code>DriverManager</code>是Java核心<code>rt.jar</code>包中的类，该类用来管理不同数据库的实现驱动即Driver，它们都实现了Java核心包中的java.sql.Driver接口，如mysql驱动包中的com.mysql.jdbc.Driver，这里主要看看如何加载外部实现类，在<code>DriverManager</code>初始化时会执行如下代码</p>
+<pre><code class="java">//DriverManager是Java核心包rt.jar的类
+public class DriverManager {
+    //省略不必要的代码
+    static {
+        loadInitialDrivers();//执行该方法
+        println(&quot;JDBC DriverManager initialized&quot;);
+    }
+
+//loadInitialDrivers方法
+ private static void loadInitialDrivers() {
+     sun.misc.Providers()
+     AccessController.doPrivileged(new PrivilegedAction&lt;Void&gt;() {
+            public Void run() {
+                //加载外部的Driver的实现类
+                ServiceLoader&lt;Driver&gt; loadedDrivers = ServiceLoader.load(Driver.class);
+              //省略不必要的代码......
+            }
+        });
+    }</code></pre>
+<p>在<code>DriverManager</code>类初始化时执行了<code>loadInitialDrivers()</code>方法,在该方法中通过<code>ServiceLoader.load(Driver.class);</code>去加载外部实现的驱动类，<code>ServiceLoader</code>类会去读取mysql的jdbc.jar下META-INF文件的内容，如下所示</p>
+<p><img src="/imag/javabases/image-20200127160252907.png" alt="image-20200127160252907"></p>
+<p>而com.mysql.jdbc.Driver继承类如下：</p>
+<pre><code class="java">public class Driver extends com.mysql.cj.jdbc.Driver {
+    public Driver() throws SQLException {
+        super();
+    }
+
+    static {
+        System.err.println(&quot;Loading class `com.mysql.jdbc.Driver&#39;. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver&#39;. &quot;
+                + &quot;The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.&quot;);
+    }
+}</code></pre>
+<p>从注释可以看出平常我们使用<code>com.mysql.jdbc.Driver</code>已被丢弃了，取而代之的是<code>com.mysql.cj.jdbc.Driver</code>，也就是说官方不再建议我们使用如下代码注册mysql驱动</p>
+<pre><code class="java">//不建议使用该方式注册驱动类
+Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+String url = &quot;jdbc:mysql://localhost:3306/cm-storylocker?characterEncoding=UTF-8&quot;;
+// 通过java库获取数据库连接
+Connection conn = java.sql.DriverManager.getConnection(url, &quot;root&quot;, &quot;root@555&quot;);</code></pre>
+<p>而是直接去掉注册步骤，如下即可</p>
+<pre><code class="java">String url = &quot;jdbc:mysql://localhost:3306/cm-storylocker?characterEncoding=UTF-8&quot;;
+// 通过java库获取数据库连接
+Connection conn = java.sql.DriverManager.getConnection(url, &quot;root&quot;, &quot;root@555&quot;);</code></pre>
+<p>这样ServiceLoader会帮助我们处理一切，并最终通过load()方法加载，看看load()方法实现</p>
+<pre><code class="java">public static &lt;S&gt; ServiceLoader&lt;S&gt; load(Class&lt;S&gt; service) {
+     //通过线程上下文类加载器加载
+      ClassLoader cl = Thread.currentThread().getContextClassLoader();
+      return ServiceLoader.load(service, cl);
+  }</code></pre>
+<p>很明显了确实通过线程上下文类加载器加载的，<strong>实际上核心包的SPI类对外部实现类的加载都是基于线程上下文类加载器执行的，</strong>通过这种方式实现了Java核心代码内部去调用外部实现类。</p>
+<p>我们知道线程上下文类加载器默认情况下就是AppClassLoader，那为什么不直接通过getSystemClassLoader()获取类加载器来加载classpath路径下的类的呢？其实是可行的，但这种直接使用<code>getSystemClassLoader()</code>方法获取<code>AppClassLoader</code>加载类有一个<strong>缺点</strong>，那就是代码部署到不同服务时会出现问题，如把代码部署到Java Web应用服务或者EJB之类的服务将会出问题，因为这些服务使用的线程上下文类加载器并非AppClassLoader，而是Java Web应用服自家的类加载器，类加载器不同，所以我们应该少用getSystemClassLoader()。</p>
+<p><strong>总之不同的服务使用的可能默认ClassLoader是不同的，但使用线程上下文类加载器总能获取到与当前程序执行相同的ClassLoader，从而避免不必要的问题</strong>。</p>
+<p>ok~.关于线程上下文类加载器暂且聊到这，前面阐述的DriverManager类，大家可以自行看看源码，相信会有更多的体会，另外关于ServiceLoader本篇并没有过多的阐述，毕竟我们主题是类加载器，但ServiceLoader是个很不错的解耦机制，大家可以自行查阅其相关用法。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>深入理解java类加载器(ClassLoader)</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">9.7k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-12, 21:41:31</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-12, 21:35:13</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8(ClassLoader)/" title="深入理解java类加载器(ClassLoader)">http://yoursite.com/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8(ClassLoader)/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019-2019 Ocean</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#垃圾','#算法','#类加载器','#反射','#模式','#设计','#面试',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
