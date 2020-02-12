@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>失败是成功之母</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="失败是成功之母">
+  <title>回文数 | 失败是成功之母</title>
+  <meta name="keywords" content=" 算法 ">
+  <meta name="description" content="回文数 | 失败是成功之母">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。加油！加油！！加油！！！ Never give up ！！！！｜｜永不放弃｜｜ 古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
 <meta property="og:type" content="website">
@@ -50,7 +50,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -267,12 +267,57 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-算法/回文数" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#博客的出现"><span class="toc-text">博客的出现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于博客"><span class="toc-text">关于博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">回文数</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="java">java</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">算法</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-12 10:34:54'>2020-02-12 10:22</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#低阶：转为字符串"><span class="toc-text">低阶：转为字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高阶：对比一半数字"><span class="toc-text">高阶：对比一半数字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法"><span class="toc-text">算法</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -285,35 +330,117 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="博客的出现"><a href="#博客的出现" class="headerlink" title="博客的出现"></a>博客的出现</h2><p>写博客是为了监督自己不断的进步，不松懈。</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#低阶：转为字符串"><span class="toc-text">低阶：转为字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高阶：对比一半数字"><span class="toc-text">高阶：对比一半数字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法"><span class="toc-text">算法</span></a></li></ol></li></ol></div></p>
+<p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<p><strong>示例 1:</strong></p>
+<pre><code class="java">输入: 121
+输出: true</code></pre>
+<p><strong>示例 2:</strong></p>
+<pre><code class="java">输入: -121
+输出: false
+解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</code></pre>
+<p><strong>示例 3:</strong></p>
+<pre><code class="java">输入: 10
+输出: false
+解释: 从右向左读, 为 01 。因此它不是一个回文数。</code></pre>
+<p><strong>进阶:</strong></p>
+<p><strong>你能不将整数转为字符串来解决这个问题吗？</strong></p>
+<h2 id="低阶：转为字符串"><a href="#低阶：转为字符串" class="headerlink" title="低阶：转为字符串"></a>低阶：转为字符串</h2><pre><code class="java">class Solution {
+    public boolean isPalindrome(int x) {
+        if(x == 0){
+            return true;
+        }
+        String xS = x +&quot;&quot;;
+        if(xS.startsWith(&quot;-&quot;)){
+            return false;
+        }else if(xS.endsWith(&quot;0&quot;)){
+            return false;
+        }else{
+            int i = 1;
+          // 第一个与最后一个进行比较
+            while(i &lt; xS.length()/2 + 1){
+                if(xS.charAt(i - 1) != xS.charAt(xS.length() - i)){
+                    return false;
+                }
+                i++;
+            }
+        }
+        return true;
+    }
+}</code></pre>
 <blockquote>
-<p>有时候，我们看到很好的东西，却匆匆一看没有记录导致后面再想看看的时候已经消失不见。</p>
+<p>执行了27ms</p>
 </blockquote>
-<blockquote>
-<p>自己想写一些自己当前阶段的感悟，为了不再使用的时候依然能够快速拾起。</p>
-</blockquote>
-<blockquote>
-<p>我想让别人也来了解我的能力。</p>
-</blockquote>
-<p>我曾七次鄙视自己的灵魂: 第一次,当它本可进取时，却故作谦卑； 第二次,当它空虚时，用爱欲来填充； 第三次,在困难和容易之间，它选择了容易； 第四次,它犯了错，却借由别人也会犯错来宽慰自己； 第五次,它自由软弱，却把它认为是生命的坚韧； 第六次,当它鄙夷一张丑恶的嘴脸时，却不知那正是自己面具中的一副； 第七次,它侧身于生活的污泥中虽不甘心，却又畏首畏尾。</p>
-<h2 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h2><p><strong>失败是成功之母</strong> 是Oceanbai的个人面试准备站，只是用来通过自己学习后的积累，如果有侵权行为，请随时联系。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
-<p>主要功能：</p>
-<ul>
-<li>搜索支持文章标题、标签(#标签)、作者(@作者)</li>
-<li>pad/手机等移动端适配</li>
-<li>页面全局快捷键 <a href='http://yelog.org/2017/03/24/3-hexo-shortcuts/' target="_blank" rel="noopener">3-hexo快捷键说明</a></li>
-</ul>
+<h2 id="高阶：对比一半数字"><a href="#高阶：对比一半数字" class="headerlink" title="高阶：对比一半数字"></a>高阶：对比一半数字</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>映入脑海的第一个想法是将数字转换为字符串，并检查字符串是否为回文。但是，这需要额外的非常量空间来创建问题描述中所不允许的字符串。</p>
+<p>第二个想法是将数字本身反转，然后将反转后的数字与原始数字进行比较，如果它们是相同的，那么这个数字就是回文。<br>但是，如果反转后的数字大于 \text{int.MAX}int.MAX，我们将遇到整数溢出问题。</p>
+<p>按照第二个想法，为了避免数字反转可能导致的溢出问题，为什么不考虑只反转 \text{int}int 数字的一半？毕竟，如果该数字是回文，其后半部分反转后应该与原始数字的前半部分相同。</p>
+<p>例如，输入 1221，我们可以将数字 “1221” 的后半部分从 “21” 反转为 “12”，并将其与前半部分 “12” 进行比较，因为二者相同，我们得知数字 1221 是回文。</p>
+<p>让我们看看如何将这个想法转化为一个算法。</p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>首先，我们应该处理一些临界情况。所有负数都不可能是回文，例如：-123 不是回文，因为 - 不等于 3。所以我们可以对所有负数返回 false。</p>
+<p>现在，让我们来考虑如何反转后半部分的数字。<br>对于数字 1221，如果执行 1221 % 10，我们将得到最后一位数字 1，要得到倒数第二位数字，我们可以先通过除以 10 把最后一位数字从 1221 中移除，1221 / 10 = 122，再求出上一步结果除以 10 的余数，122 % 10 = 2，就可以得到倒数第二位数字。如果我们把最后一位数字乘以 10，再加上倒数第二位数字，1 * 10 + 2 = 12，就得到了我们想要的反转后的数字。如果继续这个过程，我们将得到更多位数的反转数字。</p>
+<p>现在的问题是，我们如何知道反转数字的位数已经达到原始数字位数的一半？</p>
+<p>我们将原始数字除以 10，然后给反转后的数字乘上 10，所以，当原始数字小于反转后的数字时，就意味着我们已经处理了一半位数的数字。</p>
+<pre><code class="JAVA">class Solution {
+    public boolean isPalindrome(int x) {
+        // 特殊情况：
+        // 如上所述，当 x &lt; 0 时，x 不是回文数。
+        // 同样地，如果数字的最后一位是 0，为了使该数字为回文，
+        // 则其第一位数字也应该是 0
+        // 只有 0 满足这一属性
+        if(x &lt; 0 || (x % 10 == 0 &amp;&amp; x != 0)) {
+            return false;
+        }
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+        int revertedNumber = 0;
+        while(x &gt; revertedNumber) {
+            revertedNumber = revertedNumber * 10 + x % 10;
+            x /= 10;
+        }
+
+        // 当数字长度为奇数时，我们可以通过 revertedNumber/10 去除处于中位的数字。
+        // 例如，当输入为 12321 时，在 while 循环的末尾我们可以得到 x = 12，revertedNumber = 123，
+        // 由于处于中位的数字不影响回文（它总是与自己相等），所以我们可以简单地将其去除。
+        return x == revertedNumber || x == revertedNumber/10;
+    }
+}</code></pre>
+<blockquote>
+<p>执行了9ms</p>
+</blockquote>
+<p>作者：LeetCode<br>链接：<a href="https://leetcode-cn.com/problems/palindrome-number/solution/hui-wen-shu-by-leetcode/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/palindrome-number/solution/hui-wen-shu-by-leetcode/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>回文数</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-12, 10:22:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-12, 10:34:54</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/12/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%96%87%E6%95%B0/" title="回文数">http://yoursite.com/2020/02/12/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%96%87%E6%95%B0/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">©2019-2019 Ocean</p>

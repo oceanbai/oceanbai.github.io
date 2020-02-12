@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>失败是成功之母</title>
+  <title>设计模式/工厂方法模式 | 失败是成功之母</title>
   <meta name="keywords" content="">
-  <meta name="description" content="失败是成功之母">
+  <meta name="description" content="设计模式/工厂方法模式 | 失败是成功之母">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。加油！加油！！加油！！！ Never give up ！！！！｜｜永不放弃｜｜ 古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
 <meta property="og:type" content="website">
@@ -50,7 +50,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -267,12 +267,45 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-设计模式/工厂方法模式" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#博客的出现"><span class="toc-text">博客的出现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于博客"><span class="toc-text">关于博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">设计模式/工厂方法模式</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-12 11:08:32'>2020-02-12 10:54</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:757</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#日志记录器的设计"><span class="toc-text">日志记录器的设计</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -285,35 +318,74 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="博客的出现"><a href="#博客的出现" class="headerlink" title="博客的出现"></a>博客的出现</h2><p>写博客是为了监督自己不断的进步，不松懈。</p>
-<blockquote>
-<p>有时候，我们看到很好的东西，却匆匆一看没有记录导致后面再想看看的时候已经消失不见。</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#日志记录器的设计"><span class="toc-text">日志记录器的设计</span></a></li></ol></div></p>
+<p>简单工厂模式虽然简单，但存在一个很严重的问题。<strong>当系统中需要引入新产品时，由于静态工厂方法通过所传入参数的不同来创建不同的产品，这必定要修改工厂类的源代码，将违背“开闭原则”，如何实现增加新产品而不影响已有代码？</strong>工厂方法模式应运而生，本文将介绍第二种工厂模式——工厂方法模式。</p>
+<h2 id="日志记录器的设计"><a href="#日志记录器的设计" class="headerlink" title="日志记录器的设计"></a>日志记录器的设计</h2><blockquote>
+<p>Sunny软件公司欲开发一个系统运行日志记录器(Logger)，该记录器可以通过多种途径保存系统的运行日志，如通过文件记录或数据库记录，用户可以通过修改配置文件灵活地更换日志记录方式。在设计各类日志记录器时，Sunny公司的开发人员发现需要对日志记录器进行一些初始化工作，初始化参数的设置过程较为复杂，而且某些参数的设置有严格的先后次序，否则可能会发生记录失败。如何封装记录器的初始化过程并保证多种记录器切换的灵活性是Sunny公司开发人员面临的一个难题。</p>
 </blockquote>
-<blockquote>
-<p>自己想写一些自己当前阶段的感悟，为了不再使用的时候依然能够快速拾起。</p>
-</blockquote>
-<blockquote>
-<p>我想让别人也来了解我的能力。</p>
-</blockquote>
-<p>我曾七次鄙视自己的灵魂: 第一次,当它本可进取时，却故作谦卑； 第二次,当它空虚时，用爱欲来填充； 第三次,在困难和容易之间，它选择了容易； 第四次,它犯了错，却借由别人也会犯错来宽慰自己； 第五次,它自由软弱，却把它认为是生命的坚韧； 第六次,当它鄙夷一张丑恶的嘴脸时，却不知那正是自己面具中的一副； 第七次,它侧身于生活的污泥中虽不甘心，却又畏首畏尾。</p>
-<h2 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h2><p><strong>失败是成功之母</strong> 是Oceanbai的个人面试准备站，只是用来通过自己学习后的积累，如果有侵权行为，请随时联系。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
-<p>主要功能：</p>
-<ul>
-<li>搜索支持文章标题、标签(#标签)、作者(@作者)</li>
-<li>pad/手机等移动端适配</li>
-<li>页面全局快捷键 <a href='http://yelog.org/2017/03/24/3-hexo-shortcuts/' target="_blank" rel="noopener">3-hexo快捷键说明</a></li>
-</ul>
+<p>Sunny公司的开发人员通过对该需求进行分析，发现该日志记录器有两个设计要点：</p>
+<p>(1) 需要封装日志记录器的初始化过程，这些初始化工作较为复杂，例如需要初始化其他相关的类，还有可能需要读取配置文件（例如连接数据库或创建文件），导致代码较长，如果将它们都写在构造函数中，会导致构造函数庞大，不利于代码的修改和维护；</p>
+<p>   (2) 用户可能需要更换日志记录方式，在客户端代码中需要提供一种灵活的方式来选择日志记录器，尽量在不修改源代码的基础上更换或者增加日志记录方式。</p>
+<p>   Sunny公司开发人员最初使用简单工厂模式对日志记录器进行了设计，初始结构如图1所示：</p>
+<p><img src="/imag/20130712094545500.jpeg" alt="图1 基于简单工厂模式设计的日志记录器结构图"></p>
+<p>在图1中，LoggerFactory充当创建日志记录器的工厂，提供了工厂方法createLogger()用于创建日志记录器，Logger是抽象日志记录器接口，其子类为具体日志记录器。其中，工厂类LoggerFactory代码片段如下所示：</p>
+<pre><code class="java">//日志记录器工厂
+class LoggerFactory {
+    //静态工厂方法
+    public static Logger createLogger(String args) {
+        if(args.equalsIgnoreCase(&quot;db&quot;)) {
+            //连接数据库，代码省略
+            //创建数据库日志记录器对象
+            Logger logger = new DatabaseLogger(); 
+            //初始化数据库日志记录器，代码省略
+            return logger;
+        }
+        else if(args.equalsIgnoreCase(&quot;file&quot;)) {
+            //创建日志文件
+            //创建文件日志记录器对象
+            Logger logger = new FileLogger(); 
+            //初始化文件日志记录器，代码省略
+            return logger;            
+        }
+        else {
+            return null;
+        }
+    }
+}</code></pre>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>设计模式/工厂方法模式</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">766</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-12, 10:54:56</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-12, 11:08:32</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" title="设计模式/工厂方法模式">http://yoursite.com/2020/02/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">©2019-2019 Ocean</p>

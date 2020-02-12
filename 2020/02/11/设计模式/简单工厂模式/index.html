@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>简单工厂模式 | 失败是成功之母</title>
+  <meta name="keywords" content=" 模式 ">
+  <meta name="description" content="简单工厂模式 | 失败是成功之母">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。加油！加油！！加油！！！ Never give up ！！！！｜｜永不放弃｜｜ 古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;about&#x2F;index.html">
+<meta property="og:site_name" content="失败是成功之母">
+<meta property="og:description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。加油！加油！！加油！！！ Never give up ！！！！｜｜永不放弃｜｜ 古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-12T02:53:51.255Z">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Ocean Bai</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/oceanbai" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(6)</small></div></li>
+    
+        
+            
+            <li><div data-rel="java基础">java基础<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="java">java<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="面试">面试<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="6">
+<input type="hidden" id="yelog_site_word_count" value="16.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color3">垃圾</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">面试</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class=""
+           href="/2020/02/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="设计模式/工厂方法模式">设计模式/工厂方法模式</span>
+            <span class="post-date" title="2020-02-12 10:54:56">2020/02/12</span>
+        </a>
+        
+        <a  class="java "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%96%87%E6%95%B0/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="回文数">回文数</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/11/java/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"
+           data-tag="垃圾"
+           data-author="" >
+            <span class="post-title" title="垃圾回收">垃圾回收</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="模式"
+           data-author="" >
+            <span class="post-title" title="简单工厂模式">简单工厂模式</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="java "
+           href="/2019/11/30/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E5%A0%86/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="二叉堆">二叉堆</span>
+            <span class="post-date" title="2019-11-30 21:49:13">2019/11/30</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2019/11/30/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E8%A6%81%E6%B1%82/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="别人面试要求">别人面试要求</span>
+            <span class="post-date" title="2019-11-30 21:41:31">2019/11/30</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-设计模式/简单工厂模式" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">简单工厂模式</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="设计模式">设计模式</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">模式</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-11 23:01:53'>2020-02-11 21:41</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:3.5k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-图表库的设计"><span class="toc-text">1 图表库的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-简单工厂模式概述"><span class="toc-text">2 简单工厂模式概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#其基本流程如下："><span class="toc-text">其基本流程如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单工厂模式定义如下："><span class="toc-text">简单工厂模式定义如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在简单工厂模式结构图中包含如下几个角色："><span class="toc-text">在简单工厂模式结构图中包含如下几个角色：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-完整解决方案"><span class="toc-text">3 完整解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-简单工厂模式的简化"><span class="toc-text">4 简单工厂模式的简化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-简单工厂模式总结"><span class="toc-text">5 简单工厂模式总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要优点"><span class="toc-text">主要优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主要缺点"><span class="toc-text">主要缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#适用场景"><span class="toc-text">适用场景</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>工厂模式是最常用的一类创建型设计模式，通常我们所说的工厂模式是指<strong>工厂方法模式</strong>，它也是使用频率最高的工厂模式。本章将要学习的<strong>简单工厂模式</strong>是工厂方法模式的“小弟”，它不属于GoF 23种设计模式，但在软件开发中应用也较为频繁，通常将它作为学习其他工厂模式的入门。此外，工厂方法模式还有一位“大哥”——<strong>抽象工厂模式</strong>。这三种工厂模式各具特色，难度也逐个加大，在软件开发中它们都得到了广泛的应用，成为面向对象软件中常用的创建对象的工具。</p>
+<h2 id="1-图表库的设计"><a href="#1-图表库的设计" class="headerlink" title="1 图表库的设计"></a>1 图表库的设计</h2><blockquote>
+<p>Sunny软件公司欲基于Java语言开发一套图表库，该图表库可以为应用系统提供各种不同外观的图表，例如柱状图、饼状图、折线图等。Sunny软件公司图表库设计人员希望为应用系统开发人员提供一套灵活易用的图表库，而且可以较为方便地对图表库进行扩展，以便能够在将来增加一些新类型的图表。</p>
+</blockquote>
+<p>Sunny软件公司图表库设计人员提出了一个初始设计方案，将所有图表的实现代码封装在一个Chart类中，其框架代码如下所示：</p>
+<pre><code class="java">class Chart {
+    private String type; //图表类型
+
+    public Chart(Object[][] data, String type) {
+        this.type = type;
+        if (type.equalsIgnoreCase(&quot;histogram&quot;)) {
+            //初始化柱状图
+        }
+        else if (type.equalsIgnoreCase(&quot;pie&quot;)) {
+            //初始化饼状图
+        }
+        else if (type.equalsIgnoreCase(&quot;line&quot;)) {
+            //初始化折线图
+        }
+    }
+
+    public void display() {
+        if (this.type.equalsIgnoreCase(&quot;histogram&quot;)) {
+            //显示柱状图
+        }
+        else if (this.type.equalsIgnoreCase(&quot;pie&quot;)) {
+            //显示饼状图
+        }
+        else if (this.type.equalsIgnoreCase(&quot;line&quot;)) {
+            //显示折线图
+        }    
+    }
+}</code></pre>
+<p>客户端代码通过调用Chart类的构造函数来创建图表对象，根据参数type的不同可以得到不同类型的图表，然后再调用display()方法来显示相应的图表。</p>
+<p>不难看出，Chart类是一个“巨大的”类，在该类的设计中存在如下几个问题：</p>
+<p>   (1) 在Chart类中包含很多“if…else…”代码块，整个类的代码相当冗长，代码越长，阅读难度、维护难度和测试难度也越大；而且大量条件语句的存在还将影响系统的性能，程序在执行过程中需要做大量的条件判断。</p>
+<p>   (2) Chart类的职责过重，它负责初始化和显示所有的图表对象，将各种图表对象的初始化代码和显示代码集中在一个类中实现，违反了“单一职责原则”，不利于类的重用和维护；而且将大量的对象初始化代码都写在构造函数中将导致构造函数非常庞大，对象在创建时需要进行条件判断，降低了对象创建的效率。</p>
+<p>   (3) 当需要增加新类型的图表时，必须修改Chart类的源代码，违反了“开闭原则”。</p>
+<p>   (4) 客户端只能通过new关键字来直接创建Chart对象，Chart类与客户端类耦合度较高，对象的创建和使用无法分离。</p>
+<p>   (5) 客户端在创建Chart对象之前可能还需要进行大量初始化设置，例如设置柱状图的颜色、高度等，如果在Chart类的构造函数中没有提供一个默认设置，那就只能由客户端来完成初始设置，这些代码在每次创建Chart对象时都会出现，导致代码的重复。</p>
+<blockquote>
+<p>面对一个如此巨大、职责如此重，且与客户端代码耦合度非常高的类，我们应该怎么办？本章将要介绍的简单工厂模式将在一定程度上解决上述问题。</p>
+</blockquote>
+<h2 id="2-简单工厂模式概述"><a href="#2-简单工厂模式概述" class="headerlink" title="2 简单工厂模式概述"></a>2 简单工厂模式概述</h2><p>简单工厂模式并不属于GoF 23个经典设计模式，但通常将它作为学习其他工厂模式的基础，它的设计思想很简单。</p>
+<h3 id="其基本流程如下："><a href="#其基本流程如下：" class="headerlink" title="其基本流程如下："></a>其基本流程如下：</h3><p>首先将需要创建的各种不同对象（例如各种不同的Chart对象）的相关代码封装到不同的类中，这些类称为<strong>具体产品类</strong>，而将它们公共的代码进行抽象和提取后封装在一个抽象产品类中，每一个具体产品类都是<strong>抽象产品类</strong>的子类；然后提供一个<strong>工厂类</strong>用于创建各种产品，在工厂类中提供一个创建产品的工厂方法，该方法可以根据所传入的参数不同创建不同的具体产品对象；客户端只需调用工厂类的工厂方法并传入相应的参数即可得到一个产品对象。</p>
+<h3 id="简单工厂模式定义如下："><a href="#简单工厂模式定义如下：" class="headerlink" title="简单工厂模式定义如下："></a>简单工厂模式定义如下：</h3><blockquote>
+<p>简单工厂模式(Simple Factory Pattern)：定义一个工厂类，它可以根据参数的不同返回不同类的实例，被创建的实例通常都具有共同的父类。因为在简单工厂模式中用于创建实例的方法是静态(static)方法，因此简单工厂模式又被称为静态工厂方法(Static Factory Method)模式，它属于类创建型模式。</p>
+</blockquote>
+<p>简单工厂模式的要点在于：<strong>当你需要什么，只需要传入一个正确的参数，就可以获取你所需要的对象，而无须知道其创建细节。</strong>简单工厂模式结构比较简单，其核心是工厂类的设计，其结构如图1所示：</p>
+<p>![image-20200211212158696](/Users/ocean/Library/Application Support/typora-user-images/image-20200211212158696.png)</p>
+<h3 id="在简单工厂模式结构图中包含如下几个角色："><a href="#在简单工厂模式结构图中包含如下几个角色：" class="headerlink" title="在简单工厂模式结构图中包含如下几个角色："></a>在简单工厂模式结构图中包含如下几个角色：</h3><ul>
+<li><p><strong>Factory（工厂角色）：</strong>工厂角色即工厂类，它是简单工厂模式的核心，负责实现创建所有产品实例的内部逻辑；工厂类可以被外界直接调用，创建所需的产品对象；在工厂类中提供了静态的工厂方法factoryMethod()，它的返回类型为抽象产品类型Product。</p>
+</li>
+<li><p><strong>Product（抽象产品角色）：</strong>它是工厂类所创建的所有对象的父类，封装了各种产品对象的公有方法，它的引入将提高系统的灵活性，使得在工厂类中只需定义一个通用的工厂方法，因为所有创建的具体产品对象都是其子类对象。</p>
+</li>
+<li><p><strong>ConcreteProduct（具体产品角色）：</strong>它是简单工厂模式的创建目标，所有被创建的对象都充当这个角色的某个具体类的实例。每一个具体产品角色都继承了抽象产品角色，需要实现在抽象产品中声明的抽象方法。</p>
+</li>
+</ul>
+<p>在简单工厂模式中，客户端通过工厂类来创建一个产品类的实例，而无须直接使用new关键字来创建对象，它是工厂模式家族中最简单的一员。</p>
+<p>在使用简单工厂模式时，首先需要对产品类进行重构，<strong>不能设计一个包罗万象的产品类，而需根据实际情况设计一个产品层次结构</strong>，将所有产品类公共的代码移至抽象产品类，并在抽象产品类中声明一些抽象方法，以供不同的具体产品类来实现，典型的抽象产品类代码如下所示：</p>
+<pre><code class="java">abstract class Product {
+    //所有产品类的公共业务方法
+    public void methodSame() {
+        //公共方法的实现
+    }
+
+    //声明抽象业务方法
+    public abstract void methodDiff();
+}</code></pre>
+<p>在具体产品类中实现了抽象产品类中声明的抽象业务方法，不同的具体产品类可以提供不同的实现，典型的具体产品类代码如下所示：</p>
+<pre><code class="java">class ConcreteProduct extends Product {
+    //实现业务方法
+    public void methodDiff() {
+        //业务方法的实现
+    }
+}</code></pre>
+<p>简单工厂模式的核心是工厂类，在没有工厂类之前，客户端一般会使用new关键字来直接创建产品对象，而在引入工厂类之后，客户端可以通过工厂类来创建产品，在简单工厂模式中，工厂类提供了一个静态工厂方法供客户端使用，根据所传入的参数不同可以创建不同的产品对象，典型的工厂类代码如下所示：</p>
+<pre><code class="java">class Factory {
+    //静态工厂方法
+    public static Product getProduct(String arg) {
+        Product product = null;
+        if (arg.equalsIgnoreCase(&quot;A&quot;)) {
+            product = new ConcreteProductA();
+            //初始化设置product
+        }
+        else if (arg.equalsIgnoreCase(&quot;B&quot;)) {
+            product = new ConcreteProductB();
+            //初始化设置product
+        }
+        return product;
+    }
+}</code></pre>
+<p>在客户端代码中，我们通过调用工厂类的工厂方法即可得到产品对象，典型代码如下所示：</p>
+<pre><code class="java">class Client {
+    public static void main(String args[]) {
+        Product product; 
+        product = Factory.getProduct(&quot;A&quot;); //通过工厂类创建产品对象
+        product.methodSame();
+        product.methodDiff();
+    }
+}</code></pre>
+<h2 id="3-完整解决方案"><a href="#3-完整解决方案" class="headerlink" title="3 完整解决方案"></a>3 完整解决方案</h2><p>为了将Chart类的职责分离，同时将Chart对象的创建和使用分离，Sunny软件公司开发人员决定使用简单工厂模式对图表库进行重构，重构后的结构如图2所示：</p>
+<p>![image-20200211212858134](/Users/ocean/Library/Application Support/typora-user-images/image-20200211212858134.png)</p>
+<p>在图2中，Chart接口充当抽象产品类，其子类HistogramChart、PieChart和LineChart充当具体产品类，ChartFactory充当工厂类。完整代码如下所示：</p>
+<pre><code class="java">//抽象图表接口：抽象产品类
+interface Chart {
+    public void display();
+}
+
+//柱状图类：具体产品类
+class HistogramChart implements Chart {
+    public HistogramChart() {
+        System.out.println(&quot;创建柱状图！&quot;);
+    }
+
+    public void display() {
+        System.out.println(&quot;显示柱状图！&quot;);
+    }
+}
+
+//饼状图类：具体产品类
+class PieChart implements Chart {
+    public PieChart() {
+        System.out.println(&quot;创建饼状图！&quot;);
+    }
+
+    public void display() {
+        System.out.println(&quot;显示饼状图！&quot;);
+    }
+}
+
+//折线图类：具体产品类
+class LineChart implements Chart {
+    public LineChart() {
+        System.out.println(&quot;创建折线图！&quot;);
+    }
+
+    public void display() {
+        System.out.println(&quot;显示折线图！&quot;);
+    }
+}
+
+//图表工厂类：工厂类
+class ChartFactory {
+    //静态工厂方法
+    public static Chart getChart(String type) {
+        Chart chart = null;
+        if (type.equalsIgnoreCase(&quot;histogram&quot;)) {
+            chart = new HistogramChart();
+            System.out.println(&quot;初始化设置柱状图！&quot;);
+        }
+        else if (type.equalsIgnoreCase(&quot;pie&quot;)) {
+            chart = new PieChart();
+            System.out.println(&quot;初始化设置饼状图！&quot;);
+        }
+        else if (type.equalsIgnoreCase(&quot;line&quot;)) {
+            chart = new LineChart();
+            System.out.println(&quot;初始化设置折线图！&quot;);            
+        }
+        return chart;
+    }
+}</code></pre>
+<p>编写如下客户端测试代码：</p>
+<pre><code class="java">class Client {
+    public static void main(String args[]) {
+        Chart chart;
+        chart = ChartFactory.getChart(&quot;histogram&quot;); //通过静态工厂方法创建产品
+        chart.display();
+    }
+}</code></pre>
+<p>编译并运行程序，输出结果如下：</p>
+<blockquote>
+<p>创建柱状图！</p>
+<p>初始化设置柱状图！</p>
+<p>显示柱状图！</p>
+</blockquote>
+<p>在客户端测试类中，我们使用工厂类的静态工厂方法创建产品对象，如果需要更换产品，只需修改静态工厂方法中的参数即可，例如将柱状图改为饼状图，只需将代码：</p>
+<pre><code class="java">chart = ChartFactory.getChart(&quot;histogram&quot;);</code></pre>
+<p>改为：</p>
+<pre><code class="java">chart = ChartFactory.getChart(&quot;pie&quot;);</code></pre>
+<p>编译并运行程序，输出结果如下：</p>
+<blockquote>
+<p>创建饼状图！</p>
+<p>初始化设置饼状图！</p>
+<p>显示饼状图！</p>
+</blockquote>
+<h2 id="4-简单工厂模式的简化"><a href="#4-简单工厂模式的简化" class="headerlink" title="4 简单工厂模式的简化"></a>4 简单工厂模式的简化</h2><p>有时候，为了简化简单工厂模式，我们可以将抽象产品类和工厂类合并，将静态工厂方法移至抽象产品类中，如图3所示：</p>
+<p>![image-20200211213443631](/Users/ocean/Library/Application Support/typora-user-images/image-20200211213443631.png)</p>
+<p>在图3中，客户端可以通过产品父类的静态工厂方法，根据参数的不同创建不同类型的产品子类对象，这种做法在JDK等类库和框架中也广泛存在。</p>
+<h2 id="5-简单工厂模式总结"><a href="#5-简单工厂模式总结" class="headerlink" title="5 简单工厂模式总结"></a>5 简单工厂模式总结</h2><p>简单工厂模式提供了专门的工厂类用于创建对象，将对象的创建和对象的使用分离开，它作为一种最简单的工厂模式在软件开发中得到了较为广泛的应用。</p>
+<h3 id="主要优点"><a href="#主要优点" class="headerlink" title="主要优点"></a>主要优点</h3><p>简单工厂模式的主要优点如下：</p>
+<p>(1) 工厂类包含必要的判断逻辑，可以决定在什么时候创建哪一个产品类的实例，客户端可以免除直接创建产品对象的职责，而仅仅“消费”产品，简单工厂模式实现了对象创建和使用的分离。</p>
+<p>(2) 客户端无须知道所创建的具体产品类的类名，只需要知道具体产品类所对应的参数即可，对于一些复杂的类名，通过简单工厂模式可以在一定程度减少使用者的记忆量。</p>
+<p>(3) 通过引入配置文件，可以在不修改任何客户端代码的情况下更换和增加新的具体产品类，在一定程度上提高了系统的灵活性。</p>
+<h3 id="主要缺点"><a href="#主要缺点" class="headerlink" title="主要缺点"></a>主要缺点</h3><p>简单工厂模式的主要缺点如下：</p>
+<p>   (1) 由于工厂类集中了所有产品的创建逻辑，职责过重，一旦不能正常工作，整个系统都要受到影响。</p>
+<p>   (2) 使用简单工厂模式势必会增加系统中类的个数（引入了新的工厂类），增加了系统的复杂度和理解难度。</p>
+<p>   (3) 系统扩展困难，一旦添加新产品就不得不修改工厂逻辑，在产品类型较多时，有可能造成工厂逻辑过于复杂，不利于系统的扩展和维护。</p>
+<p>   (4) 简单工厂模式由于使用了静态工厂方法，造成工厂角色无法形成基于继承的等级结构。</p>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>在以下情况下可以考虑使用简单工厂模式：</p>
+<p>​    (1) 工厂类负责创建的对象比较少，由于创建的对象较少，不会造成工厂方法中的业务逻辑太过复杂。</p>
+<p>​    (2) 客户端只知道传入工厂类的参数，对于如何创建对象并不关心。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>简单工厂模式</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">3.5k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-11, 21:41:31</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-11, 23:01:53</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" title="简单工厂模式">http://yoursite.com/2020/02/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019-2019 Ocean</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#垃圾','#算法','#模式','#面试',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
