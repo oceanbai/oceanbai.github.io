@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>失败是成功之母</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="失败是成功之母">
+  <title>第二原则:依赖倒置原则 | 失败是成功之母</title>
+  <meta name="keywords" content=" 设计原则 ">
+  <meta name="description" content="第二原则:依赖倒置原则 | 失败是成功之母">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。加油！加油！！加油！！！ Never give up ！！！！｜｜永不放弃｜｜ 古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
 <meta property="og:type" content="website">
@@ -50,7 +50,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -379,12 +379,57 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-设计原则/依赖倒置原则" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#博客的出现"><span class="toc-text">博客的出现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于博客"><span class="toc-text">关于博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">第二原则:依赖倒置原则</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="后端">后端</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">设计原则</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-05-26 19:16:43'>2019-05-26 17:07</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#依赖倒置原则"><span class="toc-text">依赖倒置原则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义："><span class="toc-text">定义：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题由来："><span class="toc-text">问题由来：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案："><span class="toc-text">解决方案：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#举例"><span class="toc-text">举例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#个人拙见"><span class="toc-text">个人拙见:</span></a></li></ol></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -397,35 +442,138 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="博客的出现"><a href="#博客的出现" class="headerlink" title="博客的出现"></a>博客的出现</h2><p>写博客是为了监督自己不断的进步，不松懈。</p>
-<blockquote>
-<p>有时候，我们看到很好的东西，却匆匆一看没有记录导致后面再想看看的时候已经消失不见。</p>
-</blockquote>
-<blockquote>
-<p>自己想写一些自己当前阶段的感悟，为了不再使用的时候依然能够快速拾起。</p>
-</blockquote>
-<blockquote>
-<p>我想让别人也来了解我的能力。</p>
-</blockquote>
-<p>我曾七次鄙视自己的灵魂: 第一次,当它本可进取时，却故作谦卑； 第二次,当它空虚时，用爱欲来填充； 第三次,在困难和容易之间，它选择了容易； 第四次,它犯了错，却借由别人也会犯错来宽慰自己； 第五次,它自由软弱，却把它认为是生命的坚韧； 第六次,当它鄙夷一张丑恶的嘴脸时，却不知那正是自己面具中的一副； 第七次,它侧身于生活的污泥中虽不甘心，却又畏首畏尾。</p>
-<h2 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h2><p><strong>失败是成功之母</strong> 是Oceanbai的个人面试准备站，只是用来通过自己学习后的积累，如果有侵权行为，请随时联系。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
-<p>主要功能：</p>
-<ul>
-<li>搜索支持文章标题、标签(#标签)、作者(@作者)</li>
-<li>pad/手机等移动端适配</li>
-<li>页面全局快捷键 <a href='http://yelog.org/2017/03/24/3-hexo-shortcuts/' target="_blank" rel="noopener">3-hexo快捷键说明</a></li>
-</ul>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h1><h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。</p>
+<h2 id="问题由来："><a href="#问题由来：" class="headerlink" title="问题由来："></a>问题由来：</h2><p>类A直接依赖类B，假如要将类A改为依赖类C，则必须通过修改类A的代码来达成。这种场景下，类A一般是高层模块，负责复杂的业务逻辑；类B和类C是低层模块，负责基本的原子操作；假如修改类A，会给程序带来不必要的风险。</p>
+<h2 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h2><p>将类A修改为依赖接口I，类B和类C各自实现接口I，类A通过接口I间接与类B或者类C发生联系，则会大大降低修改类A的几率。</p>
+<p>依赖倒置原则基于这样一个事实：相对于细节的多变性，抽象的东西要稳定的多。以抽象为基础搭建起来的架构比以细节为基础搭建起来的架构要稳定的多。在java中，抽象指的是接口或者抽象类，细节就是具体的实现类，使用接口或者抽象类的目的是制定好规范和契约，而不去涉及任何具体的操作，把展现细节的任务交给他们的实现类去完成。</p>
+<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><p>依赖倒置原则的核心思想是<strong>面向接口编程</strong>，我们依旧用一个例子来说明面向接口编程比相对于面向实现编程好在什么地方。场景是这样的，母亲给孩子讲故事，只要给她一本书，她就可以照着书给孩子讲故事了。代码如下：</p>
+<pre><code class="java"> class Book{
+    public String getContent(){
+        return &quot;很久很久以前有一个阿拉伯的故事……&quot;;
+    }
+}
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+class Mother{
+    public void narrate(Book book){
+        System.out.println(&quot;妈妈开始讲故事&quot;);
+        System.out.println(book.getContent());
+    }
+}
+
+public class Client{
+    public static void main(String[] args){
+        Mother mother = new Mother();
+        mother.narrate(new Book());
+    }
+}</code></pre>
+<p>运行结果：</p>
+<p><strong>妈妈开始讲故事</strong><br><strong>很久很久以前有一个阿拉伯的故事……</strong></p>
+<p>运行良好，假如有一天，需求变成这样：不是给书而是给一份报纸，让这位母亲讲一下报纸上的故事，报纸的代码如下：</p>
+<pre><code class="java">class Newspaper{
+    public String getContent(){
+        return &quot;林书豪38+7领导尼克斯击败湖人……&quot;;
+    }
+}</code></pre>
+<p>这位母亲却办不到，因为她居然不会读报纸上的故事，这太荒唐了，只是将书换成报纸，居然必须要修改Mother才能读。假如以后需求换成杂志呢？换成网页呢？还要不断地修改Mother，这显然不是好的设计。原因就是Mother与Book之间的耦合性太高了，必须降低他们之间的耦合度才行。</p>
+<p>我们引入一个抽象的接口IReader。读物，只要是带字的都属于读物：</p>
+<pre><code class="java">interface IReader{
+    public String getContent();
+}</code></pre>
+<p>Mother类与接口IReader发生依赖关系，而Book和Newspaper都属于读物的范畴，他们各自都去实现IReader接口，这样就符合依赖倒置原则了，代码修改为：</p>
+<pre><code class="java">class Newspaper implements IReader {
+    public String getContent(){
+        return &quot;林书豪17+9助尼克斯击败老鹰……&quot;;
+    }
+}
+class Book implements IReader{
+    public String getContent(){
+        return &quot;很久很久以前有一个阿拉伯的故事……&quot;;
+    }
+}
+
+class Mother{
+    public void narrate(IReader reader){
+        System.out.println(&quot;妈妈开始讲故事&quot;);
+        System.out.println(reader.getContent());
+    }
+}
+
+public class Client{
+    public static void main(String[] args){
+        Mother mother = new Mother();
+        mother.narrate(new Book());
+        mother.narrate(new Newspaper());
+    }
+}</code></pre>
+<p>运行结果：</p>
+<p><strong>妈妈开始讲故事</strong><br><strong>很久很久以前有一个阿拉伯的故事……</strong><br><strong>妈妈开始讲故事</strong><br><strong>林书豪17+9助尼克斯击败老鹰……</strong></p>
+<p>这样修改后，无论以后怎样扩展Client类，都不需要再修改Mother类了。这只是一个简单的例子，实际情况中，代表高层模块的Mother类将负责完成主要的业务逻辑，一旦需要对它进行修改，引入错误的风险极大。所以遵循依赖倒置原则可以降低类之间的耦合性，提高系统的稳定性，降低修改程序造成的风险。</p>
+<p>采用依赖倒置原则给多人并行开发带来了极大的便利，比如上例中，原本Mother类与Book类直接耦合时，Mother类必须等Book类编码完成后才可以进行编码，因为Mother类依赖于Book类。修改后的程序则可以同时开工，互不影响，因为Mother与Book类一点关系也没有。参与协作开发的人越多、项目越庞大，采用依赖导致原则的意义就越重大。现在很流行的TDD开发模式就是依赖倒置原则最成功的应用。</p>
+<p>传递依赖关系有三种方式，以上的例子中使用的方法是接口传递，另外还有两种传递方式：构造方法传递和setter方法传递，相信用过Spring框架的，对依赖的传递方式一定不会陌生。<br>在实际编程中，我们一般需要做到如下3点：</p>
+<p>低层模块尽量都要有抽象类或接口，或者两者都有。<br>变量的声明类型尽量是抽象类或接口。<br>使用继承时遵循里氏替换原则。</p>
+<p>依赖倒置原则的核心就是要我们<strong>面向接口编程</strong>，理解了面向接口编程，也就理解了依赖倒置。</p>
+<hr>
+<p>作者：神父，我有罪<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/zhengzhb/article/details/7289269" target="_blank" rel="noopener">https://blog.csdn.net/zhengzhb/article/details/7289269</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+<hr>
+<ul>
+<li><h4 id="个人拙见"><a href="#个人拙见" class="headerlink" title="个人拙见:"></a>个人拙见:</h4></li>
+</ul>
+<ol>
+<li>面向接口编程如果理解不起来，那么换成简单易懂的方式就是面向方法编程，方法与对象是两个概念。在java中，方法都必须在类中才能实现并使用。那么如果没有了对象，只想实现方法，而不在使用类，该如何实现，相当于没有了class文件，你只有interface文件，你要怎么通过interface来实现你的方法。</li>
+<li>假设你学习的了JDK1.8的函数式(lamda表达式)<br>那么上面的代码又可以改为</li>
+</ol>
+<pre><code class="java">    @FunctionalInterface
+    public interface IReader&lt;T&gt; {
+        void narrate(T t);
+    }
+
+    public static void main(String[] args) {
+        //方法实现
+        IReader&lt;String&gt; mother = System.out::println;
+        //调用实现的方法
+        mother.narrate(&quot;妈妈开始讲故事&quot;);
+        mother.narrate(&quot;很久很久以前有一个阿拉伯的故事……&quot;);
+        mother.narrate(&quot;林书豪17+9助尼克斯击败老鹰……&quot;);
+    }</code></pre>
+<p>输出结果:</p>
+<p><strong>妈妈开始讲故事<br>很久很久以前有一个阿拉伯的故事……<br>林书豪17+9助尼克斯击败老鹰……</strong></p>
+<p>那么在上面的代码中，我们方法的实现抛弃了类，我们不在把类作为方法的载体，直接使用接口(interface)来实现方法，那么这种模式就叫做<strong>面对接口编程</strong>，也可以理解为<strong>面向函数编程</strong>。</p>
+<p>也可以这么理解<strong>在一个面向对象的系统中，系统的各种功能是由许许多多的不同对象协作完成的。在这种情况下，各个对象内部是如何实现自己的对系统设计人员来讲就 不那么重要了；而各个对象之间的协作关系则成为系统设计的关键。小到不同类之间的通信，大到各模块之间的交互，在系统设计之初都是要着重考虑的，这也是系 统设计的主要工作内容。面向接口编程我想就是指按照这种思想来编程吧</strong></p>
+<p>总之，就是类的作用不再那么重要，而方法直接的相互作用变得关键的时候就是****</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>第二原则:依赖倒置原则</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-05-26, 17:07:00</p>
+    <p><span class="copy-title">最后更新:</span>2019-05-26, 19:16:43</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99/" title="第二原则:依赖倒置原则">http://yoursite.com/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">©2019-2019 Ocean</p>

@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>简单工厂模式--------一 | 失败是成功之母</title>
+  <title>抽象工厂模式--------三 | 失败是成功之母</title>
   <meta name="keywords" content=" 模式 ">
-  <meta name="description" content="简单工厂模式--------一 | 失败是成功之母">
+  <meta name="description" content="抽象工厂模式--------三 | 失败是成功之母">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。加油！加油！！加油！！！ Never give up ！！！！｜｜永不放弃｜｜ 古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
 <meta property="og:type" content="website">
@@ -381,9 +381,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-设计模式/简单工厂模式" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-设计模式/抽象工厂模式" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">简单工厂模式--------一</h1>
+        <h1 class="article-title">抽象工厂模式--------三</h1>
     
     <div class="article-meta">
         
@@ -405,12 +405,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-13 11:23:38'>2020-02-11 21:41</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-13 11:40:36'>2020-02-13 21:41</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:3.5k</span>
+        <span>字数:4.7k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -429,7 +429,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-图表库的设计"><span class="toc-text">1 图表库的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-简单工厂模式概述"><span class="toc-text">2 简单工厂模式概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#其基本流程如下："><span class="toc-text">其基本流程如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单工厂模式定义如下："><span class="toc-text">简单工厂模式定义如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在简单工厂模式结构图中包含如下几个角色："><span class="toc-text">在简单工厂模式结构图中包含如下几个角色：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-完整解决方案"><span class="toc-text">3 完整解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-简单工厂模式的简化"><span class="toc-text">4 简单工厂模式的简化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-简单工厂模式总结"><span class="toc-text">5 简单工厂模式总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要优点"><span class="toc-text">主要优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主要缺点"><span class="toc-text">主要缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#适用场景"><span class="toc-text">适用场景</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-界面皮肤库的初始设计"><span class="toc-text">1 界面皮肤库的初始设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-产品等级结构与产品族"><span class="toc-text">2 产品等级结构与产品族</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-抽象工厂模式概述"><span class="toc-text">3 抽象工厂模式概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在抽象工厂模式结构图中包含如下几个角色："><span class="toc-text">在抽象工厂模式结构图中包含如下几个角色：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-完整解决方案"><span class="toc-text">4 完整解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-“开闭原则”的倾斜性"><span class="toc-text">5 “开闭原则”的倾斜性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-抽象工厂模式总结"><span class="toc-text">6 抽象工厂模式总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-主要优点"><span class="toc-text">1. 主要优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-主要缺点"><span class="toc-text">2. 主要缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-适用场景"><span class="toc-text">3. 适用场景</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -445,208 +445,237 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>工厂模式是最常用的一类创建型设计模式，通常我们所说的工厂模式是指<strong>工厂方法模式</strong>，它也是使用频率最高的工厂模式。本章将要学习的<strong>简单工厂模式</strong>是工厂方法模式的“小弟”，它不属于GoF 23种设计模式，但在软件开发中应用也较为频繁，通常将它作为学习其他工厂模式的入门。此外，工厂方法模式还有一位“大哥”——<strong>抽象工厂模式</strong>。这三种工厂模式各具特色，难度也逐个加大，在软件开发中它们都得到了广泛的应用，成为面向对象软件中常用的创建对象的工具。</p>
-<h2 id="1-图表库的设计"><a href="#1-图表库的设计" class="headerlink" title="1 图表库的设计"></a>1 图表库的设计</h2><blockquote>
-<p>Sunny软件公司欲基于Java语言开发一套图表库，该图表库可以为应用系统提供各种不同外观的图表，例如柱状图、饼状图、折线图等。Sunny软件公司图表库设计人员希望为应用系统开发人员提供一套灵活易用的图表库，而且可以较为方便地对图表库进行扩展，以便能够在将来增加一些新类型的图表。</p>
+        <p>工厂方法模式通过引入工厂等级结构，解决了简单工厂模式中工厂类职责太重的问题，但由于工厂方法模式中的每个工厂只生产一类产品，可能会导致系统中存在大量的工厂类，势必会增加系统的开销。此时，我们可以考虑<strong>将一些相关的产品组成一个“产品族”，由同一个工厂来统一生产</strong>，这就是我们本文将要学习的抽象工厂模式的基本思想。</p>
+<h2 id="1-界面皮肤库的初始设计"><a href="#1-界面皮肤库的初始设计" class="headerlink" title="1 界面皮肤库的初始设计"></a>1 界面皮肤库的初始设计</h2><blockquote>
+<p>Sunny软件公司欲开发一套界面皮肤库，可以对Java桌面软件进行界面美化。为了保护版权，该皮肤库源代码不打算公开，而只向用户提供已打包为jar文件的class字节码文件。用户在使用时可以通过菜单来选择皮肤，不同的皮肤将提供视觉效果不同的按钮、文本框、组合框等界面元素，其结构示意图如图1所示：<br><img src="/imag/Factory/20130713161528750.jpeg" alt="图1 界面皮肤库结构示意图"></p>
+<p>该皮肤库需要具备良好的灵活性和可扩展性，用户可以自由选择不同的皮肤，开发人员可以在不修改既有代码的基础上增加新的皮肤。</p>
 </blockquote>
-<p>Sunny软件公司图表库设计人员提出了一个初始设计方案，将所有图表的实现代码封装在一个Chart类中，其框架代码如下所示：</p>
-<pre><code class="java">class Chart {
-    private String type; //图表类型
-
-    public Chart(Object[][] data, String type) {
-        this.type = type;
-        if (type.equalsIgnoreCase(&quot;histogram&quot;)) {
-            //初始化柱状图
-        }
-        else if (type.equalsIgnoreCase(&quot;pie&quot;)) {
-            //初始化饼状图
-        }
-        else if (type.equalsIgnoreCase(&quot;line&quot;)) {
-            //初始化折线图
-        }
-    }
-
-    public void display() {
-        if (this.type.equalsIgnoreCase(&quot;histogram&quot;)) {
-            //显示柱状图
-        }
-        else if (this.type.equalsIgnoreCase(&quot;pie&quot;)) {
-            //显示饼状图
-        }
-        else if (this.type.equalsIgnoreCase(&quot;line&quot;)) {
-            //显示折线图
-        }    
-    }
-}</code></pre>
-<p>客户端代码通过调用Chart类的构造函数来创建图表对象，根据参数type的不同可以得到不同类型的图表，然后再调用display()方法来显示相应的图表。</p>
-<p>不难看出，Chart类是一个“巨大的”类，在该类的设计中存在如下几个问题：</p>
-<p>   (1) 在Chart类中包含很多“if…else…”代码块，整个类的代码相当冗长，代码越长，阅读难度、维护难度和测试难度也越大；而且大量条件语句的存在还将影响系统的性能，程序在执行过程中需要做大量的条件判断。</p>
-<p>   (2) Chart类的职责过重，它负责初始化和显示所有的图表对象，将各种图表对象的初始化代码和显示代码集中在一个类中实现，违反了“单一职责原则”，不利于类的重用和维护；而且将大量的对象初始化代码都写在构造函数中将导致构造函数非常庞大，对象在创建时需要进行条件判断，降低了对象创建的效率。</p>
-<p>   (3) 当需要增加新类型的图表时，必须修改Chart类的源代码，违反了“开闭原则”。</p>
-<p>   (4) 客户端只能通过new关键字来直接创建Chart对象，Chart类与客户端类耦合度较高，对象的创建和使用无法分离。</p>
-<p>   (5) 客户端在创建Chart对象之前可能还需要进行大量初始化设置，例如设置柱状图的颜色、高度等，如果在Chart类的构造函数中没有提供一个默认设置，那就只能由客户端来完成初始设置，这些代码在每次创建Chart对象时都会出现，导致代码的重复。</p>
+<p>Sunny软件公司的开发人员针对上述要求，决定使用工厂方法模式进行系统的设计，为了保证系统的灵活性和可扩展性，提供一系列具体工厂来创建按钮、文本框、组合框等界面元素，客户端针对抽象工厂编程，初始结构如图2所示：</p>
+<p><img src="/imag/Factory/20130713161546250.jpeg" alt="图2 基于工厂方法模式的界面皮肤库初始结构图"></p>
+<p>在图2中，提供了大量工厂来创建具体的界面组件，可以通过配置文件更换具体界面组件从而改变界面风格。但是，此设计方案存在如下问题：</p>
+<p>   (1) 当需要增加新的皮肤时，虽然不要修改现有代码，但是需要增加大量类，针对每一个新增具体组件都需要增加一个具体工厂，类的个数成对增加，这无疑会导致系统越来越庞大，增加系统的维护成本和运行开销；</p>
+<p>   (2) 由于同一种风格的具体界面组件通常要一起显示，因此需要为每个组件都选择一个具体工厂，用户在使用时必须逐个进行设置，如果某个具体工厂选择失误将会导致界面显示混乱，虽然我们可以适当增加一些约束语句，但客户端代码和配置文件都较为复杂。</p>
+<p>   如何减少系统中类的个数并保证客户端每次始终只使用某一种风格的具体界面组件？这是Sunny公司开发人员所面临的两个问题，显然，工厂方法模式无法解决这两个问题，别着急，本文所介绍的抽象工厂模式可以让这些问题迎刃而解。</p>
+<h2 id="2-产品等级结构与产品族"><a href="#2-产品等级结构与产品族" class="headerlink" title="2 产品等级结构与产品族"></a>2 产品等级结构与产品族</h2><p>在工厂方法模式中具体工厂负责生产具体的产品，每一个具体工厂对应一种具体产品，工厂方法具有唯一性，一般情况下，一个具体工厂中只有一个或者一组重载的工厂方法。但是有时候我们希望一个工厂可以提供多个产品对象，而不是单一的产品对象，如一个电器工厂，它可以生产电视机、电冰箱、空调等多种电器，而不是只生产某一种电器。为了更好地理解抽象工厂模式，我们先引入两个概念：</p>
+<p> (1) 产品等级结构：产品等级结构即产品的继承结构，如一个抽象类是电视机，其子类有海尔电视机、海信电视机、TCL电视机，则抽象电视机与具体品牌的电视机之间构成了一个产品等级结构，抽象电视机是父类，而具体品牌的电视机是其子类。</p>
+<p>   (2) 产品族：在抽象工厂模式中，产品族是指由同一个工厂生产的，位于不同产品等级结构中的一组产品，如海尔电器工厂生产的海尔电视机、海尔电冰箱，海尔电视机位于电视机产品等级结构中，海尔电冰箱位于电冰箱产品等级结构中，海尔电视机、海尔电冰箱构成了一个产品族。</p>
+<p>产品等级结构与产品族示意图如图3所示：</p>
+<p><img src="/imag/Factory/20130713162941328.jpeg" alt="图3  产品族与产品等级结构示意图"></p>
+<p>在图3中，不同颜色的多个正方形、圆形和椭圆形分别构成了三个不同的产品等级结构，而相同颜色的正方形、圆形和椭圆形构成了一个产品族，每一个形状对象都位于某个产品族，并属于某个产品等级结构。图3中一共有五个产品族，分属于三个不同的产品等级结构。我们只要指明一个产品所处的产品族以及它所属的等级结构，就可以唯一确定这个产品。</p>
+<p>当系统所提供的工厂生产的具体产品并不是一个简单的对象，而是多个位于不同产品等级结构、属于不同类型的具体产品时就可以使用抽象工厂模式。<strong>抽象工厂模式是所有形式的工厂模式中最为抽象和最具一般性的一种形式。</strong>抽象工厂模式与工厂方法模式最大的区别在于，工厂方法模式针对的是一个产品等级结构，而抽象工厂模式需要面对多个产品等级结构，一个工厂等级结构可以负责多个不同产品等级结构中的产品对象的创建。<strong>当一个工厂等级结构可以创建出分属于不同产品等级结构的一个产品族中的所有对象时，抽象工厂模式比工厂方法模式更为简单、更有效率</strong>。抽象工厂模式示意图如图4所示：<br><img src="/imag/Factory/20130713163008609.jpeg" alt="图4 抽象工厂模式示意图"></p>
+<p>在图4中，每一个具体工厂可以生产属于一个产品族的所有产品，例如生产颜色相同的正方形、圆形和椭圆形，所生产的产品又位于不同的产品等级结构中。如果使用工厂方法模式，图4所示结构需要提供15个具体工厂，而使用抽象工厂模式只需要提供5个具体工厂，极大减少了系统中类的个数。</p>
+<h2 id="3-抽象工厂模式概述"><a href="#3-抽象工厂模式概述" class="headerlink" title="3 抽象工厂模式概述"></a>3 抽象工厂模式概述</h2><p>抽象工厂模式为创建一组对象提供了一种解决方案。与工厂方法模式相比，抽象工厂模式中的具体工厂不只是创建一种产品，它负责创建一族产品。抽象工厂模式定义如下：</p>
 <blockquote>
-<p>面对一个如此巨大、职责如此重，且与客户端代码耦合度非常高的类，我们应该怎么办？本章将要介绍的简单工厂模式将在一定程度上解决上述问题。</p>
+<p>抽象工厂模式(Abstract Factory Pattern)：提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。抽象工厂模式又称为Kit模式，它是一种对象创建型模式。</p>
 </blockquote>
-<h2 id="2-简单工厂模式概述"><a href="#2-简单工厂模式概述" class="headerlink" title="2 简单工厂模式概述"></a>2 简单工厂模式概述</h2><p>简单工厂模式并不属于GoF 23个经典设计模式，但通常将它作为学习其他工厂模式的基础，它的设计思想很简单。</p>
-<h3 id="其基本流程如下："><a href="#其基本流程如下：" class="headerlink" title="其基本流程如下："></a>其基本流程如下：</h3><p>首先将需要创建的各种不同对象（例如各种不同的Chart对象）的相关代码封装到不同的类中，这些类称为<strong>具体产品类</strong>，而将它们公共的代码进行抽象和提取后封装在一个抽象产品类中，每一个具体产品类都是<strong>抽象产品类</strong>的子类；然后提供一个<strong>工厂类</strong>用于创建各种产品，在工厂类中提供一个创建产品的工厂方法，该方法可以根据所传入的参数不同创建不同的具体产品对象；客户端只需调用工厂类的工厂方法并传入相应的参数即可得到一个产品对象。</p>
-<h3 id="简单工厂模式定义如下："><a href="#简单工厂模式定义如下：" class="headerlink" title="简单工厂模式定义如下："></a>简单工厂模式定义如下：</h3><blockquote>
-<p>简单工厂模式(Simple Factory Pattern)：定义一个工厂类，它可以根据参数的不同返回不同类的实例，被创建的实例通常都具有共同的父类。因为在简单工厂模式中用于创建实例的方法是静态(static)方法，因此简单工厂模式又被称为静态工厂方法(Static Factory Method)模式，它属于类创建型模式。</p>
-</blockquote>
-<p>简单工厂模式的要点在于：<strong>当你需要什么，只需要传入一个正确的参数，就可以获取你所需要的对象，而无须知道其创建细节。</strong>简单工厂模式结构比较简单，其核心是工厂类的设计，其结构如图1所示：</p>
-<p><img src="/imag/image-20200211212158696.png" alt="image-20200211212158696"></p>
-<h3 id="在简单工厂模式结构图中包含如下几个角色："><a href="#在简单工厂模式结构图中包含如下几个角色：" class="headerlink" title="在简单工厂模式结构图中包含如下几个角色："></a>在简单工厂模式结构图中包含如下几个角色：</h3><ul>
-<li><p><strong>Factory（工厂角色）：</strong>工厂角色即工厂类，它是简单工厂模式的核心，负责实现创建所有产品实例的内部逻辑；工厂类可以被外界直接调用，创建所需的产品对象；在工厂类中提供了静态的工厂方法factoryMethod()，它的返回类型为抽象产品类型Product。</p>
+<p>在抽象工厂模式中，每一个具体工厂都提供了多个工厂方法用于产生多种不同类型的产品，这些产品构成了一个产品族，抽象工厂模式结构如图5所示：</p>
+<p><img src="/imag/Factory/20130713163800203.jpeg" alt="图5  抽象工厂模式结构图"></p>
+<h3 id="在抽象工厂模式结构图中包含如下几个角色："><a href="#在抽象工厂模式结构图中包含如下几个角色：" class="headerlink" title="在抽象工厂模式结构图中包含如下几个角色："></a>在抽象工厂模式结构图中包含如下几个角色：</h3><ul>
+<li><p>AbstractFactory（抽象工厂）：它声明了一组用于创建一族产品的方法，每一个方法对应一种产品。</p>
 </li>
-<li><p><strong>Product（抽象产品角色）：</strong>它是工厂类所创建的所有对象的父类，封装了各种产品对象的公有方法，它的引入将提高系统的灵活性，使得在工厂类中只需定义一个通用的工厂方法，因为所有创建的具体产品对象都是其子类对象。</p>
+<li><p>ConcreteFactory（具体工厂）：它实现了在抽象工厂中声明的创建产品的方法，生成一组具体产品，这些产品构成了一个产品族，每一个产品都位于某个产品等级结构中。</p>
 </li>
-<li><p><strong>ConcreteProduct（具体产品角色）：</strong>它是简单工厂模式的创建目标，所有被创建的对象都充当这个角色的某个具体类的实例。每一个具体产品角色都继承了抽象产品角色，需要实现在抽象产品中声明的抽象方法。</p>
+<li><p>AbstractProduct（抽象产品）：它为每种产品声明接口，在抽象产品中声明了产品所具有的业务方法。</p>
+</li>
+<li><p>ConcreteProduct（具体产品）：它定义具体工厂生产的具体产品对象，实现抽象产品接口中声明的业务方法。</p>
+<p> 在抽象工厂中声明了多个工厂方法，用于创建不同类型的产品，抽象工厂可以是接口，也可以是抽象类或者具体类，其典型代码如下所示：</p>
 </li>
 </ul>
-<p>在简单工厂模式中，客户端通过工厂类来创建一个产品类的实例，而无须直接使用new关键字来创建对象，它是工厂模式家族中最简单的一员。</p>
-<p>在使用简单工厂模式时，首先需要对产品类进行重构，<strong>不能设计一个包罗万象的产品类，而需根据实际情况设计一个产品层次结构</strong>，将所有产品类公共的代码移至抽象产品类，并在抽象产品类中声明一些抽象方法，以供不同的具体产品类来实现，典型的抽象产品类代码如下所示：</p>
-<pre><code class="java">abstract class Product {
-    //所有产品类的公共业务方法
-    public void methodSame() {
-        //公共方法的实现
-    }
+<pre><code class="java">abstract class AbstractFactory {
+public abstract AbstractProductA createProductA(); //工厂方法一
+public abstract AbstractProductB createProductB(); //工厂方法二
+……
+}</code></pre>
+<p>具体工厂实现了抽象工厂，每一个具体的工厂方法可以返回一个特定的产品对象，而同一个具体工厂所创建的产品对象构成了一个产品族。对于每一个具体工厂类，其典型代码如下所示：</p>
+<pre><code class="java">class ConcreteFactory1 extends AbstractFactory {
+    //工厂方法一
+public AbstractProductA createProductA() {
+    return new ConcreteProductA1();
+}
 
-    //声明抽象业务方法
-    public abstract void methodDiff();
+//工厂方法二
+public AbstractProductB createProductB() {
+    return new ConcreteProductB1();
+}
+
+……
 }</code></pre>
-<p>在具体产品类中实现了抽象产品类中声明的抽象业务方法，不同的具体产品类可以提供不同的实现，典型的具体产品类代码如下所示：</p>
-<pre><code class="java">class ConcreteProduct extends Product {
-    //实现业务方法
-    public void methodDiff() {
-        //业务方法的实现
-    }
-}</code></pre>
-<p>简单工厂模式的核心是工厂类，在没有工厂类之前，客户端一般会使用new关键字来直接创建产品对象，而在引入工厂类之后，客户端可以通过工厂类来创建产品，在简单工厂模式中，工厂类提供了一个静态工厂方法供客户端使用，根据所传入的参数不同可以创建不同的产品对象，典型的工厂类代码如下所示：</p>
-<pre><code class="java">class Factory {
-    //静态工厂方法
-    public static Product getProduct(String arg) {
-        Product product = null;
-        if (arg.equalsIgnoreCase(&quot;A&quot;)) {
-            product = new ConcreteProductA();
-            //初始化设置product
-        }
-        else if (arg.equalsIgnoreCase(&quot;B&quot;)) {
-            product = new ConcreteProductB();
-            //初始化设置product
-        }
-        return product;
-    }
-}</code></pre>
-<p>在客户端代码中，我们通过调用工厂类的工厂方法即可得到产品对象，典型代码如下所示：</p>
-<pre><code class="java">class Client {
-    public static void main(String args[]) {
-        Product product; 
-        product = Factory.getProduct(&quot;A&quot;); //通过工厂类创建产品对象
-        product.methodSame();
-        product.methodDiff();
-    }
-}</code></pre>
-<h2 id="3-完整解决方案"><a href="#3-完整解决方案" class="headerlink" title="3 完整解决方案"></a>3 完整解决方案</h2><p>为了将Chart类的职责分离，同时将Chart对象的创建和使用分离，Sunny软件公司开发人员决定使用简单工厂模式对图表库进行重构，重构后的结构如图2所示：</p>
-<p><img src="/imag/image-20200211212858134.png" alt="image-20200211212858134"></p>
-<p>在图2中，Chart接口充当抽象产品类，其子类HistogramChart、PieChart和LineChart充当具体产品类，ChartFactory充当工厂类。完整代码如下所示：</p>
-<pre><code class="java">//抽象图表接口：抽象产品类
-interface Chart {
+<p>与工厂方法模式一样，抽象工厂模式也可为每一种产品提供一组重载的工厂方法，以不同的方式对产品对象进行创建。</p>
+<h2 id="4-完整解决方案"><a href="#4-完整解决方案" class="headerlink" title="4 完整解决方案"></a>4 完整解决方案</h2><p>Sunny公司开发人员使用抽象工厂模式来重构界面皮肤库的设计，其基本结构如图6所示：</p>
+<p><img src="/imag/Factory/20130713164620203.jpeg" alt="图6 界面皮肤库结构图"></p>
+<p>在图6中，SkinFactory接口充当抽象工厂，其子类SpringSkinFactory和SummerSkinFactory充当具体工厂，接口Button、TextField和ComboBox充当抽象产品，其子类SpringButton、SpringTextField、SpringComboBox和SummerButton、SummerTextField、SummerComboBox充当具体产品。完整代码如下所示：</p>
+<pre><code class="java">//在本实例中我们对代码进行了大量简化，实际使用时，界面组件的初始化代码较为复杂，还需要使用JDK中一些已有类，为了突出核心代码，在此只提供框架代码和演示输出。
+//按钮接口：抽象产品
+interface Button {
     public void display();
 }
 
-//柱状图类：具体产品类
-class HistogramChart implements Chart {
-    public HistogramChart() {
-        System.out.println(&quot;创建柱状图！&quot;);
-    }
-
+//Spring按钮类：具体产品
+class SpringButton implements Button {
     public void display() {
-        System.out.println(&quot;显示柱状图！&quot;);
+        System.out.println(&quot;显示浅绿色按钮。&quot;);
     }
 }
 
-//饼状图类：具体产品类
-class PieChart implements Chart {
-    public PieChart() {
-        System.out.println(&quot;创建饼状图！&quot;);
-    }
-
+//Summer按钮类：具体产品
+class SummerButton implements Button {
     public void display() {
-        System.out.println(&quot;显示饼状图！&quot;);
+        System.out.println(&quot;显示浅蓝色按钮。&quot;);
+    }    
+}
+
+//文本框接口：抽象产品
+interface TextField {
+    public void display();
+}
+
+//Spring文本框类：具体产品
+class SpringTextField implements TextField {
+    public void display() {
+        System.out.println(&quot;显示绿色边框文本框。&quot;);
     }
 }
 
-//折线图类：具体产品类
-class LineChart implements Chart {
-    public LineChart() {
-        System.out.println(&quot;创建折线图！&quot;);
-    }
-
+//Summer文本框类：具体产品
+class SummerTextField implements TextField {
     public void display() {
-        System.out.println(&quot;显示折线图！&quot;);
+        System.out.println(&quot;显示蓝色边框文本框。&quot;);
+    }    
+}
+
+//组合框接口：抽象产品
+interface ComboBox {
+    public void display();
+}
+
+//Spring组合框类：具体产品
+class SpringComboBox implements ComboBox {
+    public void display() {
+        System.out.println(&quot;显示绿色边框组合框。&quot;);
     }
 }
 
-//图表工厂类：工厂类
-class ChartFactory {
-    //静态工厂方法
-    public static Chart getChart(String type) {
-        Chart chart = null;
-        if (type.equalsIgnoreCase(&quot;histogram&quot;)) {
-            chart = new HistogramChart();
-            System.out.println(&quot;初始化设置柱状图！&quot;);
-        }
-        else if (type.equalsIgnoreCase(&quot;pie&quot;)) {
-            chart = new PieChart();
-            System.out.println(&quot;初始化设置饼状图！&quot;);
-        }
-        else if (type.equalsIgnoreCase(&quot;line&quot;)) {
-            chart = new LineChart();
-            System.out.println(&quot;初始化设置折线图！&quot;);            
-        }
-        return chart;
+//Summer组合框类：具体产品
+class SummerComboBox implements ComboBox {
+    public void display() {
+        System.out.println(&quot;显示蓝色边框组合框。&quot;);
+    }    
+}
+
+//界面皮肤工厂接口：抽象工厂
+interface SkinFactory {
+    public Button createButton();
+    public TextField createTextField();
+    public ComboBox createComboBox();
+}
+
+//Spring皮肤工厂：具体工厂
+class SpringSkinFactory implements SkinFactory {
+    public Button createButton() {
+        return new SpringButton();
+    }
+
+    public TextField createTextField() {
+        return new SpringTextField();
+    }
+
+    public ComboBox createComboBox() {
+        return new SpringComboBox();
+    }
+}
+
+//Summer皮肤工厂：具体工厂
+class SummerSkinFactory implements SkinFactory {
+    public Button createButton() {
+        return new SummerButton();
+    }
+
+    public TextField createTextField() {
+        return new SummerTextField();
+    }
+
+    public ComboBox createComboBox() {
+        return new SummerComboBox();
     }
 }</code></pre>
+<p>为了让系统具备良好的灵活性和可扩展性，我们引入了工具类XMLUtil和配置文件，其中，XMLUtil类的代码如下所示：</p>
+<pre><code class="java">import javax.xml.parsers.*;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+import java.io.*;
+
+public class XMLUtil {
+//该方法用于从XML配置文件中提取具体类类名，并返回一个实例对象
+    public static Object getBean() {
+        try {
+            //创建文档对象
+            DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = dFactory.newDocumentBuilder();
+            Document doc;                            
+            doc = builder.parse(new File(&quot;config.xml&quot;)); 
+
+            //获取包含类名的文本节点
+            NodeList nl = doc.getElementsByTagName(&quot;className&quot;);
+            Node classNode=nl.item(0).getFirstChild();
+            String cName=classNode.getNodeValue();
+
+            //通过类名生成实例对象并将其返回
+            Class c=Class.forName(cName);
+              Object obj=c.newInstance();
+            return obj;
+        }   
+        catch(Exception e) {
+               e.printStackTrace();
+               return null;
+           }
+    }
+}</code></pre>
+<p>配置文件config.xml中存储了具体工厂类的类名，代码如下所示：</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;config&gt;
+    &lt;className&gt;SpringSkinFactory&lt;/className&gt;
+&lt;/config&gt;</code></pre>
 <p>编写如下客户端测试代码：</p>
 <pre><code class="java">class Client {
     public static void main(String args[]) {
-        Chart chart;
-        chart = ChartFactory.getChart(&quot;histogram&quot;); //通过静态工厂方法创建产品
-        chart.display();
+        //使用抽象层定义
+        SkinFactory factory;
+        Button bt;
+        TextField tf;
+        ComboBox cb;
+        factory = (SkinFactory)XMLUtil.getBean();
+        bt = factory.createButton();
+        tf = factory.createTextField();
+        cb = factory.createComboBox();
+        bt.display();
+        tf.display();
+        cb.display();
     }
 }</code></pre>
 <p>编译并运行程序，输出结果如下：</p>
 <blockquote>
-<p>创建柱状图！</p>
-<p>初始化设置柱状图！</p>
-<p>显示柱状图！</p>
+<p>显示浅绿色按钮。</p>
+<p>显示绿色边框文本框。</p>
+<p>显示绿色边框组合框。</p>
 </blockquote>
-<p>在客户端测试类中，我们使用工厂类的静态工厂方法创建产品对象，如果需要更换产品，只需修改静态工厂方法中的参数即可，例如将柱状图改为饼状图，只需将代码：</p>
-<pre><code class="java">chart = ChartFactory.getChart(&quot;histogram&quot;);</code></pre>
-<p>改为：</p>
-<pre><code class="java">chart = ChartFactory.getChart(&quot;pie&quot;);</code></pre>
-<p>编译并运行程序，输出结果如下：</p>
-<blockquote>
-<p>创建饼状图！</p>
-<p>初始化设置饼状图！</p>
-<p>显示饼状图！</p>
-</blockquote>
-<h2 id="4-简单工厂模式的简化"><a href="#4-简单工厂模式的简化" class="headerlink" title="4 简单工厂模式的简化"></a>4 简单工厂模式的简化</h2><p>有时候，为了简化简单工厂模式，我们可以将抽象产品类和工厂类合并，将静态工厂方法移至抽象产品类中，如图3所示：</p>
-<p><img src="/imag/image-20200211213443631.png" alt="image-20200211213443631"></p>
-<p>在图3中，客户端可以通过产品父类的静态工厂方法，根据参数的不同创建不同类型的产品子类对象，这种做法在JDK等类库和框架中也广泛存在。</p>
-<h2 id="5-简单工厂模式总结"><a href="#5-简单工厂模式总结" class="headerlink" title="5 简单工厂模式总结"></a>5 简单工厂模式总结</h2><p>简单工厂模式提供了专门的工厂类用于创建对象，将对象的创建和对象的使用分离开，它作为一种最简单的工厂模式在软件开发中得到了较为广泛的应用。</p>
-<h3 id="主要优点"><a href="#主要优点" class="headerlink" title="主要优点"></a>主要优点</h3><p>简单工厂模式的主要优点如下：</p>
-<p>(1) 工厂类包含必要的判断逻辑，可以决定在什么时候创建哪一个产品类的实例，客户端可以免除直接创建产品对象的职责，而仅仅“消费”产品，简单工厂模式实现了对象创建和使用的分离。</p>
-<p>(2) 客户端无须知道所创建的具体产品类的类名，只需要知道具体产品类所对应的参数即可，对于一些复杂的类名，通过简单工厂模式可以在一定程度减少使用者的记忆量。</p>
-<p>(3) 通过引入配置文件，可以在不修改任何客户端代码的情况下更换和增加新的具体产品类，在一定程度上提高了系统的灵活性。</p>
-<h3 id="主要缺点"><a href="#主要缺点" class="headerlink" title="主要缺点"></a>主要缺点</h3><p>简单工厂模式的主要缺点如下：</p>
-<p>   (1) 由于工厂类集中了所有产品的创建逻辑，职责过重，一旦不能正常工作，整个系统都要受到影响。</p>
-<p>   (2) 使用简单工厂模式势必会增加系统中类的个数（引入了新的工厂类），增加了系统的复杂度和理解难度。</p>
-<p>   (3) 系统扩展困难，一旦添加新产品就不得不修改工厂逻辑，在产品类型较多时，有可能造成工厂逻辑过于复杂，不利于系统的扩展和维护。</p>
-<p>   (4) 简单工厂模式由于使用了静态工厂方法，造成工厂角色无法形成基于继承的等级结构。</p>
-<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>在以下情况下可以考虑使用简单工厂模式：</p>
-<p>​    (1) 工厂类负责创建的对象比较少，由于创建的对象较少，不会造成工厂方法中的业务逻辑太过复杂。</p>
-<p>​    (2) 客户端只知道传入工厂类的参数，对于如何创建对象并不关心。</p>
+<p>如果需要更换皮肤，只需修改配置文件即可，在实际环境中，<strong>我们可以提供可视化界面，例如菜单或者窗口来修改配置文件，用户无须直接修改配置文件</strong>。如果需要增加新的皮肤，只需增加一族新的具体组件并对应提供一个新的具体工厂，修改配置文件即可使用新的皮肤，原有代码无须修改，符合“开闭原则”。</p>
+<h2 id="5-“开闭原则”的倾斜性"><a href="#5-“开闭原则”的倾斜性" class="headerlink" title="5 “开闭原则”的倾斜性"></a>5 “开闭原则”的倾斜性</h2><p>Sunny公司使用抽象工厂模式设计了界面皮肤库，该皮肤库可以较为方便地增加新的皮肤，但是现在遇到一个非常严重的问题：由于设计时考虑不全面，忘记为单选按钮(RadioButton)提供不同皮肤的风格化显示，导致无论选择哪种皮肤，单选按钮都显得那么“格格不入”。Sunny公司的设计人员决定向系统中增加单选按钮，但是发现原有系统居然不能够在符合“开闭原则”的前提下增加新的组件，原因是抽象工厂SkinFactory中根本没有提供创建单选按钮的方法，如果需要增加单选按钮，首先需要修改抽象工厂接口SkinFactory，在其中新增声明创建单选按钮的方法，然后逐个修改具体工厂类，增加相应方法以实现在不同的皮肤中创建单选按钮，此外还需要修改客户端，否则单选按钮无法应用于现有系统。</p>
+<p>怎么办？答案是抽象工厂模式无法解决该问题，这也是抽象工厂模式最大的缺点。<strong>在抽象工厂模式中，增加新的产品族很方便，但是增加新的产品等级结构很麻烦</strong>，抽象工厂模式的这种性质称为<strong>“开闭原则”的倾斜性</strong>。“开闭原则”要求系统对扩展开放，对修改封闭，通过扩展达到增强其功能的目的，对于涉及到多个产品族与多个产品等级结构的系统，其功能增强包括两方面：</p>
+<p> (1) <strong>增加产品族：</strong>对于增加新的产品族，抽象工厂模式很好地支持了“开闭原则”，只需要增加具体产品并对应增加一个新的具体工厂，对已有代码无须做任何修改。</p>
+<p> (2) <strong>增加新的产品等级结构：</strong>对于增加新的产品等级结构，需要修改所有的工厂角色，包括抽象工厂类，在所有的工厂类中都需要增加生产新产品的方法，<strong>违背了“开闭原则”。</strong></p>
+<p>   正因为抽象工厂模式存在“开闭原则”的倾斜性，它以一种倾斜的方式来满足“开闭原则”，为增加新产品族提供方便，但不能为增加新产品结构提供这样的方便，因此要求设计人员在设计之初就能够全面考虑，不会在设计完成之后向系统中增加新的产品等级结构，也不会删除已有的产品等级结构，否则将会导致系统出现较大的修改，为后续维护工作带来诸多麻烦。</p>
+<h2 id="6-抽象工厂模式总结"><a href="#6-抽象工厂模式总结" class="headerlink" title="6 抽象工厂模式总结"></a>6 抽象工厂模式总结</h2><p>抽象工厂模式是工厂方法模式的进一步延伸，由于它提供了功能更为强大的工厂类并且具备较好的可扩展性，在软件开发中得以广泛应用，尤其是在一些框架和API类库的设计中，例如在Java语言的AWT（抽象窗口工具包）中就使用了抽象工厂模式，它使用抽象工厂模式来实现在不同的操作系统中应用程序呈现与所在操作系统一致的外观界面。抽象工厂模式也是在软件开发中最常用的设计模式之一。</p>
+<h3 id="1-主要优点"><a href="#1-主要优点" class="headerlink" title="1. 主要优点"></a>1. 主要优点</h3><p> 抽象工厂模式的主要优点如下：</p>
+<p>   (1) 抽象工厂模式隔离了具体类的生成，使得客户并不需要知道什么被创建。由于这种隔离，更换一个具体工厂就变得相对容易，所有的具体工厂都实现了抽象工厂中定义的那些公共接口，因此只需改变具体工厂的实例，就可以在某种程度上改变整个软件系统的行为。</p>
+<p>   (2) 当一个产品族中的多个对象被设计成一起工作时，它能够保证客户端始终只使用同一个产品族中的对象。</p>
+<p>   (3) 增加新的产品族很方便，无须修改已有系统，符合“开闭原则”。</p>
+<h3 id="2-主要缺点"><a href="#2-主要缺点" class="headerlink" title="2. 主要缺点"></a>2. 主要缺点</h3><p>抽象工厂模式的主要缺点如下：</p>
+<p>​    增加新的产品等级结构麻烦，需要对原有系统进行较大的修改，甚至需要修改抽象层代码，这显然会带来较大的不便，违背了“开闭原则”。</p>
+<h3 id="3-适用场景"><a href="#3-适用场景" class="headerlink" title="3. 适用场景"></a>3. 适用场景</h3><p>在以下情况下可以考虑使用抽象工厂模式：</p>
+<p>   (1) 一个系统不应当依赖于产品类实例如何被创建、组合和表达的细节，这对于所有类型的工厂模式都是很重要的，用户无须关心对象的创建过程，将对象的创建和使用解耦。</p>
+<p>   (2) 系统中有多于一个的产品族，而每次只使用其中某一产品族。可以通过配置文件等方式来使得用户可以动态改变产品族，也可以很方便地增加新的产品族。</p>
+<p>   (3) 属于同一个产品族的产品将在一起使用，这一约束必须在系统的设计中体现出来。同一个产品族中的产品可以是没有任何关系的对象，但是它们都具有一些共同的约束，如同一操作系统下的按钮和文本框，按钮与文本框之间没有直接关系，但它们都是属于某一操作系统的，此时具有一个共同的约束条件：操作系统的类型。</p>
+<p>   (4) 产品等级结构稳定，设计完成之后，不会向系统中增加新的产品等级结构或者删除已有的产品等级结构。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
@@ -660,12 +689,12 @@ class ChartFactory {
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>简单工厂模式--------一</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">3.5k</span></p>
+    <p><span class="copy-title">文章标题:</span>抽象工厂模式--------三</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">4.7k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-02-11, 21:41:31</p>
-    <p><span class="copy-title">最后更新:</span>2020-02-13, 11:23:38</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" title="简单工厂模式--------一">http://yoursite.com/2020/02/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</a>
+    <p><span class="copy-title">发布时间:</span>2020-02-13, 21:41:31</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-13, 11:40:36</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" title="抽象工厂模式--------三">http://yoursite.com/2020/02/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>

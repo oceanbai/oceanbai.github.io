@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>失败是成功之母</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="失败是成功之母">
+  <title>第三原则:单一职责原则 | 失败是成功之母</title>
+  <meta name="keywords" content=" 设计原则 ">
+  <meta name="description" content="第三原则:单一职责原则 | 失败是成功之母">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。加油！加油！！加油！！！ Never give up ！！！！｜｜永不放弃｜｜ 古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
 <meta property="og:type" content="website">
@@ -50,7 +50,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -379,12 +379,57 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-设计原则/单一职责原则" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#博客的出现"><span class="toc-text">博客的出现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于博客"><span class="toc-text">关于博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">第三原则:单一职责原则</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="后端">后端</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">设计原则</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-05-26 19:11:51'>2019-05-26 17:07</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#单一职责原则"><span class="toc-text">单一职责原则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义："><span class="toc-text">定义：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题由来："><span class="toc-text">问题由来：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案："><span class="toc-text">解决方案：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#举例说明："><span class="toc-text">举例说明：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实战中使用：kafka的模块化设计"><span class="toc-text">实战中使用：kafka的模块化设计</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -397,35 +442,151 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="博客的出现"><a href="#博客的出现" class="headerlink" title="博客的出现"></a>博客的出现</h2><p>写博客是为了监督自己不断的进步，不松懈。</p>
-<blockquote>
-<p>有时候，我们看到很好的东西，却匆匆一看没有记录导致后面再想看看的时候已经消失不见。</p>
-</blockquote>
-<blockquote>
-<p>自己想写一些自己当前阶段的感悟，为了不再使用的时候依然能够快速拾起。</p>
-</blockquote>
-<blockquote>
-<p>我想让别人也来了解我的能力。</p>
-</blockquote>
-<p>我曾七次鄙视自己的灵魂: 第一次,当它本可进取时，却故作谦卑； 第二次,当它空虚时，用爱欲来填充； 第三次,在困难和容易之间，它选择了容易； 第四次,它犯了错，却借由别人也会犯错来宽慰自己； 第五次,它自由软弱，却把它认为是生命的坚韧； 第六次,当它鄙夷一张丑恶的嘴脸时，却不知那正是自己面具中的一副； 第七次,它侧身于生活的污泥中虽不甘心，却又畏首畏尾。</p>
-<h2 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h2><p><strong>失败是成功之母</strong> 是Oceanbai的个人面试准备站，只是用来通过自己学习后的积累，如果有侵权行为，请随时联系。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
-<p>主要功能：</p>
-<ul>
-<li>搜索支持文章标题、标签(#标签)、作者(@作者)</li>
-<li>pad/手机等移动端适配</li>
-<li>页面全局快捷键 <a href='http://yelog.org/2017/03/24/3-hexo-shortcuts/' target="_blank" rel="noopener">3-hexo快捷键说明</a></li>
-</ul>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h1><h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p><strong>不要存在多于一个导致类变更的原因。</strong><br>通俗的说，即一个类只负责一项职责。</p>
+<h2 id="问题由来："><a href="#问题由来：" class="headerlink" title="问题由来："></a>问题由来：</h2><p>类T负责两个不同的职责：职责P1，职责P2。当由于职责P1需求发生改变而需要修改类T时，有可能会导致原本运行正常的职责P2功能发生故障。</p>
+<h2 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h2><p>遵循单一职责原则。分别建立两个类T1、T2，使T1完成职责P1功能，T2完成职责P2功能。这样，当修改类T1时，不会使职责P2发生故障风险；同理，当修改T2时，也不会使职责P1发生故障风险。</p>
+<p>说到单一职责原则，很多人都会不屑一顾。因为它太简单了。稍有经验的程序员即使从来没有读过设计模式、从来没有听说过单一职责原则，在设计软件时也会自觉的遵守这一重要原则，因为这是常识。在软件编程中，谁也不希望因为修改了一个功能导致其他的功能发生故障。而避免出现这一问题的方法便是遵循单一职责原则。虽然单一职责原则如此简单，并且被认为是常识，但是即便是经验丰富的程序员写出的程序，也会有违背这一原则的代码存在。为什么会出现这种现象呢？<strong>因为有职责扩散。所谓职责扩散，就是因为某种原因，职责P被分化为粒度更细的职责P1和P2。</strong></p>
+<p><strong>比如：</strong>类T只负责一个职责P，这样设计是符合单一职责原则的。后来由于某种原因，也许是需求变更了，也许是程序的设计者境界提高了，需要将职责P细分为粒度更细的职责P1，P2，这时如果要使程序遵循单一职责原则，需要将类T也分解为两个类T1和T2，分别负责P1、P2两个职责。但是在程序已经写好的情况下，这样做简直太费时间了。所以，简单的修改类T，用它来负责两个职责是一个比较不错的选择，虽然这样做有悖于单一职责原则。（这样做的风险在于职责扩散的不确定性，因为我们不会想到这个职责P，在未来可能会扩散为P1，P2，P3，P4……Pn。所以记住，在职责扩散到我们无法控制的程度之前，立刻对代码进行重构。）</p>
+<h2 id="举例说明："><a href="#举例说明：" class="headerlink" title="举例说明："></a>举例说明：</h2><p>举例说明，用一个类描述动物呼吸这个场景：</p>
+<pre><code class="java">class Animal{
+    public void breathe(String animal){
+        System.out.println(animal+&quot;呼吸空气&quot;);
+    }
+}
+public class Client{
+    public static void main(String[] args){
+        Animal animal = new Animal();
+        animal.breathe(&quot;牛&quot;);
+        animal.breathe(&quot;羊&quot;);
+        animal.breathe(&quot;猪&quot;);
+    }
+}</code></pre>
+<p>运行结果：</p>
+<p><strong>牛呼吸空气<br>羊呼吸空气<br>猪呼吸空气</strong></p>
+<p>程序上线后，发现问题了，并不是所有的动物都呼吸空气的，比如鱼就是呼吸水的。修改时如果遵循单一职责原则，需要将Animal类细分为陆生动物类Terrestrial，水生动物Aquatic，代码如下：</p>
+<pre><code class="java">class Terrestrial{
+    public void breathe(String animal){
+        System.out.println(animal+&quot;呼吸空气&quot;);
+    }
+}
+class Aquatic{
+    public void breathe(String animal){
+        System.out.println(animal+&quot;呼吸水&quot;);
+    }
+}
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+public class Client{
+    public static void main(String[] args){
+        Terrestrial terrestrial = new Terrestrial();
+        terrestrial.breathe(&quot;牛&quot;);
+        terrestrial.breathe(&quot;羊&quot;);
+        terrestrial.breathe(&quot;猪&quot;);
+
+        Aquatic aquatic = new Aquatic();
+        aquatic.breathe(&quot;鱼&quot;);
+    }
+}</code></pre>
+<p>运行结果：</p>
+<p><strong>牛呼吸空气<br>羊呼吸空气<br>猪呼吸空气<br>鱼呼吸水</strong></p>
+<p>我们会发现如果这样修改花销是很大的，除了将原来的类分解之外，还需要修改客户端。而直接修改类Animal来达成目的虽然违背了单一职责原则，但花销却小的多，代码如下：</p>
+<pre><code class="java">class Animal{
+    public void breathe(String animal){
+        if(&quot;鱼&quot;.equals(animal)){
+            System.out.println(animal+&quot;呼吸水&quot;);
+        }else{
+            System.out.println(animal+&quot;呼吸空气&quot;);
+        }
+    }
+}
+
+public class Client{
+    public static void main(String[] args){
+        Animal animal = new Animal();
+        animal.breathe(&quot;牛&quot;);
+        animal.breathe(&quot;羊&quot;);
+        animal.breathe(&quot;猪&quot;);
+        animal.breathe(&quot;鱼&quot;);
+    }
+}</code></pre>
+<p>可以看到，这种修改方式要简单的多。但是却存在着隐患：有一天需要将鱼分为呼吸淡水的鱼和呼吸海水的鱼，则又需要修改Animal类的breathe方法，而对原有代码的修改会对调用“猪”“牛”“羊”等相关功能带来风险，也许某一天你会发现程序运行的结果变为“牛呼吸水”了。这种修改方式直接在代码级别上违背了单一职责原则，虽然修改起来最简单，但隐患却是最大的。还有一种修改方式：</p>
+<pre><code class="java">class Animal{
+    public void breathe(String animal){
+        System.out.println(animal+&quot;呼吸空气&quot;);
+    }
+
+    public void breathe2(String animal){
+        System.out.println(animal+&quot;呼吸水&quot;);
+    }
+}
+
+public class Client{
+    public static void main(String[] args){
+        Animal animal = new Animal();
+        animal.breathe(&quot;牛&quot;);
+        animal.breathe(&quot;羊&quot;);
+        animal.breathe(&quot;猪&quot;);
+        animal.breathe2(&quot;鱼&quot;);
+    }
+}</code></pre>
+<p>可以看到，这种修改方式没有改动原来的方法，而是在类中新加了一个方法，这样虽然也违背了单一职责原则，但在方法级别上却是符合单一职责原则的，因为它并没有动原来方法的代码。这三种方式各有优缺点，那么在实际编程中，采用哪一中呢？其实这真的比较难说，需要根据实际情况来确定。我的原则是：只有逻辑足够简单，才可以在代码级别上违反单一职责原则；只有类中方法数量足够少，才可以在方法级别上违反单一职责原则；</p>
+<p>例如本文所举的这个例子，它太简单了，它只有一个方法，所以，无论是在代码级别上违反单一职责原则，还是在方法级别上违反，都不会造成太大的影响。实际应用中的类都要复杂的多，一旦发生职责扩散而需要修改类时，除非这个类本身非常简单，否则还是遵循单一职责原则的好。</p>
+<p><strong>遵循单一职责原的优点有：</strong></p>
+<ol>
+<li>可以降低类的复杂度，一个类只负责一项职责，其逻辑肯定要比负责多项职责简单的多；</li>
+<li>提高类的可读性，提高系统的可维护性；</li>
+<li>变更引起的风险降低，变更是必然的，如果单一职责原则遵守的好，当修改一个功能时，可以显著降低对其他功能的影响。</li>
+<li>需要说明的一点是单一职责原则不只是面向对象编程思想所特有的，只要是模块化的程序设计，都适用单一职责原则。</li>
+</ol>
+<hr>
+<p>作者：神父，我有罪<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/zhengzhb/article/details/7278174" target="_blank" rel="noopener">https://blog.csdn.net/zhengzhb/article/details/7278174</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+<hr>
+<h1 id="实战中使用：kafka的模块化设计"><a href="#实战中使用：kafka的模块化设计" class="headerlink" title="实战中使用：kafka的模块化设计"></a>实战中使用：kafka的模块化设计</h1><ul>
+<li>项目结构<br><img src="http://ps3syjyh4.bkt.clouddn.com/WechatIMG24949.jpeg" alt="项目结构"><br>可以看到kafka的消费端是由七个类组成。</li>
+</ul>
+<ol>
+<li>KafkaConsumerConfig 实例化kafka的类</li>
+<li>KafkaConsumerPool 当一个微服务需要连接多个kafka的时候会有该类作为池对象进行总控的类</li>
+<li>MsgReceiver每个kafka都会有一个轮询线程去轮询持续的获取任务</li>
+<li>RecordProcessor每个kafka的轮询线程获取到任务后要对任务进行<strong>分类/处理/提交偏移量</strong>三个流程，那么这个类就是将这三个流程整合起来执行的类</li>
+<li>AssistSeparateRecords用来装配分类的运输类</li>
+<li>AssistSeparateRecord如果你要分成很多的类型，那么每个AssistSeparateRecords就会具有多个AssistSeparateRecord类</li>
+<li>AbstractConsumerProcess该抽象类将作为执行类(RecordProcessor)的实际处理对象，内部包含着<strong>分类/处理</strong>的实际执行方法实现</li>
+</ol>
+<p>我们设计的kafka模块中每一个类都只做一件事情，分工明确，而且扩展性强。<br><strong>设计模式是一种思想，不具备某种固定的形态，所以看的时候请打开思维，不要局限与文章中的内容</strong><br><strong>这里只是展示设计的结构，具体的内部实现如果想观看的请</strong></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>第三原则:单一职责原则</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-05-26, 17:07:00</p>
+    <p><span class="copy-title">最后更新:</span>2019-05-26, 19:11:51</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/" title="第三原则:单一职责原则">http://yoursite.com/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">©2019-2019 Ocean</p>

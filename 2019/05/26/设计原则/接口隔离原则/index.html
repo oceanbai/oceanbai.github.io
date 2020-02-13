@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>失败是成功之母</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="失败是成功之母">
+  <title>第四原则:接口隔离原则 | 失败是成功之母</title>
+  <meta name="keywords" content=" 设计原则 ">
+  <meta name="description" content="第四原则:接口隔离原则 | 失败是成功之母">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。加油！加油！！加油！！！ Never give up ！！！！｜｜永不放弃｜｜ 古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
 <meta property="og:type" content="website">
@@ -50,7 +50,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -379,12 +379,57 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-设计原则/接口隔离原则" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#博客的出现"><span class="toc-text">博客的出现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于博客"><span class="toc-text">关于博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">第四原则:接口隔离原则</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="后端">后端</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">设计原则</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-05-26 19:14:40'>2019-05-26 17:07</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.6k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#接口隔离原则"><span class="toc-text">接口隔离原则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义："><span class="toc-text">定义：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题由来："><span class="toc-text">问题由来：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案："><span class="toc-text">解决方案：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -397,35 +442,195 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="博客的出现"><a href="#博客的出现" class="headerlink" title="博客的出现"></a>博客的出现</h2><p>写博客是为了监督自己不断的进步，不松懈。</p>
-<blockquote>
-<p>有时候，我们看到很好的东西，却匆匆一看没有记录导致后面再想看看的时候已经消失不见。</p>
-</blockquote>
-<blockquote>
-<p>自己想写一些自己当前阶段的感悟，为了不再使用的时候依然能够快速拾起。</p>
-</blockquote>
-<blockquote>
-<p>我想让别人也来了解我的能力。</p>
-</blockquote>
-<p>我曾七次鄙视自己的灵魂: 第一次,当它本可进取时，却故作谦卑； 第二次,当它空虚时，用爱欲来填充； 第三次,在困难和容易之间，它选择了容易； 第四次,它犯了错，却借由别人也会犯错来宽慰自己； 第五次,它自由软弱，却把它认为是生命的坚韧； 第六次,当它鄙夷一张丑恶的嘴脸时，却不知那正是自己面具中的一副； 第七次,它侧身于生活的污泥中虽不甘心，却又畏首畏尾。</p>
-<h2 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h2><p><strong>失败是成功之母</strong> 是Oceanbai的个人面试准备站，只是用来通过自己学习后的积累，如果有侵权行为，请随时联系。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
-<p>主要功能：</p>
-<ul>
-<li>搜索支持文章标题、标签(#标签)、作者(@作者)</li>
-<li>pad/手机等移动端适配</li>
-<li>页面全局快捷键 <a href='http://yelog.org/2017/03/24/3-hexo-shortcuts/' target="_blank" rel="noopener">3-hexo快捷键说明</a></li>
-</ul>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h1><h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>客户端不应该依赖它不需要的接口；一个类对另一个类的依赖应该建立在最小的接口上。</p>
+<h2 id="问题由来："><a href="#问题由来：" class="headerlink" title="问题由来："></a>问题由来：</h2><p>类A通过接口I依赖类B，类C通过接口I依赖类D，如果接口I对于类A和类B来说不是最小接口，则类B和类D必须去实现他们不需要的方法。</p>
+<h2 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h2><p>将臃肿的接口I拆分为独立的几个接口，类A和类C分别与他们需要的接口建立依赖关系。也就是采用接口隔离原则。</p>
+<p>举例来说明接口隔离原则：<br><img src="http://ps3syjyh4.bkt.clouddn.com/2019-05-26-17-23.jpg" alt="图1  未遵循接口隔离原则的设计"></p>
+<p>这个图的意思是：类A依赖接口I中的方法1、方法2、方法3，类B是对类A依赖的实现。类C依赖接口I中的方法1、方法4、方法5，类D是对类C依赖的实现。对于类B和类D来说，虽然他们都存在着用不到的方法（也就是图中红色字体标记的方法），但由于实现了接口I，所以也必须要实现这些用不到的方法。对类图不熟悉的可以参照程序代码来理解，代码如下：</p>
+<pre><code class="java">interface I {
+    public void method1();
+    public void method2();
+    public void method3();
+    public void method4();
+    public void method5();
+}
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+class A{
+    public void depend1(I i){
+        i.method1();
+    }
+    public void depend2(I i){
+        i.method2();
+    }
+    public void depend3(I i){
+        i.method3();
+    }
+}
+
+class B implements I{
+    public void method1() {
+        System.out.println(&quot;类B实现接口I的方法1&quot;);
+    }
+    public void method2() {
+        System.out.println(&quot;类B实现接口I的方法2&quot;);
+    }
+    public void method3() {
+        System.out.println(&quot;类B实现接口I的方法3&quot;);
+    }
+    //对于类B来说，method4和method5不是必需的，但是由于接口A中有这两个方法，
+    //所以在实现过程中即使这两个方法的方法体为空，也要将这两个没有作用的方法进行实现。
+    public void method4() {}
+    public void method5() {}
+}
+
+class C{
+    public void depend1(I i){
+        i.method1();
+    }
+    public void depend2(I i){
+        i.method4();
+    }
+    public void depend3(I i){
+        i.method5();
+    }
+}
+
+class D implements I{
+    public void method1() {
+        System.out.println(&quot;类D实现接口I的方法1&quot;);
+    }
+    //对于类D来说，method2和method3不是必需的，但是由于接口A中有这两个方法，
+    //所以在实现过程中即使这两个方法的方法体为空，也要将这两个没有作用的方法进行实现。
+    public void method2() {}
+    public void method3() {}
+
+    public void method4() {
+        System.out.println(&quot;类D实现接口I的方法4&quot;);
+    }
+    public void method5() {
+        System.out.println(&quot;类D实现接口I的方法5&quot;);
+    }
+}
+
+public class Client{
+    public static void main(String[] args){
+        A a = new A();
+        a.depend1(new B());
+        a.depend2(new B());
+        a.depend3(new B());
+
+        C c = new C();
+        c.depend1(new D());
+        c.depend2(new D());
+        c.depend3(new D());
+    }
+}</code></pre>
+<p>可以看到，如果接口过于臃肿，只要接口中出现的方法，不管对依赖于它的类有没有用处，实现类中都必须去实现这些方法，这显然不是好的设计。如果将这个设计修改为符合接口隔离原则，就必须对接口I进行拆分。在这里我们将原有的接口I拆分为三个接口，拆分后的设计如图2所示：<br><img src="http://ps3syjyh4.bkt.clouddn.com/%E9%81%B5%E5%BE%AA%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99%E7%9A%84%E8%AE%BE%E8%AE%A1.jpg" alt="图1  遵循接口隔离原则的设计"><br>照例贴出程序的代码，供不熟悉类图的朋友参考：</p>
+<pre><code class="java">interface I1 {
+    public void method1();
+}
+
+interface I2 {
+    public void method2();
+    public void method3();
+}
+
+interface I3 {
+    public void method4();
+    public void method5();
+}
+
+class A{
+    public void depend1(I1 i){
+        i.method1();
+    }
+    public void depend2(I2 i){
+        i.method2();
+    }
+    public void depend3(I2 i){
+        i.method3();
+    }
+}
+
+class B implements I1, I2{
+    public void method1() {
+        System.out.println(&quot;类B实现接口I1的方法1&quot;);
+    }
+    public void method2() {
+        System.out.println(&quot;类B实现接口I2的方法2&quot;);
+    }
+    public void method3() {
+        System.out.println(&quot;类B实现接口I2的方法3&quot;);
+    }
+}
+
+class C{
+    public void depend1(I1 i){
+        i.method1();
+    }
+    public void depend2(I3 i){
+        i.method4();
+    }
+    public void depend3(I3 i){
+        i.method5();
+    }
+}
+
+class D implements I1, I3{
+    public void method1() {
+        System.out.println(&quot;类D实现接口I1的方法1&quot;);
+    }
+    public void method4() {
+        System.out.println(&quot;类D实现接口I3的方法4&quot;);
+    }
+    public void method5() {
+        System.out.println(&quot;类D实现接口I3的方法5&quot;);
+    }
+}</code></pre>
+<p><strong>接口隔离原则的含义是：</strong>建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。也就是说，我们要为各个类建立专用的接口，而不要试图去建立一个很庞大的接口供所有依赖它的类去调用。本文例子中，将一个庞大的接口变更为3个专用的接口所采用的就是接口隔离原则。在程序设计中，依赖几个专用的接口要比依赖一个综合的接口更灵活。接口是设计时对外部设定的“契约”，通过分散定义多个接口，可以预防外来变更的扩散，提高系统的灵活性和可维护性。</p>
+<pre><code>     说到这里，很多人会觉的接口隔离原则跟之前的单一职责原则很相似，其实不然。其一，单一职责原则原注重的是职责；而接口隔离原则注重对接口依赖的隔离。其二，单一职责原则主要是约束类，其次才是接口和方法，它针对的是程序中的实现和细节；而接口隔离原则主要约束接口接口，主要针对抽象，针对程序整体框架的构建。</code></pre><p><strong>采用接口隔离原则对接口进行约束时，要注意以下几点：</strong></p>
+<ul>
+<li>接口尽量小，但是要有限度。对接口进行细化可以提高程序设计灵活性是不挣的事实，但是如果过小，则会造成接口数量过多，使设计复杂化。所以一定要适度。</li>
+<li>为依赖接口的类定制服务，只暴露给调用的类它需要的方法，它不需要的方法则隐藏起来。只有专注地为一个模块提供定制服务，才能建立最小的依赖关系。</li>
+<li>提高内聚，减少对外交互。使接口用最少的方法去完成最多的事情。</li>
+<li>运用接口隔离原则，一定要适度，接口设计的过大或过小都不好。设计接口的时候，只有多花些时间去思考和筹划，才能准确地实践这一原则。</li>
+</ul>
+<hr>
+<p>作者：神父，我有罪<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/zhengzhb/article/details/7296921" target="_blank" rel="noopener">https://blog.csdn.net/zhengzhb/article/details/7296921</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>第四原则:接口隔离原则</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.6k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-05-26, 17:07:00</p>
+    <p><span class="copy-title">最后更新:</span>2019-05-26, 19:14:40</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/" title="第四原则:接口隔离原则">http://yoursite.com/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">©2019-2019 Ocean</p>
