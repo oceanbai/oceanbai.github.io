@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>dubbo面试题 | 心无迷惘</title>
+  <meta name="keywords" content=" 面试 ">
+  <meta name="description" content="dubbo面试题 | 心无迷惘">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 心存迷惘 则无法继续前行😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;about&#x2F;index.html">
+<meta property="og:site_name" content="心无迷惘">
+<meta property="og:description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 心存迷惘 则无法继续前行😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-15T13:29:23.087Z">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Ocean Bai</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/oceanbai" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(25)</small></div></li>
+    
+        
+            
+            <li><div data-rel="dubbo">dubbo<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="算法">算法<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="java基础">java基础<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计原则">设计原则<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="面试">面试<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="JDK">JDK<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="25">
+<input type="hidden" id="yelog_site_word_count" value="92k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">动态代理</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">类加载器</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">反射</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">垃圾</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">缓存</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">工厂模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">设计原则</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">线程池</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="设计模式 "
+           href="/2020/02/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="桥接模式----处理多维变化----五">桥接模式----处理多维变化----五</span>
+            <span class="post-date" title="2020-02-15 21:42:31">2020/02/15</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="适配器模式----不兼容结构的协调----六">适配器模式----不兼容结构的协调----六</span>
+            <span class="post-date" title="2020-02-15 21:42:31">2020/02/15</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/02/15/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="面试题">面试题</span>
+            <span class="post-date" title="2020-02-15 21:41:32">2020/02/15</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="模板方法模式--------四">模板方法模式--------四</span>
+            <span class="post-date" title="2020-02-14 16:38:31">2020/02/14</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="抽象工厂模式--------三">抽象工厂模式--------三</span>
+            <span class="post-date" title="2020-02-13 21:41:31">2020/02/13</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8(ClassLoader)/"
+           data-tag="类加载器"
+           data-author="" >
+            <span class="post-title" title="深入理解java类加载器(ClassLoader)">深入理解java类加载器(ClassLoader)</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF(Class%E5%AF%B9%E8%B1%A1)%E4%B8%8E%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"
+           data-tag="反射"
+           data-author="" >
+            <span class="post-title" title="深入理解Java类型信息(Class对象)与反射机制">深入理解Java类型信息(Class对象)与反射机制</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95------FIFO%20%E3%80%81LRU%E3%80%81LFU/"
+           data-tag="缓存"
+           data-author="" >
+            <span class="post-title" title="缓存算法（FIFO、LRU、LFU）">缓存算法（FIFO、LRU、LFU）</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%96%87%E6%95%B0/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="回文数">回文数</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E9%9D%A2%E8%AF%95%E9%A2%9803-%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="面试题03-数组中重复的数字">面试题03-数组中重复的数字</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="工厂方法模式--------二">工厂方法模式--------二</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/11/dubbo/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20RPC%20%E4%B9%8B%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%AF%87/"
+           data-tag="动态代理"
+           data-author="" >
+            <span class="post-title" title="深入理解 RPC 之动态代理篇">深入理解 RPC 之动态代理篇</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/11/dubbo/dubbo%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="dubbo面试题">dubbo面试题</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/11/java/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"
+           data-tag="垃圾"
+           data-author="" >
+            <span class="post-title" title="垃圾回收">垃圾回收</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="简单工厂模式--------一">简单工厂模式--------一</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="JDK "
+           href="/2020/02/11/java/JDK/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%A7%A3%E6%9E%90/"
+           data-tag="线程池"
+           data-author="" >
+            <span class="post-title" title="线程池源码解析">线程池源码解析</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2019/11/30/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E5%A0%86/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="二叉堆">二叉堆</span>
+            <span class="post-date" title="2019-11-30 21:49:13">2019/11/30</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2019/11/30/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E8%A6%81%E6%B1%82/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="别人面试要求">别人面试要求</span>
+            <span class="post-date" title="2019-11-30 21:41:31">2019/11/30</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第七原则:合成复用原则">第七原则:合成复用原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第二原则:依赖倒置原则">第二原则:依赖倒置原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第三原则:单一职责原则">第三原则:单一职责原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第一原则:开闭原则">第一原则:开闭原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第六原则:里氏替换原则">第六原则:里氏替换原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第四原则:接口隔离原则">第四原则:接口隔离原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第五原则:迪米特法则">第五原则:迪米特法则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-dubbo/dubbo面试题" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">dubbo面试题</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="dubbo">dubbo</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">面试</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-16 20:21:52'>2020-02-11 21:41</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:7.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Dubbo-有几种配置方式？"><span class="toc-text">1、Dubbo 有几种配置方式？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、Dubbo-调用是同步的吗？"><span class="toc-text">2、Dubbo 调用是同步的吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、Dubbo-如何做参数校验？"><span class="toc-text">3、Dubbo 如何做参数校验？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Dubbo-可以对调用结果进行缓存吗"><span class="toc-text">4、Dubbo 可以对调用结果进行缓存吗?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、注册中心挂了还可以通信吗？"><span class="toc-text">5、注册中心挂了还可以通信吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、Dubbo-在-Zookeeper-存储了哪些信息？"><span class="toc-text">6、Dubbo 在 Zookeeper 存储了哪些信息？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、Dubbo-Provider-如何实现优雅停机？"><span class="toc-text">7、Dubbo Provider 如何实现优雅停机？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、Dubbo-Provider-异步关闭时，如何从注册中心下线？"><span class="toc-text">8、Dubbo Provider 异步关闭时，如何从注册中心下线？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9、Dubbo-Consumer-只能调用从注册中心获取的-Provider-么？"><span class="toc-text">9、Dubbo Consumer 只能调用从注册中心获取的 Provider 么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10、Dubbo-支持哪些通信协议？"><span class="toc-text">10、Dubbo 支持哪些通信协议？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11、什么是本地暴露和远程暴露，他们的区别？"><span class="toc-text">11、什么是本地暴露和远程暴露，他们的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12、Dubbo-使用什么通信框架？"><span class="toc-text">12、Dubbo 使用什么通信框架？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13、Dubbo-有哪些负载均衡策略？"><span class="toc-text">13、Dubbo 有哪些负载均衡策略？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14、Dubbo-有哪些集群容错策略？"><span class="toc-text">14、Dubbo 有哪些集群容错策略？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15、Dubbo-有哪些动态代理策略？"><span class="toc-text">15、Dubbo 有哪些动态代理策略？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16、Dubbo-SPI-的设计思想是什么？"><span class="toc-text">16、Dubbo SPI 的设计思想是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17、Dubbo-服务如何监控和管理？"><span class="toc-text">17、Dubbo 服务如何监控和管理？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18、Dubbo-服务如何做降级？"><span class="toc-text">18、Dubbo 服务如何做降级？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19、Dubbo-如何做限流？"><span class="toc-text">19、Dubbo 如何做限流？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20、Dubbo-的失败重试是什么？"><span class="toc-text">20、Dubbo 的失败重试是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21、Dubbo-支持哪些注册中心？"><span class="toc-text">21、Dubbo 支持哪些注册中心？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22、Dubbo-接口如何实现幂等性？"><span class="toc-text">22、Dubbo 接口如何实现幂等性？</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、Dubbo-有几种配置方式？"><a href="#1、Dubbo-有几种配置方式？" class="headerlink" title="1、Dubbo 有几种配置方式？"></a>1、Dubbo 有几种配置方式？</h2><p>正如在 <a href="http://dubbo.apache.org/zh-cn/docs/user/configuration/xml.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— 配置》</a> 中所见，一共有四种配置方式：</p>
+<ul>
+<li>XML 配置</li>
+<li>注解配置</li>
+<li>属性配置</li>
+<li>Java API 配置</li>
+</ul>
+<p>实际上，还有第五种方式，外部化配置。参见 <a href="https://segmentfault.com/a/1190000012661402" target="_blank" rel="noopener">《Dubbo 新编程模型之外部化配置》</a> 。</p>
+<p>目前，主要使用的是<code>XML</code>配置和<code>注解</code>配置。具体使用哪一种，就看大家各自的喜好。目前，艿艿偏好 XML 配置，更加清晰好管理。</p>
+<h2 id="2、Dubbo-调用是同步的吗？"><a href="#2、Dubbo-调用是同步的吗？" class="headerlink" title="2、Dubbo 调用是同步的吗？"></a>2、Dubbo 调用是同步的吗？</h2><p>默认情况下，调用是<strong>同步</strong>的方式。</p>
+<p>可以参考 <a href="http://dubbo.apache.org/zh-cn/docs/user/demos/async-call.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— 异步调用》</a> 文档，配置<strong>异步</strong>调用的方式。当然，使用上，感觉蛮不优雅的。所以，在 Dubbo 2.7 版本后，又提供了新的两种方式，具体先参见 <a href="https://mp.weixin.qq.com/s/3WwXcWJbP7iOS3vmN-Ek1Q" target="_blank" rel="noopener">《Dubbo下一站：Apache顶级项目》</a> 文章。估计，后续才会更新官方文档。</p>
+<h2 id="3、Dubbo-如何做参数校验？"><a href="#3、Dubbo-如何做参数校验？" class="headerlink" title="3、Dubbo 如何做参数校验？"></a>3、Dubbo 如何做参数校验？</h2><p>在 <a href="http://dubbo.apache.org/zh-cn/docs/user/demos/parameter-validation.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— 参数验证》</a> 中，介绍如下：</p>
+<blockquote>
+<p>参数验证功能是基于 <a href="https://jcp.org/en/jsr/detail?id=303" target="_blank" rel="noopener">JSR303</a> 实现的，用户只需标识 JSR303 标准的验证 annotation，并通过声明 filter 来实现验证。</p>
+</blockquote>
+<ul>
+<li>参数校验功能，通过参数校验过滤器 ValidationFilter 来实现。</li>
+<li>ValidationFilter 在 Dubbo Provider 和 Consumer 都可生效。<ul>
+<li>如果我们将<strong>校验注解</strong>写在 Service 接口的方法上，那么 Consumer 在本地就会校验。如果校验不通过，直接抛出校验失败的异常，不会发起 Dubbo 调用。</li>
+<li>如果我们将<strong>校验注解</strong>写在 Service 实现的方法上，那么 Consumer 在本地不会校验，而是由 Provider 校验。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4、Dubbo-可以对调用结果进行缓存吗"><a href="#4、Dubbo-可以对调用结果进行缓存吗" class="headerlink" title="4、Dubbo 可以对调用结果进行缓存吗?"></a>4、Dubbo 可以对调用结果进行缓存吗?</h2><p>Dubbo 通过 CacheFilter 过滤器，提供结果缓存的功能，且既可以适用于 Consumer 也可以适用于 Provider 。</p>
+<p>通过结果缓存，用于加速热门数据的访问速度，Dubbo 提供声明式缓存，以减少用户加缓存的工作量。</p>
+<p>Dubbo 目前提供三种实现：</p>
+<ul>
+<li><code>lru</code> ：基于<strong>最近最少使用原则</strong>删除多余缓存，保持最热的数据被缓存。(可在缓存算法查阅)</li>
+<li><code>threadlocal</code> ：当前线程缓存，比如一个页面渲染，用到很多 portal，每个 portal 都要去查用户信息，通过线程缓存，可以减少这种多余访问。</li>
+<li><code>jcache</code> ：与 <a href="https://jcp.org/en/jsr/detail?id=107" target="_blank" rel="noopener">JSR107</a> 集成，可以桥接各种缓存实现。</li>
+</ul>
+<p>详细的源码解析，可见 <a href="http://svip.iocoder.cn/Dubbo/filter-cache-filter/" target="_blank" rel="noopener">《精尽 Dubbo 源码分析 —— 过滤器（十）之 CacheFilter》</a> 。</p>
+<h2 id="5、注册中心挂了还可以通信吗？"><a href="#5、注册中心挂了还可以通信吗？" class="headerlink" title="5、注册中心挂了还可以通信吗？"></a>5、注册中心挂了还可以通信吗？</h2><p>可以。对于正在运行的 Consumer 调用 Provider 是不需要经过注册中心，所以不受影响。并且，Consumer 进程中，内存已经缓存了 Provider 列表。</p>
+<p>那么，此时 Provider 如果下线呢？如果 Provider 是<strong>正常关闭</strong>，它会主动且直接对和其处于连接中的 Consumer 们，发送一条“我要关闭”了的消息。那么，Consumer 们就不会调用该 Provider ，而调用其它的 Provider 。</p>
+<p>另外，因为 Consumer 也会持久化 Provider 列表到本地文件。所以，此处如果 Consumer 重启，依然能够通过本地缓存的文件，获得到 Provider 列表。</p>
+<p>再另外，一般情况下，注册中心是一个集群，如果一个节点挂了，Dubbo Consumer 和 Provider 将自动切换到集群的另外一个节点上。</p>
+<h2 id="6、Dubbo-在-Zookeeper-存储了哪些信息？"><a href="#6、Dubbo-在-Zookeeper-存储了哪些信息？" class="headerlink" title="6、Dubbo 在 Zookeeper 存储了哪些信息？"></a>6、Dubbo 在 Zookeeper 存储了哪些信息？</h2><p>下面，我们先来看下 <a href="https://dubbo.gitbooks.io/dubbo-user-book/references/registry/zookeeper.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— zookeeper 注册中心》</a> 文档，内容如下：</p>
+<blockquote>
+<p><img src="/Users/ocean/Downloads/01.png" alt="流程图"></p>
+<p>流程说明：</p>
+<ul>
+<li><strong>服务提供者</strong>启动时: 向 <code>/dubbo/com.foo.BarService/providers</code> 目录下写入自己的 URL 地址</li>
+<li><strong>服务消费者</strong>启动时: 订阅 <code>/dubbo/com.foo.BarService/providers</code> 目录下的提供者 URL 地址。并向 <code>/dubbo/com.foo.BarService/consumers</code> 目录下写入自己的 URL 地址</li>
+<li><strong>监控中心</strong>启动时: 订阅 <code>/dubbo/com.foo.BarService</code> 目录下的所有提供者和消费者 URL 地址。</li>
+</ul>
+</blockquote>
+<ul>
+<li>在图中，我们可以看到 Zookeeper 的节点层级，自上而下是：<ul>
+<li><strong>Root</strong> 层：根目录，可通过 <code>&lt;dubbo:registry group=&quot;dubbo&quot; /&gt;</code> 的 <code>&quot;group&quot;</code> 设置 Zookeeper 的根节点，缺省使用 <code>&quot;dubbo&quot;</code> 。</li>
+<li><strong>Service</strong> 层：服务接口全名。</li>
+<li><strong>Type</strong> 层：分类。目前除了我们在图中看到的 <code>&quot;providers&quot;</code>( 服务提供者列表 ) <code>&quot;consumers&quot;</code>( 服务消费者列表 ) 外，还有 <a href="https://dubbo.gitbooks.io/dubbo-user-book/demos/routing-rule.html" target="_blank" rel="noopener"><code>&quot;routes&quot;</code></a>( 路由规则列表 ) 和 <a href="https://dubbo.gitbooks.io/dubbo-user-book/demos/config-rule.html" target="_blank" rel="noopener"><code>&quot;configurations&quot;</code></a>( 配置规则列表 )。</li>
+<li><strong>URL</strong> 层：URL ，根据不同 Type 目录，下面可以是服务提供者 URL 、服务消费者 URL 、路由规则 URL 、配置规则 URL 。</li>
+<li>实际上 URL 上带有 <code>&quot;category&quot;</code> 参数，已经能判断每个 URL 的分类，但是 Zookeeper 是基于节点目录订阅的，所以增加了 <strong>Type</strong> 层。</li>
+</ul>
+</li>
+<li>实际上，<strong>服务消费者</strong>启动后，不仅仅订阅了 <code>&quot;providers&quot;</code> 分类，也订阅了 <code>&quot;routes&quot;</code> <code>&quot;configurations&quot;</code> 分类。</li>
+</ul>
+<h2 id="7、Dubbo-Provider-如何实现优雅停机？"><a href="#7、Dubbo-Provider-如何实现优雅停机？" class="headerlink" title="7、Dubbo Provider 如何实现优雅停机？"></a>7、Dubbo Provider 如何实现优雅停机？</h2><p>在 <a href="http://dubbo.apache.org/zh-cn/docs/user/demos/graceful-shutdown.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— 优雅停机》</a> 中，已经对这块进行了详细的说明。</p>
+<p><strong>优雅停机</strong></p>
+<blockquote>
+<p>Dubbo 是通过 JDK 的 ShutdownHook 来完成优雅停机的，所以如果用户使用 <code>kill -9 PID</code> 等强制关闭指令，是不会执行优雅停机的，只有通过 <code>kill PID</code> 时，才会执行。</p>
+</blockquote>
+<ul>
+<li>因为大多数情况下，Dubbo 的声明周期是交给 Spring 进行管理，所以在最新的 Dubbo 版本中，增加了对 Spring 关闭事件的监听，从而关闭 Dubbo 服务。对应可见 <a href="https://github.com/apache/incubator-dubbo/issues/2865" target="_blank" rel="noopener">https://github.com/apache/incubator-dubbo/issues/2865</a> 。</li>
+</ul>
+<p><strong>服务提供方的优雅停机过程</strong></p>
+<ol>
+<li>首先，从注册中心中取消注册自己，从而使消费者不要再拉取到它。</li>
+<li>然后，sleep 10 秒( 可配 )，等到服务消费，接收到注册中心通知到该服务提供者已经下线，加大了在不重试情况下优雅停机的成功率。</li>
+<li>之后，广播 READONLY 事件给所有 Consumer 们，通知它们不再调用该服务。【很有趣的一个步骤】并且，如果此处注册中心挂掉的情况，依然能达到告诉 Consumer ，我要下线了的功能。</li>
+<li>再之后，sleep 10 毫秒，保证 Consumer 们，尽可能接收到该消息。</li>
+<li>再再之后，先标记为不接收新请求，新请求过来时直接报错，让客户端重试其它机器。</li>
+<li>再再再之后，关闭心跳线程。</li>
+<li>最后，检测线程池中的线程是否正在运行，如果有，等待所有线程执行完成，除非超时，则强制关闭。</li>
+<li>最最后，关闭服务器。</li>
+</ol>
+<p>整个过程比较复杂，感兴趣的胖友，可以详细来看看 <a href="http://svip.iocoder.cn/Dubbo/graceful-shutdown/" target="_blank" rel="noopener">《精尽 Dubbo 源码解析 —— 优雅停机》</a> 。</p>
+<p><strong>服务消费方的优雅停机过程</strong></p>
+<ol>
+<li>停止时，不再发起新的调用请求，所有新的调用在客户端即报错。</li>
+<li>然后，检测有没有请求的响应还没有返回，等待响应返回，除非超时，则强制关闭。</li>
+</ol>
+<h2 id="8、Dubbo-Provider-异步关闭时，如何从注册中心下线？"><a href="#8、Dubbo-Provider-异步关闭时，如何从注册中心下线？" class="headerlink" title="8、Dubbo Provider 异步关闭时，如何从注册中心下线？"></a>8、Dubbo Provider 异步关闭时，如何从注册中心下线？</h2><p><strong>① Zookeeper 注册中心的情况下</strong></p>
+<p>服务提供者，注册到 Zookeeper 上时，创建的是 EPHEMERAL 临时节点。所以在服务提供者异常关闭时，等待 Zookeeper 会话超时，那么该临时节点就会自动删除。</p>
+<p><strong>② Redis 注册中心的情况下</strong></p>
+<p>使用 Redis 作为注册中心，是有点小众的选择，我们就不在本文详细说了。感兴趣的胖友，可以看看 <a href="http://svip.iocoder.cn/Dubbo/registry-redis/" target="_blank" rel="noopener">《精尽 Dubbo 源码分析 —— 注册中心（三）之 Redis》</a> 一文。总的来说，实现上，还是蛮有趣的。因为，需要通知到消费者，服务列表发生变化，所以就无法使用 Redis Key 自动过期。所以… 还是看文章吧。哈哈哈哈。</p>
+<h2 id="9、Dubbo-Consumer-只能调用从注册中心获取的-Provider-么？"><a href="#9、Dubbo-Consumer-只能调用从注册中心获取的-Provider-么？" class="headerlink" title="9、Dubbo Consumer 只能调用从注册中心获取的 Provider 么？"></a>9、Dubbo Consumer 只能调用从注册中心获取的 Provider 么？</h2><p>不是，Consumer 可以强制直连 Provider 。</p>
+<p>在<strong>开发及测试环境</strong>下，经常需要绕过注册中心，只测试指定服务提供者，这时候可能需要点对点直连，点对点直连方式，将以服务接口为单位，忽略注册中心的提供者列表，A 接口配置点对点，不影响 B 接口从注册中心获取列表。</p>
+<p>相关文档，可见 <a href="http://dubbo.apache.org/zh-cn/docs/user/demos/explicit-target.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— 直连提供者》</a> 。</p>
+<p>另外，直连 Dubbo Provider 时，如果要 Debug 调试 Dubbo Provider ，可以通过配置，禁用该 Provider 注册到注册中心。否则，会被其它 Consumer 调用到。具体的配置方式，参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/demos/subscribe-only.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— 只订阅》</a> 。</p>
+<h2 id="10、Dubbo-支持哪些通信协议？"><a href="#10、Dubbo-支持哪些通信协议？" class="headerlink" title="10、Dubbo 支持哪些通信协议？"></a>10、Dubbo 支持哪些通信协议？</h2><blockquote>
+<p>对应【protocol 远程调用层】。</p>
+</blockquote>
+<p>Dubbo 目前支持如下 9 种通信协议：</p>
+<ul>
+<li>【重要】<code>dubbo://</code> ，默认协议。参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/protocol/dubbo.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— dubbo://》</a> 。</li>
+<li>【重要】<code>rest://</code> ，贡献自 Dubbox ，目前最合适的 HTTP Restful API 协议。参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/protocol/rest.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— rest://》</a> 。</li>
+<li><code>rmi://</code> ，参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/protocol/rmi.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— rmi://》</a> 。</li>
+<li><code>webservice://</code> ，参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/protocol/webservice.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— webservice://》</a> 。</li>
+<li><code>hessian://</code> ，参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/protocol/hessian.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— hessian://》</a> 。</li>
+<li><code>thrift://</code> ，参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/protocol/thrift.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— thrift://》</a> 。</li>
+<li><code>memcached://</code> ，参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/protocol/memcached.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— memcached://》</a> 。</li>
+<li><code>redis://</code> ，参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/protocol/redis.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— redis://》</a> 。</li>
+<li><code>http://</code> ，参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/protocol/http.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— http://》</a> 。注意，这个和我们理解的 HTTP 协议有差异，而是 Spring 的 HttpInvoker 实现。</li>
+</ul>
+<p>实际上，社区里还有其他通信协议正处于孵化：</p>
+<ul>
+<li><code>jsonrpc://</code> ，对应 Github 仓库为 <a href="https://github.com/apache/incubator-dubbo-rpc-jsonrpc" target="_blank" rel="noopener">https://github.com/apache/incubator-dubbo-rpc-jsonrpc</a> ，来自千米网的贡献。</li>
+</ul>
+<p>😈 每一种通信协议的实现，在 <a href="http://svip.iocoder.cn/categories/Dubbo/" target="_blank" rel="noopener">《精尽 Dubbo 源码解析》</a> 中，都有详细解析。</p>
+<p>另外，在 <a href="http://dubbo.apache.org/zh-cn/docs/user/perf-test.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— 性能测试报告》</a> 中，官方提供了上述协议的性能测试对比。</p>
+<h2 id="11、什么是本地暴露和远程暴露，他们的区别？"><a href="#11、什么是本地暴露和远程暴露，他们的区别？" class="headerlink" title="11、什么是本地暴露和远程暴露，他们的区别？"></a>11、什么是本地暴露和远程暴露，他们的区别？</h2><p>远程暴露，比较好理解。在 <a href="http://svip.iocoder.cn/Dubbo/Interview/#" target="_blank" rel="noopener">「Dubbo 支持哪些通信协议？」</a> 问题汇总，我们看到的，都是远程暴露。每次 Consumer 调用 Provider 都是跨进程，需要进行网络通信。</p>
+<p>本地暴露，在 <a href="http://dubbo.apache.org/zh-cn/docs/user/demos/local-call.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— 本地调用》</a> 一文中，定义如下：</p>
+<blockquote>
+<p>本地调用使用了 <code>injvm://</code> 协议，是一个伪协议，它不开启端口，不发起远程调用，只在 JVM 内直接关联，但执行 Dubbo 的 Filter 链。</p>
+</blockquote>
+<ul>
+<li>怎么理解呢？本地的 Dubbo Service Proxy 对象，每次调用时，会走 Dubbo Filter 链。</li>
+<li>举个例子，Spring Boot Controller 调用 Service 逻辑，就变成了调用 Dubbo Service Proxy 对象。这样，如果未来有一天，本地 Dubbo Service 迁移成远程的 Dubbo Service ，只需要进行配置的修改，而对 Controller 是透明的。</li>
+</ul>
+<h2 id="12、Dubbo-使用什么通信框架？"><a href="#12、Dubbo-使用什么通信框架？" class="headerlink" title="12、Dubbo 使用什么通信框架？"></a>12、Dubbo 使用什么通信框架？</h2><blockquote>
+<p>对应【transport 网络传输层】。</p>
+</blockquote>
+<p>在通信框架的选择上，强大的技术社区有非常多的选择，如下列表：</p>
+<ul>
+<li>Netty3</li>
+<li>Netty4</li>
+<li>Mina</li>
+<li>Grizzly</li>
+</ul>
+<p>那么 Dubbo 是如何做技术选型和实现的呢？Dubbo 在通信层拆分成了 API 层、实现层。项目结构如下：</p>
+<ul>
+<li>API 层：<ul>
+<li><code>dubbo-remoting-api</code></li>
+</ul>
+</li>
+<li>实现层：<ul>
+<li><code>dubbo-remoting-netty3</code></li>
+<li><code>dubbo-remoting-netty4</code></li>
+<li><code>dubbo-remoting-mina</code></li>
+<li><code>dubbo-remoting-grizzly</code></li>
+</ul>
+</li>
+</ul>
+<p>再配合上 Dubbo SPI 的机制，使用者可以自定义使用哪一种具体的实现。</p>
+<p>在 Dubbo 的最新版本，默认使用 <strong>Netty4</strong> 的版本。</p>
+<h2 id="13、Dubbo-有哪些负载均衡策略？"><a href="#13、Dubbo-有哪些负载均衡策略？" class="headerlink" title="13、Dubbo 有哪些负载均衡策略？"></a>13、Dubbo 有哪些负载均衡策略？</h2><blockquote>
+<p>对应【cluster 路由层】的 LoadBalance 组件。</p>
+</blockquote>
+<p>在 <a href="http://dubbo.apache.org/zh-cn/docs/user/demos/loadbalance.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— 负载均衡》</a> 中，我们可以看到 Dubbo 内置 4 种负载均衡策略。其中，默认使用 <code>random</code> 随机调用策略。</p>
+<p><strong>Random LoadBalance</strong></p>
+<ul>
+<li><strong>随机</strong>，按权重设置随机概率。</li>
+<li>在一个截面上碰撞的概率高，但调用量越大分布越均匀，而且按概率使用权重后也比较均匀，有利于动态调整提供者权重。</li>
+</ul>
+<p><strong>RoundRobin LoadBalance</strong></p>
+<ul>
+<li><strong>轮询</strong>，按公约后的权重设置轮询比率。</li>
+<li>存在慢的提供者累积请求的问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，久而久之，所有请求都卡在调到第二台上。</li>
+</ul>
+<blockquote>
+<p>举个栗子。</p>
+<p>跟运维同学申请机器，有的时候，我们运气好，正好公司资源比较充足，刚刚有一批热气腾腾、刚刚做好的一批虚拟机新鲜出炉，配置都比较高。8核+16g，机器，2 台。过了一段时间，我感觉 2 台机器有点不太够，我去找运维同学，哥儿们，你能不能再给我 1 台机器，4核+8G的机器。我还是得要。</p>
+<p>这个时候，可以给两台 8核16g 的机器设置权重 4，给剩余 1 台 4核8G 的机器设置权重 2。</p>
+</blockquote>
+<p><strong>LeastActive LoadBalance</strong></p>
+<ul>
+<li><strong>最少活跃调用数</strong>，相同活跃数的随机，活跃数指调用前后计数差。</li>
+<li>使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大。</li>
+</ul>
+<blockquote>
+<p>这个就是自动感知一下，如果某个机器性能越差，那么接收的请求越少，越不活跃，此时就会给不活跃的性能差的机器更少的请求。</p>
+</blockquote>
+<p><strong>ConsistentHash LoadBalance</strong></p>
+<ul>
+<li><strong>一致性 Hash</strong>，相同参数的请求总是发到同一提供者。</li>
+<li>当某一台提供者挂时，原本发往该提供者的请求，基于虚拟节点，平摊到其它提供者，不会引起剧烈变动。</li>
+</ul>
+<h2 id="14、Dubbo-有哪些集群容错策略？"><a href="#14、Dubbo-有哪些集群容错策略？" class="headerlink" title="14、Dubbo 有哪些集群容错策略？"></a>14、Dubbo 有哪些集群容错策略？</h2><blockquote>
+<p>对应【cluster 路由层】的 Cluster 组件。</p>
+</blockquote>
+<p>在 <a href="http://dubbo.apache.org/zh-cn/docs/user/demos/fault-tolerent-strategy.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— 集群容错》</a> 中，我们可以看到 Dubbo 内置 6 种负载均衡策略。其中，默认使用 <code>failover</code> 失败自动重试其他服务的策略。</p>
+<p><strong>Failover Cluster</strong></p>
+<p>失败自动切换，当出现失败，重试其它服务器。通常用于读操作，但重试会带来更长延迟。可通过 <code>retries=&quot;2&quot;</code> 来设置重试次数(不含第一次)。</p>
+<p><strong>Failfast Cluster</strong></p>
+<p>快速失败，只发起一次调用，失败立即报错。通常用于非幂等性的写操作，比如新增记录。</p>
+<p><strong>Failsafe Cluster</strong></p>
+<p>失败安全，出现异常时，直接忽略。通常用于写入审计日志等操作。</p>
+<p><strong>Failback Cluster</strong></p>
+<p>失败自动恢复，后台记录失败请求，定时重发。通常用于消息通知操作。</p>
+<p><strong>Forking Cluster</strong></p>
+<p>并行调用多个服务器，只要一个成功即返回。通常用于实时性要求较高的读操作，但需要浪费更多服务资源。可通过 <code>forks=&quot;2&quot;</code> 来设置最大并行数。</p>
+<p><strong>Broadcast Cluster</strong></p>
+<p>广播调用所有提供者，逐个调用，任意一台报错则报错。通常用于通知所有提供者更新缓存或日志等本地资源信息。</p>
+<h2 id="15、Dubbo-有哪些动态代理策略？"><a href="#15、Dubbo-有哪些动态代理策略？" class="headerlink" title="15、Dubbo 有哪些动态代理策略？"></a>15、Dubbo 有哪些动态代理策略？</h2><blockquote>
+<p>对应【proxy 服务代理层】。</p>
+</blockquote>
+<p>可能有胖友对动态代理不是很了解。因为，Consumer 仅仅引用服务 <code>***-api.jar</code> 包，那么可以获得到需要服务的 XXXService 接口。那么，通过动态创建对应调用 Dubbo 服务的实现类。简化代码如下：</p>
+<pre><code class="java">// ProxyFactory.java
+
+/**
+ * create proxy.
+ *
+ * 创建 Proxy ，在引用服务调用。
+ *
+ * @param invoker Invoker 对象
+ * @return proxy
+ */
+@Adaptive({Constants.PROXY_KEY})
+&lt;T&gt; T getProxy(Invoker&lt;T&gt; invoker) throws RpcException;
+</code></pre>
+<ul>
+<li>方法参数 <code>invoker</code> ，实现了调用 Dubbo 服务的逻辑。</li>
+<li>返回的 <code>&lt;T&gt;</code> 结果，就是 XXXService 的实现类，而这个实现类，就是通过<strong>动态代理</strong>的<strong>工具类</strong>进行生成。</li>
+</ul>
+<p>通过动态代理的方式，实现了对于我们开发使用 Dubbo 时，透明的效果。当然，因为实际场景下，我们是结合 Spring 场景在使用，所以不会直接使用该 API 。</p>
+<p>目前实现动态代理的<strong>工具类</strong>还是蛮多的，如下：</p>
+<ul>
+<li>Javassist</li>
+<li>JDK <em>原生自带</em></li>
+<li>CGLIB</li>
+<li>ASM</li>
+</ul>
+<p>其中，Dubbo 动态代理使用了 Javassist 和 JDK 两种方式。</p>
+<ul>
+<li>默认情况下，使用 Javassist 。</li>
+<li>可通过 SPI 机制，切换使用 JDK 的方式。</li>
+</ul>
+<p><strong>为什么默认使用 Javassist？</strong></p>
+<p>在 Dubbo 开发者【梁飞】的博客 <a href="https://javatar.iteye.com/blog/814426" target="_blank" rel="noopener">《动态代理方案性能对比》</a> 中，我们可以看到这几种方式的性能差异，而 Javassit 排在第一。也就是说，因为<strong>性能</strong>的原因。</p>
+<p>有一点需要注意，Javassit 提供<strong>字节码</strong> bytecode 生成方式和动态代理接口两种方式。后者的性能比 JDK 自带的还慢，所以 Dubbo 使用的是前者<strong>字节码</strong> bytecode 生成方式。</p>
+<p><strong>那么是不是 JDK 代理就没意义？</strong></p>
+<p>实际上，JDK 代理在 JDK 1.8 版本下，性能已经有很大的提升，并且无需引入三方工具的依赖，也是非常棒的选择。所以，Spring 和 Motan 在动态代理生成上，优先选择 JDK 代理。</p>
+<blockquote>
+<p>注意，Spring 同时也选择了 CGLIB 作为生成动态代理的工具之一。</p>
+</blockquote>
+<h2 id="16、Dubbo-SPI-的设计思想是什么？"><a href="#16、Dubbo-SPI-的设计思想是什么？" class="headerlink" title="16、Dubbo SPI 的设计思想是什么？"></a>16、Dubbo SPI 的设计思想是什么？</h2><p>首先的首先，我们得来理解 Java SPI 是什么？因为徐妈在这块已经写了非常非常非常不错的文章，我们直接<strong>认真</strong>，一定要<strong>认真</strong>看 <a href="http://www.iocoder.cn/Fight/xuma/spi/" target="_blank" rel="noopener">《JAVA 拾遗 —— 关于 SPI 机制》</a> 。</p>
+<p>那么既然 Java SPI 机制已经这么牛逼，为什么 Dubbo 还要自己实现 Dubbo SPI 机制呢？良心的 Dubbo 在 <a href="http://dubbo.apache.org/zh-cn/docs/dev/SPI.html" target="_blank" rel="noopener">《Dubbo 开发指南 —— 扩展点加载》</a> 中，给出了答案：</p>
+<ul>
+<li>1、JDK 标准的 SPI 会一次性实例化扩展点所有实现，如果有扩展实现初始化很耗时，但如果没用上也加载，会很浪费资源。</li>
+<li>2、如果扩展点加载失败，连扩展点的名称都拿不到了。比如：JDK 标准的 ScriptEngine，通过 getName() 获取脚本类型的名称，但如果 RubyScriptEngine 因为所依赖的 jruby.jar 不存在，导致 RubyScriptEngine 类加载失败，这个失败原因被吃掉了，和 ruby 对应不起来，当用户执行 ruby 脚本时，会报不支持 ruby，而不是真正失败的原因。</li>
+<li>3、增加了对扩展点 IoC 和 AOP 的支持，一个扩展点可以直接 setter 注入其它扩展点。</li>
+</ul>
+<p><strong>什么意思呢？</strong></p>
+<ul>
+<li>第一点问题，Dubbo 有很多的拓展点，例如 Protocol、Filter 等等。并且每个拓展点有多种的实现，例如 Protocol 有 DubboProtocol、InjvmProtocol、RestProtocol 等等。那么使用 JDK SPI 机制，会初始化无用的拓展点及其实现，造成不必要的耗时与资源浪费。</li>
+<li>第二点问题，因为没用过 ScriptEngine ，所以看不懂，哈哈哈哈。</li>
+<li>第三点问题，严格来说，这不算问题，<strong>而是增加了功能特性</strong>，更多的体现是，Dubbo SPI 提供类似 Spring IoC 和 AOP 的功能。</li>
+</ul>
+<p>如果如果如果想要深入理解 Dubbo SPI 体系，胖友可以阅读 <a href="http://svip.iocoder.cn/Dubbo/spi" target="_blank" rel="noopener">《精尽 Dubbo 源码分析 —— 拓展机制 SPI》</a> 。艿话说的好，读懂 Dubbo SPI 的源码，你就读懂了一半 Dubbo 的源码。</p>
+<hr>
+<p>再引申下，有些刁钻的面试官，可能会让你先讲讲 Spring IoC 是如何实现的，Dubbo SPI 是怎么提供 IoC 功能的，那么你可以看看如下两篇文章来准备：</p>
+<ul>
+<li>Spring IoC ，<a href="http://www.iocoder.cn/Fight/Interview-poorly-asked-Spring-IOC-process-1/" target="_blank" rel="noopener">《面试问烂的 Spring IoC 过程》</a> 。</li>
+<li>Dubbo SPI IoC ，<a href="https://segmentfault.com/a/1190000014698351#articleHeader12" target="_blank" rel="noopener">《Dubbo SPI 机制和 IoC》</a> 的 <a href="http://svip.iocoder.cn/Dubbo/Interview/部分" target="_blank" rel="noopener">「IOC 注入」</a>。</li>
+</ul>
+<p>再再引申下，有些刁钻的面试官，可能会让你先讲讲 Spring AOP 是如何实现的，Dubbo SPI 是怎么提供 AOP 功能的，那么你可以看看如下两篇文章来准备：</p>
+<ul>
+<li>Spring AOP ，<a href="http://www.iocoder.cn/Fight/Interview-poorly-asked-Spring-AOP-principles/" target="_blank" rel="noopener">《面试问烂的 Spring AOP 原理》</a> 。</li>
+<li>Dubbo SPI AOP ，详细见 <a href="http://svip.iocoder.cn/Dubbo/spi" target="_blank" rel="noopener">《精尽 Dubbo 源码分析 —— 拓展机制 SPI》</a> 文章。核心源码是：</li>
+</ul>
+<hr>
+<pre><code class="java">private static final ConcurrentMap&lt;Class&lt;?&gt;, Object&gt; EXTENSION_INSTANCES = new ConcurrentHashMap&lt;Class&lt;?&gt;, Object&gt;();
+
+  1: 
+  7: @SuppressWarnings(&quot;unchecked&quot;)
+  8: private T createExtension(String name) {
+  9:     // 获得拓展名对应的拓展实现类
+ 10:     Class&lt;?&gt; clazz = getExtensionClasses().get(name);
+ 11:     if (clazz == null) {
+ 12:         throw findException(name); // 抛出异常
+ 13:     }
+ 14:     try {
+ 15:         // 从缓存中，获得拓展对象。
+ 16:         T instance = (T) EXTENSION_INSTANCES.get(clazz);
+ 17:         if (instance == null) {
+ 18:             // 当缓存不存在时，创建拓展对象，并添加到缓存中。
+ 19:             EXTENSION_INSTANCES.putIfAbsent(clazz, clazz.newInstance());
+ 20:             instance = (T) EXTENSION_INSTANCES.get(clazz);
+ 21:         }
+ 22:         // 注入依赖的属性
+ 23:         injectExtension(instance);
+ 24:         // 创建 Wrapper 拓展对象
+ 25:         Set&lt;Class&lt;?&gt;&gt; wrapperClasses = cachedWrapperClasses;
+ 26:         if (wrapperClasses != null &amp;&amp; !wrapperClasses.isEmpty()) {
+ 27:             for (Class&lt;?&gt; wrapperClass : wrapperClasses) {
+ 28:                 instance = injectExtension((T) wrapperClass.getConstructor(type).newInstance(instance));
+ 29:             }
+ 30:         }
+ 31:         return instance;
+ 32:     } catch (Throwable t) {
+ 33:         throw new IllegalStateException(&quot;Extension instance(name: &quot; + name + &quot;, class: &quot; +
+ 34:                 type + &quot;)  could not be instantiated: &quot; + t.getMessage(), t);
+ 35:     }
+ 36: }</code></pre>
+<p>第 24 至 30 行：创建 Wrapper 拓展对象，将 <code>instance</code> <strong>包装在其中</strong>。在 <a href="https://dubbo.gitbooks.io/dubbo-dev-book/SPI.html" target="_blank" rel="noopener">《Dubbo 开发指南 —— 扩展点加载》</a> 文章中，如此介绍 Wrapper 类：</p>
+<blockquote>
+<p>Wrapper 类同样实现了扩展点接口，但是 Wrapper 不是扩展点的真正实现。它的用途主要是用于从 ExtensionLoader 返回扩展点时，包装在真正的扩展点实现外。即从 ExtensionLoader 中返回的实际上是 Wrapper 类的实例，Wrapper 持有了实际的扩展点实现类。</p>
+<p>扩展点的 Wrapper 类可以有多个，也可以根据需要新增。</p>
+<p>通过 Wrapper 类可以把所有扩展点公共逻辑移至 Wrapper 中。新加的 Wrapper 在所有的扩展点上添加了逻辑，有些类似 AOP，即 Wrapper 代理了扩展点。</p>
+<ul>
+<li>例如：<a href="https://github.com/YunaiV/dubbo/blob/6b8e51ac55880a0f10a34f297d0869fcdbb42369/dubbo-rpc/dubbo-rpc-api/src/main/java/com/alibaba/dubbo/rpc/listener/ListenerExporterWrapper.java" target="_blank" rel="noopener">ListenerExporterWrapper</a>、<a href="https://github.com/YunaiV/dubbo/blob/6b8e51ac55880a0f10a34f297d0869fcdbb42369/dubbo-rpc/dubbo-rpc-api/src/main/java/com/alibaba/dubbo/rpc/protocol/ProtocolFilterWrapper.java" target="_blank" rel="noopener">ProtocolFilterWrapper</a> 。</li>
+</ul>
+</blockquote>
+<h2 id="17、Dubbo-服务如何监控和管理？"><a href="#17、Dubbo-服务如何监控和管理？" class="headerlink" title="17、Dubbo 服务如何监控和管理？"></a>17、Dubbo 服务如何监控和管理？</h2><p>一旦使用 Dubbo 做了服务化后，必须必须必须要做的<strong>服务治理</strong>，也就是说，要做服务的管理与监控。当然，还有服务的降级和限流。这块，放在下面的面试题，在详细解析。</p>
+<p><strong>Dubbo 管理平台 + 监控平台</strong></p>
+<ul>
+<li><code>dubbo-monitor</code> 监控平台，基于 Dubbo 的【monitor 监控层】，实现相应的监控数据的收集到监控平台。</li>
+<li><code>dubbo-admin</code> 管理平台，基于注册中心，可以获取到服务相关的信息。</li>
+</ul>
+<p>关于这块的选择，胖友直接看看 <a href="https://www.jianshu.com/p/a022e1305e66" target="_blank" rel="noopener">《Dubbo监控和管理（dubbokeeper）》</a> 。</p>
+<p>另外，目前 Dubbo 正在重做 <code>dubbo-admin</code> 管理平台，感兴趣的胖友，可以跟进 <a href="https://github.com/apache/incubator-dubbo-ops" target="_blank" rel="noopener">https://github.com/apache/incubator-dubbo-ops</a> 。</p>
+<p><strong>链路追踪</strong></p>
+<p>关链路追踪的概念，就不重复介绍了。</p>
+<p>目前能够实现链路追踪的组件还是比较多的，如下：</p>
+<ul>
+<li>Apache SkyWalking 【推荐】</li>
+<li>Zipkin</li>
+<li>Cat</li>
+<li>PinPoint</li>
+</ul>
+<p>具体集成的方式，Dubbo 官方推荐了两篇博文：</p>
+<ul>
+<li><a href="http://www.iocoder.cn/SkyWalking/How-do-I-use-Skywalking-to-do-tracking-for-the-Dubbo-service" target="_blank" rel="noopener">《使用 Apache SkyWalking (Incubator) 做分布式跟踪》</a></li>
+<li><a href="http://dubbo.apache.org/zh-cn/blog/use-zipkin-in-dubbo.html" target="_blank" rel="noopener">《在 Dubbo 中使用 Zipkin》</a></li>
+</ul>
+<h2 id="18、Dubbo-服务如何做降级？"><a href="#18、Dubbo-服务如何做降级？" class="headerlink" title="18、Dubbo 服务如何做降级？"></a>18、Dubbo 服务如何做降级？</h2><p>比如说服务 A 调用服务 B，结果服务 B 挂掉了。服务 A 再重试几次调用服务 B，还是不行，那么直接降级，走一个备用的逻辑，给用户返回响应。</p>
+<p>在 Dubbo 中，实现服务降级的功能，一共有两大种方式。</p>
+<p><strong>① Dubbo 原生自带的服务降级功能</strong></p>
+<p>具体可以看看 <a href="http://dubbo.apache.org/zh-cn/docs/user/demos/service-downgrade.html" target="_blank" rel="noopener">《Dubbo 用户指南 —— 服务降级》</a> 。</p>
+<p>当然，这个功能，并不能实现现代微服务的<strong>熔断器</strong>的功能。所以一般情况下，不太推荐这种方式，而是采用第二种方式。</p>
+<p><strong>② 引入支持服务降级的组件</strong></p>
+<p>目前开源社区常用的有两种组件支持服务降级的功能，分别是：</p>
+<ul>
+<li>Alibaba Sentinel</li>
+<li>Netflix Hystrix</li>
+</ul>
+<p>因为目前 Hystrix 已经停止维护，并且和 Dubbo 的集成度不是特别高，需要做二次开发，所以推荐使用 Sentinel 。具体的介绍，胖友可以看看 <a href="https://github.com/alibaba/Sentinel/wiki/介绍" target="_blank" rel="noopener">《Sentinel 介绍》</a> 。</p>
+<p>关于 Dubbo 如何集成 Sentinel ，胖友可以阅读 <a href="http://www.iocoder.cn/Sentinel/all/sentinel-introduction-for-dubbo/" target="_blank" rel="noopener">《Sentinel 为 Dubbo 服务保驾护航》</a> 一文。</p>
+<p>关于 Sentinel 和 Hystrix 对比，胖友可以阅读 <a href="http://www.iocoder.cn/Sentinel/all/Sentinel-and-Hystrix/" target="_blank" rel="noopener">《Sentinel 与 Hystrix 的对比》</a> 一文。</p>
+<h2 id="19、Dubbo-如何做限流？"><a href="#19、Dubbo-如何做限流？" class="headerlink" title="19、Dubbo 如何做限流？"></a>19、Dubbo 如何做限流？</h2><p>在做服务稳定性时，有一句非常经典的话：</p>
+<ul>
+<li>怀疑第三方</li>
+<li>防备使用方</li>
+<li>做好自己</li>
+</ul>
+<p>那么，上面看到的服务降级，就属于怀疑第三方。<br>而本小节的限流目的，就是防备使用方。</p>
+<p>此处，艿艿要再推荐一篇文章：<a href="http://www.iocoder.cn/Fight/How-do-you-robust-back-end-services/" target="_blank" rel="noopener">《你应该如何正确健壮后端服务？》</a> 。</p>
+<p>目前，在 Dubbo 中，实现服务降级的功能，一共有两大种方式。</p>
+<p><strong>① Dubbo 原生自带的限流功能</strong></p>
+<p>通过 TpsLimitFilter 实现，仅适用于服务提供者。具体的使用方式，源码实现，看看 <a href="http://svip.iocoder.cn/Dubbo/filter-limit-filter/" target="_blank" rel="noopener">《精尽 Dubbo 源码分析 —— 过滤器（九）之 TpsLimitFilter》</a> 。</p>
+<p>😈 参照 TpsLimitFilter 的思路，可以实现自定义限流的 Filter ，并且使用 Guava RateLimiter 工具类，达到 <a href="http://svip.iocoder.cn/Dubbo/Interview/令牌桶算法限流" target="_blank" rel="noopener">令牌桶算法限流</a> 的功能。</p>
+<p><strong>② 引入支持限流的组件</strong></p>
+<p>关于这个功能，还是推荐集成 Sentinel 组件。</p>
+<h2 id="20、Dubbo-的失败重试是什么？"><a href="#20、Dubbo-的失败重试是什么？" class="headerlink" title="20、Dubbo 的失败重试是什么？"></a>20、Dubbo 的失败重试是什么？</h2><p>所谓失败重试，就是 consumer 调用 provider 要是失败了，比如抛异常了，此时应该是可以重试的，或者调用超时了也可以重试。</p>
+<p>实际场景下，我们一般会<strong>禁用掉重试</strong>。因为，因为超时后重试会有问题，超时你不知道是成功还是失败。例如，可能会导致两次扣款的问题。</p>
+<p>所以，我们一般使用 failfast 集群容错策略，而不是 failover 策略。配置如下：</p>
+<pre><code class="xml">&lt;dubbo:service cluster=&quot;failfast&quot; timeout=&quot;2000&quot; /&gt;</code></pre>
+<p>另外，一定一定一定要配置适合自己业务的<strong>超时时间</strong>。</p>
+<p>当然，可以将操作分成<strong>读</strong>和<strong>写</strong>两种，前者支持重试，后者不支持重试。因为，<strong>读</strong>操作天然具有幂等性。</p>
+<h2 id="21、Dubbo-支持哪些注册中心？"><a href="#21、Dubbo-支持哪些注册中心？" class="headerlink" title="21、Dubbo 支持哪些注册中心？"></a>21、Dubbo 支持哪些注册中心？</h2><p>Dubbo 支持多种主流注册中心，如下：</p>
+<ul>
+<li>【默认】Zookeeper ，参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/registry/zookeeper.html" target="_blank" rel="noopener">《用户指南 —— Zookeeper 注册中心》</a> 。</li>
+<li>Redis ，参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/registry/redis.html" target="_blank" rel="noopener">《用户指南 —— Redis 注册中心》</a> 。</li>
+<li>Multicast 注册中心，参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/registry/multicast.html" target="_blank" rel="noopener">《用户指南 —— Multicast 注册中心》</a> 。</li>
+<li>Simple 注册中心，参见 <a href="http://dubbo.apache.org/zh-cn/docs/user/references/registry/simple.html" target="_blank" rel="noopener">《用户指南 —— Simple 注册中心》</a> 。</li>
+</ul>
+<p>目前 Alibaba 正在开源新的注册中心 <a href="https://nacos.io/zh-cn/" target="_blank" rel="noopener">Nacos</a> ，也是未来的选择之一。</p>
+<p>当然，Netflix Eureka 也是注册中心的一个选择，不过 Dubbo 暂未集成实现。</p>
+<p>另外，此处会引申一个经典的问题，见 <a href="http://dockone.io/article/78" target="_blank" rel="noopener">《为什么不应该使用 ZooKeeper 做服务发现》</a> 文章。</p>
+<h2 id="22、Dubbo-接口如何实现幂等性？"><a href="#22、Dubbo-接口如何实现幂等性？" class="headerlink" title="22、Dubbo 接口如何实现幂等性？"></a>22、Dubbo 接口如何实现幂等性？</h2><blockquote>
+<p>所谓幂等，简单地说，就是对接口的多次调用所产生的结果和调用一次是一致的。扩展一下，这里的接口，可以理解为对外发布的 HTTP 接口或者 Thrift 接口，也可以是接收消息的内部接口，甚至是一个内部方法或操作。</p>
+<p>那么我们为什么需要接口具有幂等性呢？设想一下以下情形：</p>
+<ul>
+<li>在 App 中下订单的时候，点击确认之后，没反应，就又点击了几次。在这种情况下，如果无法保证该接口的幂等性，那么将会出现重复下单问题。</li>
+<li>在接收消息的时候，消息推送重复。如果处理消息的接口无法保证幂等，那么重复消费消息产生的影响可能会非常大。</li>
+</ul>
+</blockquote>
+<p>所以，从这段描述中，幂等性不仅仅是 Dubbo 接口的问题，包括 HTTP 接口、Thrift 接口都存在这样的问题，甚至说 MQ 消息、定时任务，都会碰到这样的场景。那么应该怎么办呢？</p>
+<blockquote>
+<p>这个不是技术问题，这个没有通用的一个方法，这个应该<strong>结合业务</strong>来保证幂等性。</p>
+<p>所谓<strong>幂等性</strong>，就是说一个接口，多次发起同一个请求，你这个接口得保证结果是准确的，比如不能多扣款、不能多插入一条数据、不能将统计值多加了 1。这就是幂等性。</p>
+<p>其实保证幂等性主要是三点：</p>
+<ul>
+<li>对于每个请求必须有一个唯一的标识，举个栗子：订单支付请求，肯定得包含订单 id，一个订单 id 最多支付一次，对吧。</li>
+<li>每次处理完请求之后，必须有一个记录标识这个请求处理过了。常见的方案是在 mysql 中记录个状态啥的，比如支付之前记录一条这个订单的支付流水。</li>
+<li>每次接收请求需要进行判断，判断之前是否处理过。比如说，如果有一个订单已经支付了，就已经有了一条支付流水，那么如果重复发送这个请求，则此时先插入支付流水，orderId 已经存在了，唯一键约束生效，报错插入不进去的。然后你就不用再扣款了。</li>
+</ul>
+<p>实际运作过程中，你要结合自己的业务来，比如说利用 redis，用 orderId 作为唯一键。只有成功插入这个支付流水，才可以执行实际的支付扣款。</p>
+<p>要求是支付一个订单，必须插入一条支付流水，order_id 建一个唯一键 <code>unique key</code>。你在支付一个订单之前，先插入一条支付流水，order_id 就已经进去了。你就可以写一个标识到 redis 里面去，<code>set order_id payed</code>，下一次重复请求过来了，先查 redis 的 order_id 对应的 value，如果是 <code>payed</code> 就说明已经支付过了，你就别重复支付了。</p>
+</blockquote>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>dubbo面试题</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">7.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-11, 21:41:31</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-16, 20:21:52</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/11/dubbo/dubbo%E9%9D%A2%E8%AF%95%E9%A2%98/" title="dubbo面试题">http://yoursite.com/2020/02/11/dubbo/dubbo%E9%9D%A2%E8%AF%95%E9%A2%98/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019-2019 Ocean</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#动态代理','#面试','#算法','#类加载器','#反射','#垃圾','#缓存','#设计模式','#工厂模式','#设计原则','#线程池',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>适配器模式----不兼容结构的协调----六 | 心无迷惘</title>
+  <meta name="keywords" content=" 设计模式 ">
+  <meta name="description" content="适配器模式----不兼容结构的协调----六 | 心无迷惘">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 心存迷惘 则无法继续前行😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;about&#x2F;index.html">
+<meta property="og:site_name" content="心无迷惘">
+<meta property="og:description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 心存迷惘 则无法继续前行😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-15T13:29:23.087Z">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Ocean Bai</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/oceanbai" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(25)</small></div></li>
+    
+        
+            
+            <li><div data-rel="dubbo">dubbo<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="算法">算法<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="java基础">java基础<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计原则">设计原则<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="面试">面试<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="JDK">JDK<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="25">
+<input type="hidden" id="yelog_site_word_count" value="92k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">动态代理</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">类加载器</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">反射</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">垃圾</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">缓存</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">工厂模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">设计原则</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">线程池</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="设计模式 "
+           href="/2020/02/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="桥接模式----处理多维变化----五">桥接模式----处理多维变化----五</span>
+            <span class="post-date" title="2020-02-15 21:42:31">2020/02/15</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="适配器模式----不兼容结构的协调----六">适配器模式----不兼容结构的协调----六</span>
+            <span class="post-date" title="2020-02-15 21:42:31">2020/02/15</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/02/15/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="面试题">面试题</span>
+            <span class="post-date" title="2020-02-15 21:41:32">2020/02/15</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="模板方法模式--------四">模板方法模式--------四</span>
+            <span class="post-date" title="2020-02-14 16:38:31">2020/02/14</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="抽象工厂模式--------三">抽象工厂模式--------三</span>
+            <span class="post-date" title="2020-02-13 21:41:31">2020/02/13</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8(ClassLoader)/"
+           data-tag="类加载器"
+           data-author="" >
+            <span class="post-title" title="深入理解java类加载器(ClassLoader)">深入理解java类加载器(ClassLoader)</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF(Class%E5%AF%B9%E8%B1%A1)%E4%B8%8E%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"
+           data-tag="反射"
+           data-author="" >
+            <span class="post-title" title="深入理解Java类型信息(Class对象)与反射机制">深入理解Java类型信息(Class对象)与反射机制</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95------FIFO%20%E3%80%81LRU%E3%80%81LFU/"
+           data-tag="缓存"
+           data-author="" >
+            <span class="post-title" title="缓存算法（FIFO、LRU、LFU）">缓存算法（FIFO、LRU、LFU）</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%96%87%E6%95%B0/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="回文数">回文数</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E9%9D%A2%E8%AF%95%E9%A2%9803-%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="面试题03-数组中重复的数字">面试题03-数组中重复的数字</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="工厂方法模式--------二">工厂方法模式--------二</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/11/dubbo/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20RPC%20%E4%B9%8B%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%AF%87/"
+           data-tag="动态代理"
+           data-author="" >
+            <span class="post-title" title="深入理解 RPC 之动态代理篇">深入理解 RPC 之动态代理篇</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/11/dubbo/dubbo%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="dubbo面试题">dubbo面试题</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/11/java/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"
+           data-tag="垃圾"
+           data-author="" >
+            <span class="post-title" title="垃圾回收">垃圾回收</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="简单工厂模式--------一">简单工厂模式--------一</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="JDK "
+           href="/2020/02/11/java/JDK/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%A7%A3%E6%9E%90/"
+           data-tag="线程池"
+           data-author="" >
+            <span class="post-title" title="线程池源码解析">线程池源码解析</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2019/11/30/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E5%A0%86/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="二叉堆">二叉堆</span>
+            <span class="post-date" title="2019-11-30 21:49:13">2019/11/30</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2019/11/30/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E8%A6%81%E6%B1%82/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="别人面试要求">别人面试要求</span>
+            <span class="post-date" title="2019-11-30 21:41:31">2019/11/30</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第七原则:合成复用原则">第七原则:合成复用原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第二原则:依赖倒置原则">第二原则:依赖倒置原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第三原则:单一职责原则">第三原则:单一职责原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第一原则:开闭原则">第一原则:开闭原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第六原则:里氏替换原则">第六原则:里氏替换原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第四原则:接口隔离原则">第四原则:接口隔离原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第五原则:迪米特法则">第五原则:迪米特法则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-设计模式/适配器模式" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">适配器模式----不兼容结构的协调----六</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="设计模式">设计模式</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">设计模式</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-16 23:34:33'>2020-02-15 21:42</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:4.9k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、-没有源码的算法库"><span class="toc-text">1、 没有源码的算法库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、-适配器模式概述"><span class="toc-text">2、 适配器模式概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、-完整解决方案"><span class="toc-text">3、 完整解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、-类适配器"><span class="toc-text">4、 类适配器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、-双向适配器"><span class="toc-text">5、 双向适配器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、-缺省适配器"><span class="toc-text">6、 缺省适配器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、-适配器模式总结"><span class="toc-text">7、 适配器模式总结</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>我的笔记本电脑的工作电压是20V，而我国的家庭用电是220V，如何让20V的笔记本电脑能够在220V的电压下工作？</p>
+<p>答案是引入一个电源适配器(AC Adapter)，俗称充电器或变压器，有了这个电源适配器，生活用电和笔记本电脑即可兼容。</p>
+</blockquote>
+<p>在软件开发中，有时也存在类似这种不兼容的情况，我们也可以像引入一个电源适配器一样引入一个称之为适配器的角色来协调这些存在不兼容的结构，这种设计方案即为适配器模式。</p>
+<h2 id="1、-没有源码的算法库"><a href="#1、-没有源码的算法库" class="headerlink" title="1、 没有源码的算法库"></a>1、 没有源码的算法库</h2><blockquote>
+<p>Sunny软件公司在很久以前曾开发了一个算法库，里面包含了一些常用的算法，例如排序算法和查找算法，在进行各类软件开发时经常需要重用该算法库中的算法。在为某学校开发教务管理系统时，开发人员发现需要对学生成绩进行排序和查找，该系统的设计人员已经开发了一个成绩操作接口ScoreOperation，在该接口中声明了排序方法sort(int[]) 和查找方法search(int[], int)，为了提高排序和查找的效率，开发人员决定重用算法库中的快速排序算法类QuickSort和二分查找算法类BinarySearch，其中QuickSort的quickSort(int[])方法实现了快速排序，BinarySearch 的binarySearch (int[], int)方法实现了二分查找。</p>
+<p>   由于某些原因，现在Sunny公司开发人员已经找不到该算法库的源代码，无法直接通过复制和粘贴操作来重用其中的代码；部分开发人员已经针对ScoreOperation接口编程，如果再要求对该接口进行修改或要求大家直接使用QuickSort类和BinarySearch类将导致大量代码需要修改。</p>
+<p>   Sunny软件公司开发人员面对这个没有源码的算法库，遇到一个幸福而又烦恼的问题：如何在既不修改现有接口又不需要任何算法库代码的基础上能够实现算法库的重用？</p>
+</blockquote>
+<p>通过分析，我们不难得知，现在Sunny软件公司面对的问题有点类似本章最开始所提到的电压问题，成绩操作接口ScoreOperation好比只支持20V电压的笔记本，而算法库好比220V的家庭用电，这两部分都没有办法再进行修改，而且它们原本是两个完全不相关的结构，如图9-2所示：</p>
+<p><img src="/imag/Factory/1362066394_7865.jpg" alt="图9-2 需协调的两个系统的结构示意图"></p>
+<p>现在我们需要ScoreOperation接口能够和已有算法库一起工作，让它们在同一个系统中能够兼容，最好的实现方法是增加一个类似电源适配器一样的适配器角色，通过适配器来协调这两个原本不兼容的结构。如何在软件开发中设计和实现适配器是本章我们将要解决的核心问题，下面就让我们正式开始学习这种用于解决不兼容结构问题的适配器模式。</p>
+<h2 id="2、-适配器模式概述"><a href="#2、-适配器模式概述" class="headerlink" title="2、 适配器模式概述"></a>2、 适配器模式概述</h2><p>与电源适配器相似，在适配器模式中引入了一个被称为<strong>适配器(Adapter)</strong>的包装类，而它所包装的对象称为<strong>适配者(Adaptee)</strong>，即被适配的类。适配器的实现就是把客户类的请求转化为对适配者的相应接口的调用。也就是说：当客户类调用适配器的方法时，在适配器类的内部将调用适配者类的方法，而这个过程对客户类是透明的，客户类并不直接访问适配者类。因此，适配器让那些由于接口不兼容而不能交互的类可以一起工作。</p>
+<p>适配器模式可以将一个类的接口和另一个类的接口匹配起来，而无须修改原来的适配者接口和抽象目标类接口。适配器模式定义如下：</p>
+<blockquote>
+<p>适配器模式(Adapter Pattern)：将一个接口转换成客户希望的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。</p>
+</blockquote>
+<p>【注：在适配器模式定义中所提及的接口是指广义的接口，它可以表示一个方法或者方法的集合。】</p>
+<p>在适配器模式中，我们通过增加一个新的适配器类来解决接口不兼容的问题，使得原本没有任何关系的类可以协同工作。根据适配器类与适配者类的关系不同，适配器模式可分为对象适配器和类适配器两种，<strong>在对象适配器模式中，适配器与适配者之间是关联关系；在类适配器模式中，适配器与适配者之间是继承（或实现）关系。</strong>在实际开发中，对象适配器的使用频率更高，对象适配器模式结构如图9-3所示：</p>
+<p><img src="/imag/Factory/1362066399_9469.jpg" alt="图 9-3 对象适配器模式结构图"></p>
+<p>在对象适配器模式结构图中包含如下几个角色：</p>
+<ul>
+<li><p><strong>Target（目标抽象类）：</strong>目标抽象类定义客户所需接口，可以是一个抽象类或接口，也可以是具体类。</p>
+</li>
+<li><p><strong>Adapter（适配器类）：</strong>适配器可以调用另一个接口，作为一个转换器，对Adaptee和Target进行适配，适配器类是适配器模式的核心，在对象适配器中，它通过继承Target并关联一个Adaptee对象使二者产生联系。</p>
+</li>
+<li><p><strong>Adaptee（适配者类）：</strong>适配者即被适配的角色，它定义了一个已经存在的接口，这个接口需要适配，适配者类一般是一个具体类，包含了客户希望使用的业务方法，在某些情况下可能没有适配者类的源代码。</p>
+</li>
+</ul>
+<p>根据对象适配器模式结构图，在对象适配器中，客户端需要调用request()方法，而适配者类Adaptee没有该方法，但是它所提供的specificRequest()方法却是客户端所需要的。为了使客户端能够使用适配者类，需要提供一个包装类Adapter，即适配器类。这个包装类包装了一个适配者的实例，从而将客户端与适配者衔接起来，在适配器的request()方法中调用适配者的specificRequest()方法。因为适配器类与适配者类是关联关系（也可称之为委派关系），所以这种适配器模式称为对象适配器模式。典型的对象适配器代码如下所示：</p>
+<pre><code class="java">class Adapter extends Target {
+    private Adaptee adaptee; //维持一个对适配者对象的引用
+
+    public Adapter(Adaptee adaptee) {
+        this.adaptee=adaptee;
+    }
+
+    public void request() {
+        adaptee.specificRequest(); //转发调用
+    }
+}</code></pre>
+<h2 id="3、-完整解决方案"><a href="#3、-完整解决方案" class="headerlink" title="3、 完整解决方案"></a>3、 完整解决方案</h2><p>Sunny软件公司开发人员决定使用适配器模式来重用算法库中的算法，其基本结构如图9-4所示：</p>
+<p><img src="/imag/Factory/1362069067_3033.jpg" alt="图9-4  算法库重用结构图"></p>
+<p>在图9-4中，ScoreOperation接口充当抽象目标，QuickSort和BinarySearch类充当适配者，OperationAdapter充当适配器。完整代码如下所示：</p>
+<pre><code class="java">//抽象成绩操作类：目标接口
+interface ScoreOperation {
+    public int[] sort(int array[]); //成绩排序
+    public int search(int array[],int key); //成绩查找
+}
+
+//快速排序类：适配者
+class QuickSort {
+    public int[] quickSort(int array[]) {
+        sort(array,0,array.length-1);
+        return array;
+    }
+
+    public void sort(int array[],int p, int r) {
+        int q=0;
+        if(p&lt;r) {
+            q=partition(array,p,r);
+            sort(array,p,q-1);
+            sort(array,q+1,r);
+        }
+    }
+
+    public int partition(int[] a, int p, int r) {
+        int x=a[r];
+        int j=p-1;
+        for (int i=p;i&lt;=r-1;i++) {
+            if (a[i]&lt;=x) {
+                j++;
+                swap(a,j,i);
+            }
+        }
+        swap(a,j+1,r);
+        return j+1;    
+    }
+
+    public void swap(int[] a, int i, int j) {   
+        int t = a[i];   
+        a[i] = a[j];   
+        a[j] = t;   
+    }
+}
+
+//二分查找类：适配者
+class BinarySearch {
+    public int binarySearch(int array[],int key) {
+        int low = 0;
+        int high = array.length -1;
+        while(low &lt;= high) {
+            int mid = (low + high) / 2;
+            int midVal = array[mid];
+            if(midVal &lt; key) {  
+low = mid +1;  
+}
+            else if (midVal &gt; key) {  
+high = mid -1;  
+}
+            else {  
+return 1; //找到元素返回1  
+}
+        }
+        return -1;  //未找到元素返回-1
+    }
+}
+
+//操作适配器：适配器
+class OperationAdapter implements ScoreOperation {
+    private QuickSort sortObj; //定义适配者QuickSort对象
+    private BinarySearch searchObj; //定义适配者BinarySearch对象
+
+    public OperationAdapter() {
+        sortObj = new QuickSort();
+        searchObj = new BinarySearch();
+    }
+
+    public int[] sort(int array[]) {  
+return sortObj.quickSort(array); //调用适配者类QuickSort的排序方法
+}
+
+    public int search(int array[],int key) {  
+return searchObj.binarySearch(array,key); //调用适配者类BinarySearch的查找方法
+}
+}</code></pre>
+<p>为了让系统具备良好的灵活性和可扩展性，我们引入了工具类XMLUtil和配置文件，其中，XMLUtil类的代码如下所示：</p>
+<pre><code class="java">import javax.xml.parsers.*;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+import java.io.*;
+class XMLUtil {
+//该方法用于从XML配置文件中提取具体类类名，并返回一个实例对象
+    public static Object getBean() {
+        try {
+            //创建文档对象
+            DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = dFactory.newDocumentBuilder();
+            Document doc;                            
+            doc = builder.parse(new File(&quot;config.xml&quot;)); 
+
+            //获取包含类名的文本节点
+            NodeList nl = doc.getElementsByTagName(&quot;className&quot;);
+            Node classNode=nl.item(0).getFirstChild();
+            String cName=classNode.getNodeValue();
+
+            //通过类名生成实例对象并将其返回
+            Class c=Class.forName(cName);
+              Object obj=c.newInstance();
+            return obj;
+        }   
+        catch(Exception e) {
+               e.printStackTrace();
+               return null;
+           }
+    }
+}</code></pre>
+<p>配置文件config.xml中存储了适配器类的类名，代码如下所示：</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;config&gt;
+    &lt;className&gt;OperationAdapter&lt;/className&gt;
+&lt;/config&gt;</code></pre>
+<p>编写如下客户端测试代码：</p>
+<pre><code class="java">class Client {
+    public static void main(String args[]) {
+        ScoreOperation operation;  //针对抽象目标接口编程
+        operation = (ScoreOperation)XMLUtil.getBean(); //读取配置文件，反射生成对象
+        int scores[] = {84,76,50,69,90,91,88,96}; //定义成绩数组
+        int result[];
+        int score;
+
+        System.out.println(&quot;成绩排序结果：&quot;);
+        result = operation.sort(scores);
+
+        //遍历输出成绩
+        for(int i : scores) {
+            System.out.print(i + &quot;,&quot;);
+        }
+        System.out.println();
+
+        System.out.println(&quot;查找成绩90：&quot;);
+        score = operation.search(result,90);
+        if (score != -1) {
+            System.out.println(&quot;找到成绩90。&quot;);
+        }
+        else {
+            System.out.println(&quot;没有找到成绩90。&quot;);
+        }
+
+        System.out.println(&quot;查找成绩92：&quot;);
+        score = operation.search(result,92);
+        if (score != -1) {
+            System.out.println(&quot;找到成绩92。&quot;);
+        }
+        else {
+            System.out.println(&quot;没有找到成绩92。&quot;);
+        }
+    }
+}</code></pre>
+<p>编译并运行程序，输出结果如下：</p>
+<blockquote>
+<p>成绩排序结果：</p>
+<p>50,69,76,84,88,90,91,96,</p>
+<p>查找成绩90：</p>
+<p>找到成绩90。</p>
+<p>查找成绩92：</p>
+<p>没有找到成绩92。</p>
+</blockquote>
+<p>在本实例中使用了对象适配器模式，同时引入了配置文件，将适配器类的类名存储在配置文件中。如果需要使用其他排序算法类和查找算法类，可以增加一个新的适配器类，使用新的适配器来适配新的算法，原有代码无须修改。通过引入配置文件和反射机制，可以在不修改客户端代码的情况下使用新的适配器，无须修改源代码，符合“开闭原则”。</p>
+<h2 id="4、-类适配器"><a href="#4、-类适配器" class="headerlink" title="4、 类适配器"></a>4、 类适配器</h2><p>除了对象适配器模式之外，适配器模式还有一种形式，那就是类适配器模式，<strong>类适配器模式和对象适配器模式最大的区别在于适配器和适配者之间的关系不同，对象适配器模式中适配器和适配者之间是关联关系，而类适配器模式中适配器和适配者是继承关系，</strong>类适配器模式结构如图9-5所示：</p>
+<p><img src="/imag/Factory/1362099343_7447.jpg" alt="图 9-5 类适配器模式结构图"></p>
+<p>根据类适配器模式结构图，适配器类实现了抽象目标类接口Target，并继承了适配者类，在适配器类的request()方法中调用所继承的适配者类的specificRequest()方法，实现了适配。</p>
+<p>典型的类适配器代码如下所示：</p>
+<pre><code class="java">class Adapter extends Adaptee implements Target {
+    public void request() {
+        specificRequest();
+    }
+}</code></pre>
+<p>由于Java、C#等语言不支持多重类继承，因此类适配器的使用受到很多限制，例如如果目标抽象类Target不是接口，而是一个类，就无法使用类适配器；此外，如果适配者Adapter为最终(Final)类，也无法使用类适配器。在Java等面向对象编程语言中，大部分情况下我们使用的是对象适配器，类适配器较少使用。</p>
+<h2 id="5、-双向适配器"><a href="#5、-双向适配器" class="headerlink" title="5、 双向适配器"></a>5、 双向适配器</h2><p>在对象适配器的使用过程中，如果在适配器中同时包含对目标类和适配者类的引用，适配者可以通过它调用目标类中的方法，目标类也可以通过它调用适配者类中的方法，那么该适配器就是一个双向适配器，其结构示意图如图9-6所示：<img src="/imag/Factory/1362100282_9857.jpg" alt="图9-6 双向适配器结构示意图"></p>
+<p>双向适配器的实现较为复杂，其典型代码如下所示：</p>
+<pre><code class="java">class Adapter implements Target,Adaptee {
+    //同时维持对抽象目标类和适配者的引用
+    private Target target;
+    private Adaptee adaptee;
+
+    public Adapter(Target target) {
+        this.target = target;
+    }
+
+    public Adapter(Adaptee adaptee) {
+        this.adaptee = adaptee;
+    }
+
+    public void request() {
+        adaptee.specificRequest();
+    }
+
+    public void specificRequest() {
+        target.request();
+    }
+}</code></pre>
+<p>在实际开发中，我们很少使用双向适配器。</p>
+<p><strong>双向适配器 与中介者模式 有着何许的区别？感觉都是 封装对象之间的交互。</strong></p>
+<blockquote>
+<p>双向适配器中目标类和适配者之间可以理解为存在双向1对1的关系，而中介者中同事类之间存在多对多关系。两个模式的动机不一样，一个用于协调不兼容的类，一个用于封装复杂的类（对象）之间的交互。</p>
+</blockquote>
+<h2 id="6、-缺省适配器"><a href="#6、-缺省适配器" class="headerlink" title="6、 缺省适配器"></a>6、 缺省适配器</h2><p><strong>缺省适配器模式</strong>是适配器模式的一种变体，其应用也较为广泛。缺省适配器模式的定义如下：</p>
+<blockquote>
+<p>缺省适配器模式(Default Adapter Pattern)：当不需要实现一个接口所提供的所有方法时，可先设计一个抽象类实现该接口，并为接口中每个方法提供一个默认实现（空方法），那么该抽象类的子类可以选择性地覆盖父类的某些方法来实现需求，它适用于不想使用一个接口中的所有方法的情况，又称为单接口适配器模式。</p>
+</blockquote>
+<p> 缺省适配器模式结构如图9-7所示：</p>
+<p><img src="/imag/Factory/1362101177_9180.jpg" alt="图9-7  缺省适配器模式结构图"></p>
+<p>在缺省适配器模式中，包含如下三个角色：</p>
+<ul>
+<li><p>ServiceInterface（适配者接口）：它是一个接口，通常在该接口中声明了大量的方法。</p>
+</li>
+<li><p>AbstractServiceClass（缺省适配器类）：它是缺省适配器模式的核心类，使用空方法的形式实现了在ServiceInterface接口中声明的方法。通常将它定义为抽象类，因为对它进行实例化没有任何意义。</p>
+</li>
+<li><p>ConcreteServiceClass（具体业务类）：它是缺省适配器类的子类，在没有引入适配器之前，它需要实现适配者接口，因此需要实现在适配者接口中定义的所有方法，而对于一些无须使用的方法也不得不提供空实现。在有了缺省适配器之后，可以直接继承该适配器类，根据需要有选择性地覆盖在适配器类中定义的方法。</p>
+<p> 在JDK类库的事件处理包java.awt.event中广泛使用了缺省适配器模式，如WindowAdapter、KeyAdapter、MouseAdapter等。下面我们以处理窗口事件为例来进行说明：在Java语言中，一般我们可以使用两种方式来实现窗口事件处理类，一种是通过实现WindowListener接口，另一种是通过继承WindowAdapter适配器类。如果是使用第一种方式，直接实现WindowListener接口，事件处理类需要实现在该接口中定义的七个方法，而对于大部分需求可能只需要实现一两个方法，其他方法都无须实现，但由于语言特性我们不得不为其他方法也提供一个简单的实现（通常是空实现），这给使用带来了麻烦。而使用缺省适配器模式就可以很好地解决这一问题，在JDK中提供了一个适配器类WindowAdapter来实现WindowListener接口，该适配器类为接口中的每一个方法都提供了一个空实现，此时事件处理类可以继承WindowAdapter类，而无须再为接口中的每个方法都提供实现。如图9-8所示：</p>
+</li>
+</ul>
+<p><img src="/imag/Factory/1362101198_5374.jpg" alt="图9-8  WindowListener和WindowAdapter结构图"></p>
+<h2 id="7、-适配器模式总结"><a href="#7、-适配器模式总结" class="headerlink" title="7、 适配器模式总结"></a>7、 适配器模式总结</h2><p>适配器模式将现有接口转化为客户类所期望的接口，实现了对现有类的复用，它是一种使用频率非常高的设计模式，在软件开发中得以广泛应用，在Spring等开源框架、驱动程序设计（如JDBC中的数据库驱动程序）中也使用了适配器模式。</p>
+<ol>
+<li><p>主要优点</p>
+<p>无论是对象适配器模式还是类适配器模式都具有如下优点：</p>
+<p>(1) <strong>将目标类和适配者类解耦</strong>，通过引入一个适配器类来重用现有的适配者类，无须修改原有结构。</p>
+<p>(2) <strong>增加了类的透明性和复用性</strong>，将具体的业务实现过程封装在适配者类中，对于客户端类而言是透明的，而且提高了适配者的复用性，同一个适配者类可以在多个不同的系统中复用。</p>
+<p>(3) <strong>灵活性和扩展性都非常好</strong>，通过使用配置文件，可以很方便地更换适配器，也可以在不修改原有代码的基础上增加新的适配器类，完全符合“开闭原则”。</p>
+<blockquote>
+<p> 具体来说，类适配器模式还有如下优点：</p>
+<p>   由于适配器类是适配者类的子类，因此可以在适配器类中置换一些适配者的方法，使得适配器的灵活性更强。</p>
+<p>   对象适配器模式还有如下优点：</p>
+<p>   (1) 一个对象适配器可以把多个不同的适配者适配到同一个目标；</p>
+<p>   (2) 可以适配一个适配者的子类，由于适配器和适配者之间是关联关系，根据“里氏代换原则”，适配者的子类也可通过该适配器进行适配。</p>
+</blockquote>
+</li>
+</ol>
+<ol start="2">
+<li><p>主要缺点</p>
+<p>  <strong>类适配器模式</strong>的缺点如下：</p>
+<p>   (1) 对于Java、C#等不支持多重类继承的语言，一次最多只能适配一个适配者类，<strong>不能同时适配多个适配者</strong>；</p>
+<p>   (2) <strong>适配者类不能为最终类</strong>，如在Java中不能为final类，C#中不能为sealed类；</p>
+<p>   (3) 在Java、C#等语言中，<strong>类适配器模式中的目标抽象类只能为接口</strong>，不能为类，其使用有一定的局限性。</p>
+<p>   <strong>对象适配器模式</strong>的缺点如下：</p>
+<p>   与类适配器模式相比，<strong>要在适配器中置换适配者类的某些方法比较麻烦</strong>。如果一定要置换掉适配者类的一个或多个方法，可以先做一个适配者类的子类，将适配者类的方法置换掉，然后再把适配者类的子类当做真正的适配者进行适配，实现过程较为复杂。</p>
+</li>
+</ol>
+<ol start="3">
+<li>适用场景</li>
+</ol>
+<p>在以下情况下可以考虑使用适配器模式：</p>
+<p>​    (1) 系统需要使用一些现有的类，而这些类的接口（如方法名）不符合系统的需要，甚至没有这些类的源代码。</p>
+<p>​    (2) 想创建一个可以重复使用的类，用于与一些彼此之间没有太大关联的一些类，包括一些可能在将来引进的类一起工作。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>适配器模式----不兼容结构的协调----六</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">4.9k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-15, 21:42:31</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-16, 23:34:33</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="适配器模式----不兼容结构的协调----六">http://yoursite.com/2020/02/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019-2019 Ocean</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#动态代理','#面试','#算法','#类加载器','#反射','#垃圾','#缓存','#设计模式','#工厂模式','#设计原则','#线程池',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
