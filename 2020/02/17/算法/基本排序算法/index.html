@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>二叉堆 | 心无迷惘</title>
-  <meta name="keywords" content=" 算法 ">
-  <meta name="description" content="二叉堆 | 心无迷惘">
+  <title>算法/基本排序算法 | 心无迷惘</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="算法/基本排序算法 | 心无迷惘">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 心存迷惘 则无法继续前行😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
 <meta property="og:type" content="website">
@@ -489,36 +489,24 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-算法/二叉堆" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-算法/基本排序算法" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">二叉堆</h1>
+        <h1 class="article-title">算法/基本排序算法</h1>
     
     <div class="article-meta">
         
         
         
-        <span class="book">
-            
-                <a  data-rel="算法">算法</a>
-            
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a class="color3">算法</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-14 21:26:43'>2019-11-30 21:49</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-17 10:48:44'>2020-02-17 10:46</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:194</span>
+        <span>字数:47</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -537,7 +525,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-什么是二叉堆？"><span class="toc-text">1. 什么是二叉堆？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-二叉堆本质上是一种完全二叉树，它分为两个类型："><span class="toc-text">1.1 二叉堆本质上是一种完全二叉树，它分为两个类型：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-二叉堆的根节点叫做堆顶。"><span class="toc-text">1.2 二叉堆的根节点叫做堆顶。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-最大堆和最小堆的特点："><span class="toc-text">1.3 最大堆和最小堆的特点：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-堆的自我调整"><span class="toc-text">2. 堆的自我调整</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-插入节点"><span class="toc-text">2.1 插入节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-删除节点"><span class="toc-text">2.2 删除节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-构建二叉堆"><span class="toc-text">2.3 构建二叉堆</span></a></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -553,24 +541,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-什么是二叉堆？"><span class="toc-text">1. 什么是二叉堆？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-二叉堆本质上是一种完全二叉树，它分为两个类型："><span class="toc-text">1.1 二叉堆本质上是一种完全二叉树，它分为两个类型：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-二叉堆的根节点叫做堆顶。"><span class="toc-text">1.2 二叉堆的根节点叫做堆顶。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-最大堆和最小堆的特点："><span class="toc-text">1.3 最大堆和最小堆的特点：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-堆的自我调整"><span class="toc-text">2. 堆的自我调整</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-插入节点"><span class="toc-text">2.1 插入节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-删除节点"><span class="toc-text">2.2 删除节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-构建二叉堆"><span class="toc-text">2.3 构建二叉堆</span></a></li></ol></li></ol></div></p>
-<h4 id="1-什么是二叉堆？"><a href="#1-什么是二叉堆？" class="headerlink" title="1. 什么是二叉堆？"></a>1. 什么是二叉堆？</h4><h5 id="1-1-二叉堆本质上是一种完全二叉树，它分为两个类型："><a href="#1-1-二叉堆本质上是一种完全二叉树，它分为两个类型：" class="headerlink" title="1.1 二叉堆本质上是一种完全二叉树，它分为两个类型："></a>1.1 二叉堆本质上是一种完全二叉树，它分为两个类型：</h5><ol>
-<li><p>最大堆</p>
-<p>最大堆任何一个父节点的值，都<strong>大于等于</strong>它左右孩子节点的值。</p>
-</li>
-<li><p>最小堆</p>
-<p>最小堆任何一个父节点的值，都<strong>小于等于</strong>它左右孩子节点的值。</p>
-</li>
-</ol>
-<h5 id="1-2-二叉堆的根节点叫做堆顶。"><a href="#1-2-二叉堆的根节点叫做堆顶。" class="headerlink" title="1.2 二叉堆的根节点叫做堆顶。"></a>1.2 二叉堆的根节点叫做<strong>堆顶</strong>。</h5><h5 id="1-3-最大堆和最小堆的特点："><a href="#1-3-最大堆和最小堆的特点：" class="headerlink" title="1.3 最大堆和最小堆的特点："></a>1.3 最大堆和最小堆的特点：</h5><blockquote>
-<p>最大堆的堆顶是整个堆中的<strong>最大元素</strong>；</p>
-</blockquote>
-<blockquote>
-<p>最小堆的堆顶是整个堆中的<strong>最小元素</strong>。</p>
-</blockquote>
-<h4 id="2-堆的自我调整"><a href="#2-堆的自我调整" class="headerlink" title="2. 堆的自我调整"></a>2. 堆的自我调整</h4><p>对于二叉堆，如下有几种操作，都是基于堆的自我调整</p>
-<h5 id="2-1-插入节点"><a href="#2-1-插入节点" class="headerlink" title="2.1 插入节点"></a>2.1 插入节点</h5><pre><code class="java"></code></pre>
-<h5 id="2-2-删除节点"><a href="#2-2-删除节点" class="headerlink" title="2.2 删除节点"></a>2.2 删除节点</h5><h5 id="2-3-构建二叉堆"><a href="#2-3-构建二叉堆" class="headerlink" title="2.3 构建二叉堆"></a>2.3 构建二叉堆</h5>
+        <p>递归：</p>
+<p>青蛙跳台阶。f(n) = f(n -1) + f(n -2)      跳上台阶n的方式 = 第一次跳一下 + 第一次跳两下</p>
+<p>快速排序：</p>
+<p>归并排序：</p>
+<p>冒泡排序：</p>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
     </div>
@@ -583,12 +559,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>二叉堆</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">276</span></p>
+    <p><span class="copy-title">文章标题:</span>算法/基本排序算法</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">47</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-11-30, 21:49:13</p>
-    <p><span class="copy-title">最后更新:</span>2020-02-14, 21:26:43</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/30/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E5%A0%86/" title="二叉堆">http://yoursite.com/2019/11/30/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E5%A0%86/</a>
+    <p><span class="copy-title">发布时间:</span>2020-02-17, 10:46:52</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-17, 10:48:44</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/17/%E7%AE%97%E6%B3%95/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" title="算法/基本排序算法">http://yoursite.com/2020/02/17/%E7%AE%97%E6%B3%95/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
