@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>面试题03-数组中重复的数字 | 心无迷惘</title>
-  <meta name="keywords" content=" 算法 ">
-  <meta name="description" content="面试题03-数组中重复的数字 | 心无迷惘">
+  <title>Spring AOP 简单流程与使用 | 心无迷惘</title>
+  <meta name="keywords" content=" AOP ">
+  <meta name="description" content="Spring AOP 简单流程与使用 | 心无迷惘">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="11月的最后一天，即时结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 心存迷惘 则无法继续前行😃😃😃😃😃😃😃😃😃😃😃😃🧐🧐🧐🧐🧐🧐🧐🧐🧐💪💪💪💪💪💪">
 <meta property="og:type" content="website">
@@ -561,9 +561,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-算法/面试题03-数组中重复的数字" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Spring/AOP" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">面试题03-数组中重复的数字</h1>
+        <h1 class="article-title">Spring AOP 简单流程与使用</h1>
     
     <div class="article-meta">
         
@@ -571,26 +571,26 @@
         
         <span class="book">
             
-                <a  data-rel="算法">算法</a>
+                <a  data-rel="Spring">Spring</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color3">算法</a>
+            <a class="color4">AOP</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-14 21:26:23'>2020-02-12 10:22</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-20 15:57:04'>2020-02-20 15:41</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:343</span>
+        <span>字数:441</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -609,7 +609,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目"><span class="toc-text">题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解法一：BITmap"><span class="toc-text">解法一：BITmap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解法二：桶思想-抽屉原理"><span class="toc-text">解法二：桶思想+抽屉原理</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、AOP-的设计"><span class="toc-text">一、AOP 的设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代理的创建（按步骤）："><span class="toc-text">代理的创建（按步骤）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代理的调用"><span class="toc-text">代理的调用</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -625,52 +625,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>找出数组中重复的数字。</p>
-<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
-<p><strong>示例 1：</strong></p>
-<pre><code>输入：
-[2, 3, 1, 0, 2, 5, 3]
-输出：2 或 3 </code></pre><p><strong>限制：</strong></p>
-<pre><code>2 &lt;= n &lt;= 100000</code></pre><h2 id="解法一：BITmap"><a href="#解法一：BITmap" class="headerlink" title="解法一：BITmap"></a>解法一：BITmap</h2><pre><code class="java">class Solution {
-    public int findRepeatNumber(int[] nums) {
-        byte[] a = new byte[nums.length / 8 + 1];
-        for (int num : nums) {
-            byte aNum = a[num / 8];
-            if ((aNum &amp; (1 &lt;&lt; (num &amp; 7))) != 0) {
-                return num;
-            } else {
-                a[num / 8] |= (1 &lt;&lt; (num &amp; 7));
-            }
-        }
-        return 0;
-    }
-}</code></pre>
-<h2 id="解法二：桶思想-抽屉原理"><a href="#解法二：桶思想-抽屉原理" class="headerlink" title="解法二：桶思想+抽屉原理"></a>解法二：桶思想+抽屉原理</h2><pre><code class="java">public class Solution {
-
-    public int findRepeatNumber(int[] nums) {
-        int len = nums.length;
-
-        for (int i = 0; i &lt; len; i++) {
-            // nums[i] 应该放在下标为 i 的位置上 。会一直进行交换，那么相当于进行了一次小排序
-            while (nums[i] != i) {
-
-                if (nums[i] == nums[nums[i]]) {
-                    return nums[i];
-                }
-                swap(nums, i, nums[i]);
-            }
-        }
-        throw new IllegalArgumentException(&quot;数组中不存在重复数字！&quot;);
-    }
-
-    private void swap(int[] nums, int index1, int index2) {
-        int temp = nums[index1];
-        nums[index1] = nums[index2];
-        nums[index2] = temp;
-    }
-}
-</code></pre>
-<p>作者：liweiwei1419<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/tong-de-si-xiang-by-liweiwei1419/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/tong-de-si-xiang-by-liweiwei1419/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+        <h2 id="一、AOP-的设计"><a href="#一、AOP-的设计" class="headerlink" title="一、AOP 的设计"></a>一、AOP 的设计</h2><ol>
+<li>每个 Bean 都会被 JDK 或者 Cglib 代理。取决于是否有接口。</li>
+<li>每个 Bean 会有多个“方法拦截器”。注意：拦截器分为两层，外层由 Spring 内核控制流程，内层拦截器是用户设置，也就是 AOP。</li>
+<li>当代理方法被调用时，先经过外层拦截器，外层拦截器根据方法的各种信息判断该方法应该执行哪些“内层拦截器”。内层拦截器的设计就是职责连的设计。</li>
+</ol>
+<h3 id="代理的创建（按步骤）："><a href="#代理的创建（按步骤）：" class="headerlink" title="代理的创建（按步骤）："></a>代理的创建（按步骤）：</h3><ul>
+<li>首先，需要创建代理工厂，代理工厂需要 3 个重要的信息：拦截器数组，目标对象接口数组，目标对象。</li>
+<li>创建代理工厂时，默认会在拦截器数组尾部再增加一个默认拦截器 —— 用于最终的调用目标方法。</li>
+<li>当调用 getProxy 方法的时候，会根据接口数量大余 0 条件返回一个代理对象（JDK or Cglib）。</li>
+<li>注意：创建代理对象时，同时会创建一个外层拦截器，这个拦截器就是 Spring 内核的拦截器。用于控制整个 AOP 的流程。</li>
+</ul>
+<h3 id="代理的调用"><a href="#代理的调用" class="headerlink" title="代理的调用"></a>代理的调用</h3><ul>
+<li>当对代理对象进行调用时，就会触发外层拦截器。</li>
+<li>外层拦截器根据代理配置信息，创建内层拦截器链。创建的过程中，会根据表达式判断当前拦截是否匹配这个拦截器。而这个拦截器链设计模式就是职责链模式。</li>
+<li>当整个链条执行到最后时，就会触发创建代理时那个尾部的默认拦截器，从而调用目标方法。最后返回。</li>
+</ul>
+<p>UML 图：</p>
+<p><img src="/imag/Factory/4236553-52cc7fe83aba8a2d.png" alt="UML图"></p>
+<p>关于调用过程，流程图：</p>
+<p><img src="/imag/Factory/4236553-115860c16ceed67b.png" alt="流程图"></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
@@ -684,12 +658,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>面试题03-数组中重复的数字</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">343</span></p>
+    <p><span class="copy-title">文章标题:</span>Spring AOP 简单流程与使用</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">441</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-02-12, 10:22:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-02-14, 21:26:23</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/12/%E7%AE%97%E6%B3%95/%E9%9D%A2%E8%AF%95%E9%A2%9803-%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97/" title="面试题03-数组中重复的数字">http://yoursite.com/2020/02/12/%E7%AE%97%E6%B3%95/%E9%9D%A2%E8%AF%95%E9%A2%9803-%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97/</a>
+    <p><span class="copy-title">发布时间:</span>2020-02-20, 15:41:31</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-20, 15:57:04</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/20/Spring/AOP/" title="Spring AOP 简单流程与使用">http://yoursite.com/2020/02/20/Spring/AOP/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
