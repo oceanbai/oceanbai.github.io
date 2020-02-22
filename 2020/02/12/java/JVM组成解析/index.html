@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JVM组成解析 | 心无迷惘</title>
+  <meta name="keywords" content=" jvm ">
+  <meta name="description" content="JVM组成解析 | 心无迷惘">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="11月的最后一天，既是结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 心存迷惘 则无法继续前行">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;about&#x2F;index.html">
+<meta property="og:site_name" content="心无迷惘">
+<meta property="og:description" content="11月的最后一天，既是结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 心存迷惘 则无法继续前行">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-21T03:41:40.400Z">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Ocean Bai</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/oceanbai" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(35)</small></div></li>
+    
+        
+            
+            <li><div data-rel="算法">算法<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="JVM">JVM<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="java基础">java基础<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="网络知识">网络知识<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Spring">Spring<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="面试">面试<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="dubbo">dubbo<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计原则">设计原则<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="JDK">JDK<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="35">
+<input type="hidden" id="yelog_site_word_count" value="122.5k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color3">缓存</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">jvm</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">垃圾</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">三次握手</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">四次挥手</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">类加载器</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AOP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">工厂模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">反射</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">总结面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPI</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">动态代理</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">设计原则</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">线程池</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">ThreadLocal</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="网络知识 "
+           href="/2020/02/22/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8Band%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/"
+           data-tag="三次握手,四次挥手"
+           data-author="" >
+            <span class="post-title" title="三次握手and四次挥手">三次握手and四次挥手</span>
+            <span class="post-date" title="2020-02-22 16:41:31">2020/02/22</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/20/Spring/AOP/"
+           data-tag="AOP"
+           data-author="" >
+            <span class="post-title" title="Spring AOP 简单流程与使用">Spring AOP 简单流程与使用</span>
+            <span class="post-date" title="2020-02-20 15:41:31">2020/02/20</span>
+        </a>
+        
+        <a  class="JDK "
+           href="/2020/02/19/java/JDK/CGlib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"
+           data-tag="动态代理"
+           data-author="" >
+            <span class="post-title" title="CGlib动态代理源码">CGlib动态代理源码</span>
+            <span class="post-date" title="2020-02-19 16:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="JDK "
+           href="/2020/02/19/java/JDK/JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%BA%90%E7%A0%81/"
+           data-tag="动态代理"
+           data-author="" >
+            <span class="post-title" title="JDK动态代理源码">JDK动态代理源码</span>
+            <span class="post-date" title="2020-02-19 16:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="JDK "
+           href="/2020/02/19/java/JDK/ThreadLocal%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"
+           data-tag="ThreadLocal"
+           data-author="" >
+            <span class="post-title" title="ThreadLocal源码解析">ThreadLocal源码解析</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/02/18/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E6%8A%80%E6%9C%AF%E6%A0%88/"
+           data-tag="面试,总结面试"
+           data-author="" >
+            <span class="post-title" title="面试技术栈">面试技术栈</span>
+            <span class="post-date" title="2020-02-18 16:41:32">2020/02/18</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/17/dubbo/dubboSPI/"
+           data-tag="SPI"
+           data-author="" >
+            <span class="post-title" title="dubboSPI详解">dubboSPI详解</span>
+            <span class="post-date" title="2020-02-17 14:41:31">2020/02/17</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/02/17/%E9%9D%A2%E8%AF%95/%E7%BE%8E%E5%9B%A2%E7%A0%94%E7%A9%B6%E7%94%9F%E5%AE%9E%E4%B9%A0%E7%94%9F/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="美团研究生实习生">美团研究生实习生</span>
+            <span class="post-date" title="2020-02-17 11:41:31">2020/02/17</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/02/17/%E7%AE%97%E6%B3%95/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="算法/基本排序算法">算法/基本排序算法</span>
+            <span class="post-date" title="2020-02-17 10:46:52">2020/02/17</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="桥接模式----处理多维变化----五">桥接模式----处理多维变化----五</span>
+            <span class="post-date" title="2020-02-15 21:42:31">2020/02/15</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="适配器模式----不兼容结构的协调----六">适配器模式----不兼容结构的协调----六</span>
+            <span class="post-date" title="2020-02-15 21:42:31">2020/02/15</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/02/15/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="面试题">面试题</span>
+            <span class="post-date" title="2020-02-15 21:41:32">2020/02/15</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="模板方法模式--------四">模板方法模式--------四</span>
+            <span class="post-date" title="2020-02-14 16:38:31">2020/02/14</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="抽象工厂模式--------三">抽象工厂模式--------三</span>
+            <span class="post-date" title="2020-02-13 21:41:31">2020/02/13</span>
+        </a>
+        
+        <a  class="JVM "
+           href="/2020/02/12/java/JVM%E7%BB%84%E6%88%90%E8%A7%A3%E6%9E%90/"
+           data-tag="jvm"
+           data-author="" >
+            <span class="post-title" title="JVM组成解析">JVM组成解析</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8(ClassLoader)/"
+           data-tag="类加载器"
+           data-author="" >
+            <span class="post-title" title="深入理解java类加载器(ClassLoader)">深入理解java类加载器(ClassLoader)</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF(Class%E5%AF%B9%E8%B1%A1)%E4%B8%8E%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"
+           data-tag="反射"
+           data-author="" >
+            <span class="post-title" title="深入理解Java类型信息(Class对象)与反射机制">深入理解Java类型信息(Class对象)与反射机制</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95------FIFO%20%E3%80%81LRU%E3%80%81LFU/"
+           data-tag="缓存"
+           data-author="" >
+            <span class="post-title" title="缓存算法（FIFO、LRU、LFU）">缓存算法（FIFO、LRU、LFU）</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%96%87%E6%95%B0/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="回文数">回文数</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E9%9D%A2%E8%AF%95%E9%A2%9803-%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="面试题03-数组中重复的数字">面试题03-数组中重复的数字</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="工厂方法模式--------二">工厂方法模式--------二</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/11/java/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"
+           data-tag="垃圾"
+           data-author="" >
+            <span class="post-title" title="垃圾回收">垃圾回收</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="简单工厂模式--------一">简单工厂模式--------一</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/11/dubbo/dubbo%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="dubbo面试题">dubbo面试题</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/11/dubbo/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20RPC%20%E4%B9%8B%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%AF%87/"
+           data-tag="动态代理"
+           data-author="" >
+            <span class="post-title" title="深入理解 RPC 之动态代理篇">深入理解 RPC 之动态代理篇</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="JDK "
+           href="/2020/02/11/java/JDK/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%A7%A3%E6%9E%90/"
+           data-tag="线程池"
+           data-author="" >
+            <span class="post-title" title="线程池源码解析">线程池源码解析</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2019/11/30/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E5%A0%86/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="二叉堆">二叉堆</span>
+            <span class="post-date" title="2019-11-30 21:49:13">2019/11/30</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2019/11/30/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E8%A6%81%E6%B1%82/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="别人面试要求">别人面试要求</span>
+            <span class="post-date" title="2019-11-30 21:41:31">2019/11/30</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第一原则:开闭原则">第一原则:开闭原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第二原则:依赖倒置原则">第二原则:依赖倒置原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第四原则:接口隔离原则">第四原则:接口隔离原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第三原则:单一职责原则">第三原则:单一职责原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第七原则:合成复用原则">第七原则:合成复用原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第六原则:里氏替换原则">第六原则:里氏替换原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第五原则:迪米特法则">第五原则:迪米特法则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-java/JVM组成解析" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">JVM组成解析</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="JVM">JVM</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">jvm</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-22 17:02:26'>2020-02-12 21:41</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-java类的加载机制"><span class="toc-text">1. java类的加载机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#阶段说明"><span class="toc-text">阶段说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-加载"><span class="toc-text">1. 加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-验证"><span class="toc-text">2. 验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-准备"><span class="toc-text">3. 准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-解析阶段"><span class="toc-text">4. 解析阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-类初始化阶段"><span class="toc-text">5. 类初始化阶段</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#必须执行初始化"><span class="toc-text">必须执行初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意以下几种情况不会执行类初始化"><span class="toc-text">注意以下几种情况不会执行类初始化:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-JVM内存结构"><span class="toc-text">2. JVM内存结构</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-java类的加载机制"><a href="#1-java类的加载机制" class="headerlink" title="1. java类的加载机制"></a>1. java类的加载机制</h2><blockquote>
+<p>类从被加载到虚拟机内存中开始，到卸载出内存为止，它的整个生命周期包括:<code>加载 (Loading)</code>、<code>验证(Verification)</code>、<code>准备(Preparation</code>)、<code>解析(Resolution)</code>、<code>初始化 (Initialization)</code>、<code>使用(Using)</code>和<code>卸载(Unloading)</code><strong>7 个阶段</strong>。其中验证、准备、解析 3 个部分统称为<strong>连接(Linking)</strong></p>
+</blockquote>
+<p><img src="/image/javabases/classLoading.jpg" alt="classLoading"></p>
+<h3 id="阶段说明"><a href="#阶段说明" class="headerlink" title="阶段说明"></a>阶段说明</h3><h4 id="1-加载"><a href="#1-加载" class="headerlink" title="1. 加载"></a>1. 加载</h4><p>虚拟机需要完成以下 3 件事情: </p>
+<ol>
+<li>通过一个类的全限定名来获取定义此类的二进制字节流。 </li>
+<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构。</li>
+<li>在内存中生成一个代表这个类的<code>java.lang.Class</code>对象，作为方法区这个类的各种数据的访问入口。</li>
+</ol>
+<h4 id="2-验证"><a href="#2-验证" class="headerlink" title="2. 验证"></a>2. 验证</h4><p>是连接阶段的第一步，这一阶段的目的是为了确保<code>Class</code>文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全。</p>
+<blockquote>
+<p>但从整体上看，验证阶段大致上会完成 下面 4 个阶段的检验动作:</p>
+<ul>
+<li>文件格式验证</li>
+<li>元数据验证</li>
+<li>字节码验证</li>
+<li>符号引用验证。</li>
+</ul>
+</blockquote>
+<h4 id="3-准备"><a href="#3-准备" class="headerlink" title="3. 准备"></a>3. 准备</h4><p>是正式为类变量分配内存并设置类变量初始值的阶段，这些变量所使用的内存都将在<code>方法区</code>中进行分配。</p>
+<p>这个阶段中有两个容易产生混淆的概念需要强调一下，首先，这时候进行内存分配的仅包括类变量(被<code>static</code>修饰的变量)，而不包括实例变量，实例变量将会在对象实例化时随着对象一起分配在 Java 堆中。其次，这里所说的初始值“通常情况”下是数据类型的零值。</p>
+<p>假设一个类变量的定义为:<code>public static int value=123;</code>那变量 value 在准备阶段过后的初始值为 0 而不是 123，因为这时候尚未开始执行任何 Java 方法，而把 value 赋值为 123 的 putstatic 指令是程序被编译后，存放于类构造器<clinit> ()方法之中，所以把 value 赋值为 123 的动作将在初始化阶段才会执行。</p>
+<p>列出了 Java 中所有基本数据类型的零值。</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">零值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">int</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td align="center">0L</td>
+</tr>
+<tr>
+<td align="center">short</td>
+<td align="center">(short)0</td>
+</tr>
+<tr>
+<td align="center">char</td>
+<td align="center">‘\u0000’</td>
+</tr>
+<tr>
+<td align="center">byte</td>
+<td align="center">(byte)0</td>
+</tr>
+<tr>
+<td align="center">boolean</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="center">0.0f</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">0.0d</td>
+</tr>
+<tr>
+<td align="center">reference</td>
+<td align="center">null</td>
+</tr>
+</tbody></table>
+<p> 假设上面类变量 value 的定义变为:<code>public static final int value=123;</code><br> 编译时 Javac 将会为 value 生成 ConstantValue 属性，在准备阶段虚拟机就会根据 ConstantValue 的设置将 value 赋值为 123。</p>
+<h4 id="4-解析阶段"><a href="#4-解析阶段" class="headerlink" title="4. 解析阶段"></a>4. 解析阶段</h4><p> 是虚拟机将常量池内的<strong>符号引用</strong>替换为<strong>直接引用</strong>的过程.</p>
+<p>符号引用就是 class 文件中 的:</p>
+<ol>
+<li><p>CONSTANT_Class_info</p>
+</li>
+<li><p>CONSTANT_Field_info</p>
+</li>
+<li><p>CONSTANT_Method_info</p>
+</li>
+</ol>
+<p>等类型的常量。</p>
+<p><strong>符号引用</strong></p>
+<p>符号引用与虚拟机实现的布局无关，引用的目标并不一定要已经加载到内存中。各种虚拟机实现的内存布局可以各不相同，但是它们能接受的符号引用必须是一致的，因为符号引用的字面量形式明确定义在 Java 虚拟机规范的 Class 文件格式中。</p>
+<p><strong>直接引用</strong></p>
+<p>直接引用可以是指向目标的指针，相对偏移量或是一个能间接定位到目标的句柄。如果有 了直接引用，那引用的目标必定已经在内存中存在。</p>
+<h4 id="5-类初始化阶段"><a href="#5-类初始化阶段" class="headerlink" title="5. 类初始化阶段"></a>5. 类初始化阶段</h4><p>是类加载过程的最后一步，前面的类加载过程中，除了在加载阶段用户应用程序可以通过自定义类加载器参与之外，其余动作完全由虚拟机主导和控制。到了初始化阶段，才真正开始执行类中定义的 Java 程序代码。</p>
+<p>在准备阶段，变量已经赋过一次系统要求的初始值，而在初始化阶段，则根据程序员通过程序制定的主观计划去初始化类变量和其他资源，或者可以从另外一个角度来表达:<strong>初始化阶段是执行类构造器<clinit>()方法的过程</strong>。</p>
+<p><clinit>() 方法是由编译器自动收集类中的所有类变量的赋值动作和静态语句块(static{}块)中的语句合并产生的，编译器收集的顺序是由语句在源文件中出现的顺序所决定的。 <clinit>()方法对于类或接口来说并不是必需的，如果一个类中没有静态语句块，也没有对变量的赋值操作，那么编译器可以不为这个类生成<clinit>()方法。 虚拟机会保证一个类的<clinit>()方法在多线程环境中被正确地加锁、同步，如果多个线程同时去初始化一个类，那么只会有一个线程去执行这个类的<clinit>()方法，其他线程都需要阻塞等待，直到活动线程执行<clinit>()方法完毕。<strong>如果在一个类的<clinit>() 方法中有耗时很长的操作，就可能造成多个进程阻塞。</strong></p>
+<h3 id="必须执行初始化"><a href="#必须执行初始化" class="headerlink" title="必须执行初始化"></a>必须执行初始化</h3><p>于初始化阶段，虚拟机规范则是严格规定了有且只有 5 种情况必须立即对类进行“初始化” (而加载、验证、准备自然需要在此之前开始):</p>
+<p>1)遇到 new、getstatic、putstatic 或 invokestatic 这 4 条字节码指令时，如果类没有进行 过初始化，则需要先触发其初始化。生成这 4 条指令的最常见的 Java 代码场景是:使用 new关键字实例化对象的时候、读取或设置一个类的静态字段(被 final 修饰、已在编译期把结果放入常量池的静态字段除外)的时候，以及调用一个类的静态方法的时候。<br> 2)使用 java.lang.reflect 包的方法对类进行反射调用的时候，如果类没有进行过初始化， 则需要先触发其初始化。 3)当初始化一个类的时候，如果发现其父类还没有进行过初始化，则需要先触发其父类的 初始化。</p>
+<p>4)当虚拟机启动时，用户需要指定一个要执行的主类(包含 main()方法的那个类)，虚 拟机会先初始化这个主类。<br> 5)当使用 JDK 1.7 的动态语言支持时，如果一个 java.lang.invoke.MethodHandle 实例最 后的解析结果 REF_getStatic、REF_putStatic、REF_invokeStatic 的方法句柄，并且这个 方法句柄所对应的类没有进行过初始化，则需要先触发其初始化。</p>
+<p>注意: 对于静态字段，只有直接定义这个字段的类才会被初始化，因此通过其子类来引用父类中定 义的静态字段，只会触发父类的初始化而不会触发子类的初始化。<br> 常量 HELLOWORLD，但其实在编译阶段通过常量传播优化，已经将此常量的值“hello world” 存储到了 NotInitialization 类的常量池中，以后 NotInitialization 对常量 ConstClass.HELLOWORLD 的引用实际都被转化为 NotInitialization 类对自身常量池的引用 了。<br> 也就是说，实际上 NotInitialization 的 Class 文件之中并没有 ConstClass 类的符号引用入口， 这两个类在编译成 Class 之后就不存在任何联系了。</p>
+<h3 id="注意以下几种情况不会执行类初始化"><a href="#注意以下几种情况不会执行类初始化" class="headerlink" title="注意以下几种情况不会执行类初始化:"></a>注意以下几种情况不会执行类初始化:</h3><ol>
+<li>通过子类引用父类的静态字段，只会触发父类的初始化，而不会触发子类的初始化。</li>
+<li>定义对象数组，不会触发该类的初始化。</li>
+<li>常量在编译期间会存入调用类的常量池中，本质上并没有直接引用定义常量的类，不会触<br>发定义常量所在的类。</li>
+<li>通过类名获取 Class 对象，不会触发类的初始化。</li>
+<li>通过 Class.forName 加载指定类时，如果指定参数 initialize 为 false 时，也不会触发类初<br>始化，其实这个参数是告诉虚拟机，是否要对类进行初始化。</li>
+<li>通过 ClassLoader 默认的 loadClass 方法，也不会触发初始化动作。</li>
+</ol>
+<h2 id="2-JVM内存结构"><a href="#2-JVM内存结构" class="headerlink" title="2. JVM内存结构"></a>2. JVM内存结构</h2>
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>JVM组成解析</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-12, 21:41:31</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-22, 17:02:26</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/12/java/JVM%E7%BB%84%E6%88%90%E8%A7%A3%E6%9E%90/" title="JVM组成解析">http://yoursite.com/2020/02/12/java/JVM%E7%BB%84%E6%88%90%E8%A7%A3%E6%9E%90/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019-2020 Ocean</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#缓存','#jvm','#垃圾','#算法','#三次握手','#四次挥手','#类加载器','#AOP','#设计模式','#工厂模式','#面试','#反射','#总结面试','#SPI','#动态代理','#设计原则','#线程池','#ThreadLocal',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
