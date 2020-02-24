@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>深入浅出分析HashMap | 心无迷惘</title>
+  <meta name="keywords" content=" java , hashmap ">
+  <meta name="description" content="深入浅出分析HashMap | 心无迷惘">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="11月的最后一天，既是结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 心存迷惘 则无法继续前行">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;about&#x2F;index.html">
+<meta property="og:site_name" content="心无迷惘">
+<meta property="og:description" content="11月的最后一天，既是结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 心存迷惘 则无法继续前行">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-21T03:41:40.400Z">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Ocean Bai</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/oceanbai" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(51)</small></div></li>
+    
+        
+            
+            <li><div data-rel="Spring">Spring<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="JVM">JVM<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="java基础">java基础<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Mysql">Mysql<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="算法">算法<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计原则">设计原则<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="dubbo">dubbo<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="面试">面试<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="网络知识">网络知识<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="JDK">JDK<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="java并发">java并发<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="51">
+<input type="hidden" id="yelog_site_word_count" value="158.3k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AOP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">IOC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">jvm</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">类加载器</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">日志系统</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">事务</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">垃圾</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">反射</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">缓存</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">设计原则</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">工厂模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPI</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">总结面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">动态代理</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">三次握手</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">四次挥手</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">指令</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">ThreadLocal</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">arrayList</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">hashmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">线程池</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">内存模型</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class=""
+           href="/2020/02/23/java/%E5%B9%B6%E5%8F%91/Java%20Volatile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="java/并发/Java Volatile">java/并发/Java Volatile</span>
+            <span class="post-date" title="2020-02-23 11:41:41">2020/02/23</span>
+        </a>
+        
+        <a  class="java并发 "
+           href="/2020/02/23/java/%E5%B9%B6%E5%8F%91/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/"
+           data-tag="java,内存模型"
+           data-author="" >
+            <span class="post-title" title="java内存模型">java内存模型</span>
+            <span class="post-date" title="2020-02-23 10:41:31">2020/02/23</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/02/22/java/java%E5%BC%95%E7%94%A8/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="java/java引用">java/java引用</span>
+            <span class="post-date" title="2020-02-22 20:26:03">2020/02/22</span>
+        </a>
+        
+        <a  class="网络知识 "
+           href="/2020/02/22/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8Band%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/"
+           data-tag="三次握手,四次挥手"
+           data-author="" >
+            <span class="post-title" title="三次握手and四次挥手">三次握手and四次挥手</span>
+            <span class="post-date" title="2020-02-22 16:41:31">2020/02/22</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/20/Spring/AOP/"
+           data-tag="AOP"
+           data-author="" >
+            <span class="post-title" title="Spring AOP 简单流程与使用">Spring AOP 简单流程与使用</span>
+            <span class="post-date" title="2020-02-20 15:41:31">2020/02/20</span>
+        </a>
+        
+        <a  class="JDK "
+           href="/2020/02/19/java/JDK/CGlib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"
+           data-tag="动态代理"
+           data-author="" >
+            <span class="post-title" title="CGlib动态代理源码">CGlib动态代理源码</span>
+            <span class="post-date" title="2020-02-19 16:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="JDK "
+           href="/2020/02/19/java/JDK/JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%BA%90%E7%A0%81/"
+           data-tag="动态代理"
+           data-author="" >
+            <span class="post-title" title="JDK动态代理源码">JDK动态代理源码</span>
+            <span class="post-date" title="2020-02-19 16:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/19/Spring/IoC%20%E4%B9%8B%E5%8A%A0%E8%BD%BD%20BeanDefinition/"
+           data-tag="IOC"
+           data-author="" >
+            <span class="post-title" title="IoC 之加载 BeanDefinition">IoC 之加载 BeanDefinition</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/19/Spring/IoC%20%E4%B9%8B%E5%BC%80%E5%90%AF%20Bean%20%E7%9A%84%E5%8A%A0%E8%BD%BD/"
+           data-tag="IOC"
+           data-author="" >
+            <span class="post-title" title="IoC 之开启 Bean 的加载">IoC 之开启 Bean 的加载</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/19/Spring/IoC%20%E4%B9%8B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Spring%20IoC/"
+           data-tag="IOC"
+           data-author="" >
+            <span class="post-title" title="IoC 之深入理解 Spring IoC">IoC 之深入理解 Spring IoC</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/19/Spring/IoC%20%E4%B9%8B%E8%8E%B7%E5%8F%96%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%9E%8B/"
+           data-tag="IOC"
+           data-author="" >
+            <span class="post-title" title="IoC 之获取验证模型">IoC 之获取验证模型</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/19/Spring/Spring%20AOP%20%E4%B9%8B%20%E7%90%86%E8%AE%BA%E7%AF%87/"
+           data-tag="AOP"
+           data-author="" >
+            <span class="post-title" title="Spring AOP 之 理论篇">Spring AOP 之 理论篇</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/19/Spring/%E9%9D%A2%E8%AF%95%E9%97%AE%E7%83%82%E7%9A%84%20Spring%20IOC%20%E8%BF%87%E7%A8%8B/"
+           data-tag="IOC"
+           data-author="" >
+            <span class="post-title" title="面试问烂的 Spring IOC 过程">面试问烂的 Spring IOC 过程</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="JDK "
+           href="/2020/02/19/java/JDK/ThreadLocal%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"
+           data-tag="ThreadLocal"
+           data-author="" >
+            <span class="post-title" title="ThreadLocal源码解析">ThreadLocal源码解析</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/02/18/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E6%8A%80%E6%9C%AF%E6%A0%88/"
+           data-tag="面试,总结面试"
+           data-author="" >
+            <span class="post-title" title="面试技术栈">面试技术栈</span>
+            <span class="post-date" title="2020-02-18 16:41:32">2020/02/18</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/17/dubbo/dubboSPI/"
+           data-tag="SPI"
+           data-author="" >
+            <span class="post-title" title="dubboSPI详解">dubboSPI详解</span>
+            <span class="post-date" title="2020-02-17 14:41:31">2020/02/17</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/02/17/%E9%9D%A2%E8%AF%95/%E7%BE%8E%E5%9B%A2%E7%A0%94%E7%A9%B6%E7%94%9F%E5%AE%9E%E4%B9%A0%E7%94%9F/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="美团研究生实习生">美团研究生实习生</span>
+            <span class="post-date" title="2020-02-17 11:41:31">2020/02/17</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/02/17/%E7%AE%97%E6%B3%95/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="算法/基本排序算法">算法/基本排序算法</span>
+            <span class="post-date" title="2020-02-17 10:46:52">2020/02/17</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="桥接模式----处理多维变化----五">桥接模式----处理多维变化----五</span>
+            <span class="post-date" title="2020-02-15 21:42:31">2020/02/15</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="适配器模式----不兼容结构的协调----六">适配器模式----不兼容结构的协调----六</span>
+            <span class="post-date" title="2020-02-15 21:42:31">2020/02/15</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/02/15/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="面试题">面试题</span>
+            <span class="post-date" title="2020-02-15 21:41:32">2020/02/15</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="模板方法模式--------四">模板方法模式--------四</span>
+            <span class="post-date" title="2020-02-14 16:38:31">2020/02/14</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="抽象工厂模式--------三">抽象工厂模式--------三</span>
+            <span class="post-date" title="2020-02-13 21:41:31">2020/02/13</span>
+        </a>
+        
+        <a  class="JVM "
+           href="/2020/02/12/java/JVM%E7%BB%84%E6%88%90%E8%A7%A3%E6%9E%90/"
+           data-tag="jvm"
+           data-author="" >
+            <span class="post-title" title="JVM组成解析">JVM组成解析</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8(ClassLoader)/"
+           data-tag="类加载器"
+           data-author="" >
+            <span class="post-title" title="深入理解java类加载器(ClassLoader)">深入理解java类加载器(ClassLoader)</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF(Class%E5%AF%B9%E8%B1%A1)%E4%B8%8E%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"
+           data-tag="反射"
+           data-author="" >
+            <span class="post-title" title="深入理解Java类型信息(Class对象)与反射机制">深入理解Java类型信息(Class对象)与反射机制</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%96%87%E6%95%B0/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="回文数">回文数</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E9%9D%A2%E8%AF%95%E9%A2%9803-%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="面试题03-数组中重复的数字">面试题03-数组中重复的数字</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95------FIFO%20%E3%80%81LRU%E3%80%81LFU/"
+           data-tag="缓存"
+           data-author="" >
+            <span class="post-title" title="缓存算法（FIFO、LRU、LFU）">缓存算法（FIFO、LRU、LFU）</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="工厂方法模式--------二">工厂方法模式--------二</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/11/java/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"
+           data-tag="垃圾"
+           data-author="" >
+            <span class="post-title" title="垃圾回收">垃圾回收</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="简单工厂模式--------一">简单工厂模式--------一</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/11/dubbo/dubbo%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="dubbo面试题">dubbo面试题</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/11/dubbo/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20RPC%20%E4%B9%8B%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%AF%87/"
+           data-tag="动态代理"
+           data-author="" >
+            <span class="post-title" title="深入理解 RPC 之动态代理篇">深入理解 RPC 之动态代理篇</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="JDK "
+           href="/2020/02/11/java/JDK/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%A7%A3%E6%9E%90/"
+           data-tag="线程池"
+           data-author="" >
+            <span class="post-title" title="线程池源码解析Executor">线程池源码解析Executor</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="Mysql "
+           href="/2020/02/01/mysql/02%7C%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E3%80%82redolog%E4%B8%8Ebinlog/"
+           data-tag="mysql,日志系统"
+           data-author="" >
+            <span class="post-title" title="02|日志系统。redolog与binlog">02|日志系统。redolog与binlog</span>
+            <span class="post-date" title="2020-02-01 16:41:32">2020/02/01</span>
+        </a>
+        
+        <a  class="Mysql "
+           href="/2020/02/01/mysql/04%20%7C%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95/"
+           data-tag="mysql,索引"
+           data-author="" >
+            <span class="post-title" title="04 | 深入浅出索引">04 | 深入浅出索引</span>
+            <span class="post-date" title="2020-02-01 16:41:32">2020/02/01</span>
+        </a>
+        
+        <a  class="Mysql "
+           href="/2020/02/01/mysql/03%20%7C%20%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/"
+           data-tag="mysql,事务"
+           data-author="" >
+            <span class="post-title" title="03 | 事务隔离">03 | 事务隔离</span>
+            <span class="post-date" title="2020-02-01 16:41:32">2020/02/01</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/01/java/JDK/%E6%9F%A5%E7%9C%8BJava%E7%9A%84%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/"
+           data-tag="java,指令"
+           data-author="" >
+            <span class="post-title" title="查看Java的汇编指令">查看Java的汇编指令</span>
+            <span class="post-date" title="2020-02-01 16:41:32">2020/02/01</span>
+        </a>
+        
+        <a  class="JDK "
+           href="/2020/02/01/java/JDK/ArrayList%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"
+           data-tag="java,arrayList"
+           data-author="" >
+            <span class="post-title" title="ArrayList源码解析">ArrayList源码解析</span>
+            <span class="post-date" title="2020-02-01 16:41:32">2020/02/01</span>
+        </a>
+        
+        <a  class="JDK "
+           href="/2020/02/01/java/JDK/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%88%86%E6%9E%90HashMap/"
+           data-tag="java,hashmap"
+           data-author="" >
+            <span class="post-title" title="深入浅出分析HashMap">深入浅出分析HashMap</span>
+            <span class="post-date" title="2020-02-01 16:41:32">2020/02/01</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/29/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/epoll%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3%E5%8F%8Aepoll%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%9E%8B/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="网络知识/epoll原理详解及epoll反应堆模型">网络知识/epoll原理详解及epoll反应堆模型</span>
+            <span class="post-date" title="2020-01-29 22:21:02">2020/01/29</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2019/11/30/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E5%A0%86/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="二叉堆">二叉堆</span>
+            <span class="post-date" title="2019-11-30 21:49:13">2019/11/30</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2019/11/30/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E8%A6%81%E6%B1%82/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="别人面试要求">别人面试要求</span>
+            <span class="post-date" title="2019-11-30 21:41:31">2019/11/30</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第二原则:依赖倒置原则">第二原则:依赖倒置原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第七原则:合成复用原则">第七原则:合成复用原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第一原则:开闭原则">第一原则:开闭原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第三原则:单一职责原则">第三原则:单一职责原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第四原则:接口隔离原则">第四原则:接口隔离原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第五原则:迪米特法则">第五原则:迪米特法则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第六原则:里氏替换原则">第六原则:里氏替换原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-java/JDK/深入浅出分析HashMap" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">深入浅出分析HashMap</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="JDK">JDK</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">java</a>
+            
+            <a class="color3">hashmap</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-24 11:07:24'>2020-02-01 16:41</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:6.6k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#摘要"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hash冲突"><span class="toc-text">Hash冲突</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码分析"><span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通过K获取数组下标"><span class="toc-text">通过K获取数组下标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#源码部分："><span class="toc-text">源码部分：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#put方法的详细执行"><span class="toc-text">put方法的详细执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#put方法源码部分"><span class="toc-text">put方法源码部分</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#resize扩容过程"><span class="toc-text">resize扩容过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#jdk1-7的扩容实现"><span class="toc-text">jdk1.7的扩容实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jdk1-8的扩容实现"><span class="toc-text">jdk1.8的扩容实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get方法获取参数值"><span class="toc-text">get方法获取参数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove删除元素"><span class="toc-text">remove删除元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#摘要"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hash冲突"><span class="toc-text">Hash冲突</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码分析"><span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通过K获取数组下标"><span class="toc-text">通过K获取数组下标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#源码部分："><span class="toc-text">源码部分：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#put方法的详细执行"><span class="toc-text">put方法的详细执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#put方法源码部分"><span class="toc-text">put方法源码部分</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#resize扩容过程"><span class="toc-text">resize扩容过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#jdk1-7的扩容实现"><span class="toc-text">jdk1.7的扩容实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jdk1-8的扩容实现"><span class="toc-text">jdk1.8的扩容实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get方法获取参数值"><span class="toc-text">get方法获取参数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove删除元素"><span class="toc-text">remove删除元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></div></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Map的实现类有HashMap、LinkedHashMap、TreeMap、IdentityHashMap、WeakHashMap、Hashtable、Properties等等。</p>
+<img src="/imag/javabases/image-20200129162522133.png" alt="image-20200129162522133" style="zoom:200%;" />
+
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>在程序编程的时候，HashMap是一个使用非常频繁的容器类，它允许键值都放入null元素。除该类方法未实现同步外，其余跟Hashtable大致相同，但跟TreeMap不同，该容器不保证元素顺序，根据需要该容器可能会对元素重新哈希，元素的顺序也会被重新打散，因此不同时间迭代同一个HashMap的顺序可能会不同。</p>
+</blockquote>
+<p>HashMap容器，实质还是一个哈希数组结构，但是在元素插入的时候，存在发生hash冲突的可能性；</p>
+<h3 id="Hash冲突"><a href="#Hash冲突" class="headerlink" title="Hash冲突"></a>Hash冲突</h3><p>对于发生Hash冲突的情况，冲突有两种实现方式。</p>
+<ul>
+<li>一种开放地址方式（当发生hash冲突时，就继续以此继续寻找，直到找到没有冲突的hash值）。</li>
+<li>另一种是拉链方式（将冲突的元素放入链表）。<strong>Java HashMap采用的就是第二种方式，拉链法。</strong></li>
+</ul>
+<p>在jdk1.7中，HashMap主要是由数组+链表组成，当发生hash冲突的时候，就将冲突的元素放入链表中。</p>
+<p>从jdk1.8开始，<strong>HashMap主要是由数组+链表+红黑树实现的</strong>，相比jdk1.7而言，多了一个红黑树实现。当链表长度超过8的时候，就将链表变成红黑树，如图所示。</p>
+<p><img src="/imag/javabases/image-20200129164522418.png" alt="image-20200129164522418"></p>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p>直接打开HashMap的源码分析，可以看到，主要有5个关键参数：</p>
+<ul>
+<li><strong>threshold：表示容器所能容纳的key-value对极限。</strong></li>
+<li><strong>loadFactor：负载因子。</strong></li>
+<li><strong>modCount：记录修改次数。</strong></li>
+<li><strong>size：表示实际存在的键值对数量。</strong></li>
+<li><strong>table：一个哈希桶数组，键值对就存放在里面。</strong></li>
+</ul>
+<pre><code class="java">public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;
+    implements Map&lt;K,V&gt;, Cloneable, Serializable {
+
+    //所能容纳的key-value对极限(capacity * loadFactor)
+    int threshold;
+
+    //负载因子
+    final float loadFactor;
+
+    //记录修改次数(并发的时候会有点作用)
+    int modCount;
+
+    //实际存在的键值对数量
+    int size;
+
+    //哈希桶数组
+    transient Node&lt;K,V&gt;[] table;
+}</code></pre>
+<p>接着来看看<code>Node</code>这个类，<code>Node</code>是<code>HashMap</code>的一个内部类，实现了<code>Map.Entry</code>接口，本质是就是一个映射(键值对)</p>
+<pre><code class="java">static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
+        final int hash;//hash值
+        final K key;//k键
+        V value;//value值
+        Node&lt;K,V&gt; next;//链表中下一个元素
+}</code></pre>
+<p>在HashMap的数据结构中，有两个参数可以影响HashMap的性能：<strong>初始容量（inital capacity）</strong>和<strong>负载因子（load factor）</strong>。</p>
+<p><strong>初始容量（inital capacity）是指table的初始长度length（默认值是16）；</strong></p>
+<p><strong>负载因子（load factor）用指自动扩容的临界值（默认值是0.75）；</strong></p>
+<p><code>threshold</code>是<code>HashMap</code>所能容纳的最大数据量的<code>Node</code>(键值对)个数（每次putVal结束都会检测是否大于这个数），计算公式<code>threshold = capacity * Load factor</code>。当entry的数量超过<code>capacity*load_factor</code>时，容器将自动扩容并重新哈希，扩容后的<code>HashMap</code>容量是之前容量的<strong>两倍</strong>，<strong>所以数组的长度总是2的n次方</strong>。</p>
+<p><strong>初始容量</strong>和<strong>负载因子</strong>也可以修改，具体实现方式，可以在对象初始化的时候，指定参数，比如：</p>
+<pre><code class="java">Map map = new HashMap(int initialCapacity, float loadFactor);</code></pre>
+<p>但是，默认的负载因子0.75是对空间和时间效率的一个平衡选择，建议大家不要修改，除非在时间和空间比较特殊的情况下，如果内存空间很多而又对时间效率要求很高，可以降低负载因子Load factor的值；相反，如果内存空间紧张而对时间效率要求不高，可以增加负载因子loadFactor的值，这个值可以大于1。 同时，对于插入元素较多的场景，可以将初始容量设大，减少重新哈希的次数。</p>
+<p><strong>空间大时间效率需要高—–&gt;降低负载因子Load factor</strong></p>
+<p><strong>空间紧张时间效率需要不高—–&gt;提高负载因子Load factor</strong></p>
+<p>HashMap的内部功能实现有很多，本文主要从以下几点，进行逐步分析。</p>
+<ul>
+<li><strong>通过K获取数组下标；</strong></li>
+<li><strong>put方法的详细执行；</strong></li>
+<li><strong>resize扩容过程；</strong></li>
+<li><strong>get方法获取参数值；</strong></li>
+<li><strong>remove删除元素；</strong></li>
+</ul>
+<h3 id="通过K获取数组下标"><a href="#通过K获取数组下标" class="headerlink" title="通过K获取数组下标"></a>通过K获取数组下标</h3><p>不管增加、删除还是查找键值对，定位到数组的位置都是很关键的第一步，打开hashMap的任意一个增加、删除、查找方法，从源码可以看出，通过<code>key</code>获取数组下标，主要做了3步操作，其中<code>length</code>指的是容器数组的大小。</p>
+<p><img src="/imag/javabases/image-20200129170841955.png" alt="image-20200129170841955"></p>
+<h4 id="源码部分："><a href="#源码部分：" class="headerlink" title="源码部分："></a>源码部分：</h4><pre><code class="java">static final int hash(Object key) {
+        int h;
+        // 将高位更好的保留。
+        // &amp; 将会把高位丢弃，低位与高位做与运算
+        // ｜ 保留所有特征，很多数的二进制将更加相近
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+ }
+/**获取数组下标方法*/
+static int indexFor(int h, int length) {
+    //jdk1.7的源码，jdk1.8没有这个方法，但是实现原理一样的
+     return h &amp; (length-1);  //第三步 取模运算
+}</code></pre>
+<h3 id="put方法的详细执行"><a href="#put方法的详细执行" class="headerlink" title="put方法的详细执行"></a>put方法的详细执行</h3><p>put(K key, V value)方法是将指定的key, value对添加到map里。该方法首先会对map做一次查找，看是否包含该K，如果已经包含则直接返回；如果没有找到，则将元素插入容器。具体插入过程如下：</p>
+<p><img src="/imag/javabases/image-20200129172508299.png" alt="image-20200129172508299"></p>
+<p>具体执行步骤</p>
+<ul>
+<li><strong>1、判断键值对数组table[i]是否为空或为null，否则执行resize()进行扩容；</strong></li>
+<li><strong>2、根据键值key计算hash值得到插入的数组索引i，如果table[i]==null，直接新建节点添加；</strong></li>
+<li><strong>3、当table[i]不为空，判断table[i]的首个元素是否和传入的key一样，如果相同直接覆盖value；</strong></li>
+<li><strong>4、判断table[i] 是否为treeNode，即table[i] 是否是红黑树，如果是红黑树，则直接在树中插入键值对；</strong></li>
+<li><strong>5、遍历table[i]，判断链表长度是否大于8，大于8的话把链表转换为红黑树，在红黑树中执行插入操作，否则进行链表的插入操作；遍历过程中若发现key已经存在直接覆盖value即可；</strong></li>
+<li><strong>6、插入成功后，判断实际存在的键值对数量size是否超多了最大容量threshold，如果超过，进行扩容操作；</strong></li>
+</ul>
+<h4 id="put方法源码部分"><a href="#put方法源码部分" class="headerlink" title="put方法源码部分"></a>put方法源码部分</h4><pre><code class="java">/**
+ * put方法
+ */
+public V put(K key, V value) {
+        return putVal(hash(key), key, value, false, true);
+}</code></pre>
+<p>插入元素方法</p>
+<pre><code class="java">/**
+ * 插入元素方法
+ */
+ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+                   boolean evict) {
+        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
+        // 1、判断数组table是否为空或为null
+        if ((tab = table) == null || (n = tab.length) == 0)
+            n = (tab = resize()).length;
+        // 2、判断数组下标table[i]==null
+        if ((p = tab[i = (n - 1) &amp; hash]) == null)
+            tab[i] = newNode(hash, key, value, null);
+        else {
+            Node&lt;K,V&gt; e; K k;
+            // 3、判断table[i]的首个元素是否和传入的key一样
+            if (p.hash == hash &amp;&amp;
+                ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+                e = p;
+            // 4、判断table[i] 是否为treeNode
+            else if (p instanceof TreeNode)
+                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+            else {
+                // 5、遍历table[i]，判断链表长度是否大于8
+                for (int binCount = 0; ; ++binCount) {
+                    if ((e = p.next) == null) {
+                        p.next = newNode(hash, key, value, null);
+                        // 长度大于8，转红黑树结构
+                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                            treeifyBin(tab, hash);
+                        break;
+                    }
+                    if (e.hash == hash &amp;&amp;
+                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                        break;
+                    p = e;
+                }
+            }
+            // 传入的K元素已经存在，直接覆盖value
+            if (e != null) { // existing mapping for key
+                V oldValue = e.value;
+                if (!onlyIfAbsent || oldValue == null)
+                    e.value = value;
+              // 为LinkedMap准备的
+                afterNodeAccess(e);
+                return oldValue;
+            }
+        }
+        ++modCount;
+        // 6、判断size是否超出最大容量
+        if (++size &gt; threshold)
+            resize();
+        afterNodeInsertion(evict);
+        return null;
+}</code></pre>
+<p>其中，与jdk1.7有区别的地方，第4步新增了红黑树插入方法，源码部分：</p>
+<pre><code class="java">/**
+   * 红黑树的插入操作
+   */
+final TreeNode&lt;K,V&gt; putTreeVal(HashMap&lt;K,V&gt; map, Node&lt;K,V&gt;[] tab,
+                                       int h, K k, V v) {
+            Class&lt;?&gt; kc = null;
+            boolean searched = false;
+            TreeNode&lt;K,V&gt; root = (parent != null) ? root() : this;
+            for (TreeNode&lt;K,V&gt; p = root;;) {
+                // dir:遍历的方向， ph:p节点的hash值
+                int dir, ph; K pk;
+                // 红黑树是根据hash值来判断大小
+                // -1:左孩子方向 1:右孩子方向
+                if ((ph = p.hash) &gt; h)
+                    dir = -1;
+                else if (ph &lt; h)
+                    dir = 1;
+                // 如果key存在的话就直接返回当前节点
+                else if ((pk = p.key) == k || (k != null &amp;&amp; k.equals(pk)))
+                    return p;
+                // 如果当前插入的类型和正在比较的节点的Key是Comparable的话，就直接通过此接口比较
+                else if ((kc == null &amp;&amp;
+                          (kc = comparableClassFor(k)) == null) ||
+                         (dir = compareComparables(kc, k, pk)) == 0) {
+                    if (!searched) {
+                        TreeNode&lt;K,V&gt; q, ch;
+                        searched = true;
+                        // 尝试在p的左子树或者右子树中找到了目标元素
+                        if (((ch = p.left) != null &amp;&amp;
+                             (q = ch.find(h, k, kc)) != null) ||
+                            ((ch = p.right) != null &amp;&amp;
+                             (q = ch.find(h, k, kc)) != null))
+                            return q;
+                    }
+                    // 获取遍历的方向
+                    dir = tieBreakOrder(k, pk);
+                }
+                // 上面的所有if-else判断都是在判断下一次进行遍历的方向，即dir
+                TreeNode&lt;K,V&gt; xp = p;
+                // 当下面的if判断进去之后就代表找到了目标操作元素,即xp
+                if ((p = (dir &lt;= 0) ? p.left : p.right) == null) {
+                    Node&lt;K,V&gt; xpn = xp.next;
+                    // 插入新的元素
+                    TreeNode&lt;K,V&gt; x = map.newTreeNode(h, k, v, xpn);
+                    if (dir &lt;= 0)
+                        xp.left = x;
+                    else
+                        xp.right = x;
+                    // 因为TreeNode今后可能退化成链表，在这里需要维护链表的next属性
+                    xp.next = x;
+                    // 完成节点插入操作
+                    x.parent = x.prev = xp;
+                    if (xpn != null)
+                        ((TreeNode&lt;K,V&gt;)xpn).prev = x;
+                    // 插入操作完成之后就要进行一定的调整操作了
+                    moveRootToFront(tab, balanceInsertion(root, x));
+                    return null;
+                }
+       }
+}</code></pre>
+<h3 id="resize扩容过程"><a href="#resize扩容过程" class="headerlink" title="resize扩容过程"></a>resize扩容过程</h3><p>在说jdk1.8的HashMap动态扩容之前，我们先来了解一下jdk1.7的HashMap扩容实现，因为jdk1.8代码实现比Java1.7复杂了不止一倍，主要是Java1.8引入了红黑树设计，但是实现思想大同小异！</p>
+<h4 id="jdk1-7的扩容实现"><a href="#jdk1-7的扩容实现" class="headerlink" title="jdk1.7的扩容实现"></a>jdk1.7的扩容实现</h4><p><img src="/imag/javabases/image-20200129173249095.png" alt="image-20200129173249095"></p>
+<p>源码部分</p>
+<pre><code class="java">/**
+  * JDK1.7扩容方法
+  * 传入新的容量
+  */
+void resize(int newCapacity) {
+    // 引用扩容前的Entry数组
+    Entry[] oldTable = table;
+    int oldCapacity = oldTable.length;
+     // 扩容前的数组大小如果已经达到最大(2^30)了
+    if (oldCapacity == MAXIMUM_CAPACITY) {
+        // 修改阈值为int的最大值(2^31-1)，这样以后就不会扩容了
+        threshold = Integer.MAX_VALUE;
+        return;
+    }
+    // 初始化一个新的Entry数组
+    Entry[] newTable = new Entry[newCapacity];
+    // 将数据转移到新的Entry数组里，这里包含最重要的重新定位
+    transfer(newTable);
+    // HashMap的table属性引用新的Entry数组
+    table = newTable;
+    threshold = (int) (newCapacity * loadFactor);//修改阈值
+}</code></pre>
+<p>transfer复制数组方法，源码部分：</p>
+<pre><code class="java">// 遍历每个元素，按新的容量进行rehash，放到新的数组上
+void transfer(Entry[] newTable) {
+    // src引用了旧的Entry数组
+    Entry[] src = table;
+    int newCapacity = newTable.length;
+    for (int j = 0; j &lt; src.length; j++) {
+        // 遍历旧的Entry数组
+        Entry&lt;K, V&gt; e = src[j];
+        // 取得旧Entry数组的每个元素
+        if (e != null) {
+            // 释放旧Entry数组的对象引用（for循环后，旧的Entry数组不再引用任何对象）
+            src[j] = null;
+            do {
+                Entry&lt;K, V&gt; next = e.next;
+                // 重新计算每个元素在数组中的位置
+                // 实现逻辑，也是上文那个取模运算方法
+                int i = indexFor(e.hash, newCapacity);
+                // 标记数组
+                e.next = newTable[i];
+                // 将元素放在数组上
+                newTable[i] = e;
+                // 访问下一个Entry链上的元素，循环遍历
+                e = next;
+            } while (e != null);
+        }  
+    }  
+}</code></pre>
+<p><strong>jdk1.7扩容总结：</strong> newTable[i]的引用赋给了e.next，也就是使用了单链表的头插入方式，同一位置上新元素总会被放在链表的头部位置；这样先放在一个索引上的元素终会被放到Entry链的尾部(如果发生了hash冲突的话），这一点和Jdk1.8有区别。在旧数组中同一条Entry链上的元素，通过重新计算索引位置后，有可能被放到了新数组的不同位置上。</p>
+<h4 id="jdk1-8的扩容实现"><a href="#jdk1-8的扩容实现" class="headerlink" title="jdk1.8的扩容实现"></a>jdk1.8的扩容实现</h4><p><img src="/imag/javabases/image-20200129173945210.png" alt="image-20200129173945210"></p>
+<p>源码如下</p>
+<pre><code class="java">final Node&lt;K,V&gt;[] resize() {
+        // 引用扩容前的node数组
+        Node&lt;K,V&gt;[] oldTab = table;
+        // 旧的容量
+        int oldCap = (oldTab == null) ? 0 : oldTab.length;
+        // 旧的阈值
+        int oldThr = threshold;
+        // 新的容量、阈值初始化为0
+        int newCap, newThr = 0;
+        if (oldCap &gt; 0) {
+            // 如果旧容量已经超过最大容量，让阈值也等于最大容量，以后不再扩容
+                threshold = Integer.MAX_VALUE;
+            if (oldCap &gt;= MAXIMUM_CAPACITY) {
+                threshold = Integer.MAX_VALUE;
+                return oldTab;
+            }
+            // 没超过最大值，就扩充为原来的2倍
+            else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;
+                     oldCap &gt;= DEFAULT_INITIAL_CAPACITY)
+                // 如果旧容量翻倍没有超过最大值，且旧容量不小于初始化容量16，则翻倍
+                newThr = oldThr &lt;&lt; 1; // double threshold
+        }
+        else if (oldThr &gt; 0) // initial capacity was placed in threshold
+            // 初始化容量设置为阈值
+            newCap = oldThr;
+        else {               // zero initial threshold signifies using defaults
+            // 0的时候使用默认值初始化
+            newCap = DEFAULT_INITIAL_CAPACITY;
+            newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+        }
+        // 计算新阈值，如果新容量或新阈值大于等于最大容量，则直接使用最大值作为阈值，不再扩容
+        if (newThr == 0) {
+            float ft = (float)newCap * loadFactor;
+            newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?
+                      (int)ft : Integer.MAX_VALUE);
+        }
+        // 设置新阈值
+        threshold = newThr;
+        @SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;})
+            Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];
+        // 创建新的数组，并引用
+        table = newTab;
+        // 如果老的数组有数据，也就是是扩容而不是初始化，才执行下面的代码，否则初始化的到这里就可以结束了
+        if (oldTab != null) {
+            // 轮询老数组所有数据
+            for (int j = 0; j &lt; oldCap; ++j) {
+                // 以一个新的节点引用当前节点，然后释放原来的节点的引用
+                Node&lt;K,V&gt; e;
+                if ((e = oldTab[j]) != null) {
+                    oldTab[j] = null;
+                    // 如果e没有next节点，证明这个节点上没有hash冲突，则直接把e的引用给到新的数组位置上
+                    if (e.next == null)
+                        newTab[e.hash &amp; (newCap - 1)] = e;
+                    else if (e instanceof TreeNode)
+                        //！！！如果是红黑树，则进行分裂
+                        ((TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);
+                    else {
+                        // 链表优化重hash的代码块
+                        Node&lt;K,V&gt; loHead = null, loTail = null;
+                        Node&lt;K,V&gt; hiHead = null, hiTail = null;
+                        Node&lt;K,V&gt; next;
+                        // 从这条链表上第一个元素开始轮询，如果当前元素新增的bit是0，则放在当前这条链表上，如果是1，则放在&quot;j+oldcap&quot;这个位置上，生成“低位”和“高位”两个链表
+                        do {
+                            next = e.next;
+                            if ((e.hash &amp; oldCap) == 0) {
+                                if (loTail == null)
+                                    loHead = e;
+                                else
+                                    // 元素是不断的加到尾部的，不会像1.7里面一样会倒序
+                                    loTail.next = e;
+                                // 新增的元素永远是尾元素
+                                loTail = e;
+                            }
+                            else {
+                                // 高位的链表与低位的链表处理逻辑一样，不断的把元素加到链表尾部
+                                if (hiTail == null)
+                                    hiHead = e;
+                                else
+                                    hiTail.next = e;
+                                hiTail = e;
+                            }
+                        } while ((e = next) != null);
+                        // 低位链表放到j这个索引的位置上
+                        if (loTail != null) {
+                            loTail.next = null;
+                            newTab[j] = loHead;
+                        }
+                        // 高位链表放到(j+oldCap)这个索引的位置上
+                        if (hiTail != null) {
+                            hiTail.next = null;
+                            newTab[j + oldCap] = hiHead;
+                        }
+                    }
+                }
+            }
+        }
+        return newTab;
+}</code></pre>
+<p>1.7与1.8处理逻辑大同小异，区别主要还是在树节点的分裂<code>((TreeNode)e).split()</code>这个方法上</p>
+<pre><code class="java">/**
+ * 红黑树分裂方法
+ */
+final void split(HashMap&lt;K,V&gt; map, Node&lt;K,V&gt;[] tab, int index, int bit) {
+            //当前这个节点的引用，即这个索引上的树的根节点
+            TreeNode&lt;K,V&gt; b = this;
+            // Relink into lo and hi lists, preserving order
+            TreeNode&lt;K,V&gt; loHead = null, loTail = null;
+            TreeNode&lt;K,V&gt; hiHead = null, hiTail = null;
+            //高位低位的初始树节点个数都设成0
+            int lc = 0, hc = 0;
+            for (TreeNode&lt;K,V&gt; e = b, next; e != null; e = next) {
+                next = (TreeNode&lt;K,V&gt;)e.next;
+                e.next = null;
+                //bit=oldcap,这里判断新bit位是0还是1，如果是0就放在低位树上，如果是1就放在高位树上，这里先是一个双向链表
+                if ((e.hash &amp; bit) == 0) {
+                    if ((e.prev = loTail) == null)
+                        loHead = e;
+                    else
+                        loTail.next = e;
+                    loTail = e;
+                    ++lc;
+                }
+                else {
+                    if ((e.prev = hiTail) == null)
+                        hiHead = e;
+                    else
+                        hiTail.next = e;
+                    hiTail = e;
+                    ++hc;
+                }
+            }
+
+            if (loHead != null) {
+                if (lc &lt;= UNTREEIFY_THRESHOLD)
+                    //！！！如果低位的链表长度小于阈值6，则把树变成链表，并放到新数组中j索引位置
+                    tab[index] = loHead.untreeify(map);
+                else {
+                    tab[index] = loHead;
+                    // 高位不为空，进行红黑树转换
+                    if (hiHead != null) // (else is already treeified)
+                        loHead.treeify(tab);
+                }
+            }
+            if (hiHead != null) {
+                if (hc &lt;= UNTREEIFY_THRESHOLD)
+                    tab[index + bit] = hiHead.untreeify(map);
+                else {
+                    tab[index + bit] = hiHead;
+                    if (loHead != null)
+                        hiHead.treeify(tab);
+                }
+            }
+}</code></pre>
+<p><code>untreeify</code>方法，将树转变为单向链表</p>
+<pre><code class="java">/**
+ * 将树转变为单向链表
+ */
+final Node&lt;K,V&gt; untreeify(HashMap&lt;K,V&gt; map) {
+            Node&lt;K,V&gt; hd = null, tl = null;
+            for (Node&lt;K,V&gt; q = this; q != null; q = q.next) {
+                Node&lt;K,V&gt; p = map.replacementNode(q, null);
+                if (tl == null)
+                    hd = p;
+                else
+                    tl.next = p;
+                tl = p;
+            }
+            return hd;
+}</code></pre>
+<p><code>treeify</code>方法，将链表转换为红黑树，会根据红黑树特性进行颜色转换、左旋、右旋等</p>
+<pre><code class="java">/**
+ * 链表转换为红黑树，会根据红黑树特性进行颜色转换、左旋、右旋等
+ */
+final void treeify(Node&lt;K,V&gt;[] tab) {
+            TreeNode&lt;K,V&gt; root = null;
+            for (TreeNode&lt;K,V&gt; x = this, next; x != null; x = next) {
+                next = (TreeNode&lt;K,V&gt;)x.next;
+                x.left = x.right = null;
+                if (root == null) {
+                    x.parent = null;
+                    x.red = false;
+                    root = x;
+                }
+                else {
+                    K k = x.key;
+                    int h = x.hash;
+                    Class&lt;?&gt; kc = null;
+                    for (TreeNode&lt;K,V&gt; p = root;;) {
+                        int dir, ph;
+                        K pk = p.key;
+                        if ((ph = p.hash) &gt; h)
+                            dir = -1;
+                        else if (ph &lt; h)
+                            dir = 1;
+                        else if ((kc == null &amp;&amp;
+                                  (kc = comparableClassFor(k)) == null) ||
+                                 (dir = compareComparables(kc, k, pk)) == 0)
+                            dir = tieBreakOrder(k, pk);
+
+                        TreeNode&lt;K,V&gt; xp = p;
+                        if ((p = (dir &lt;= 0) ? p.left : p.right) == null) {
+                            x.parent = xp;
+                            if (dir &lt;= 0)
+                                xp.left = x;
+                            else
+                                xp.right = x;
+                            //进行左旋、右旋调整
+                            root = balanceInsertion(root, x);
+                            break;
+                        }
+                    }
+                }
+            }
+            moveRootToFront(tab, root);
+}</code></pre>
+<p>jdk1.8在进行重新扩容之后，会重新计算hash值，因为n变为2倍，假设初始 tableSize = 4 要扩容到 8 来说就是 0100 到 1000 的变化（左移一位就是 2 倍），在扩容中只用判断原来的 hash 值与左移动的一位（newtable 的值）按位与操作是 0 或 1 就行，0 的话索引就不变，1 的话索引变成原索引 + oldCap；</p>
+<p>其实现如下流程图所示：</p>
+<p><img src="/imag/javabases/image-20200129175155520.png" alt="image-20200129175155520"></p>
+<p>可以看见，因为 hash 值本来就是随机性的，所以 hash 按位与上 newTable 得到的 0（扩容前的索引位置）和 1（扩容前索引位置加上扩容前数组长度的数值索引处）就是随机的，所以扩容的过程就能把之前哈希冲突的元素再随机的分布到不同的索引去，这算是 JDK1.8 的一个优化点。</p>
+<p>此外，JDK1.7中rehash的时候，旧链表迁移新链表的时候，如果在新表的数组索引位置相同，则链表元素会倒置，但是从上图可以看出，JDK1.8不会倒置。</p>
+<p>同时，由于 JDK1.7 中发生哈希冲突时仅仅采用了链表结构存储冲突元素，所以扩容时仅仅是重新计算其存储位置而已。而 JDK1.8 中为了性能在同一索引处发生哈希冲突到一定程度时，链表结构会转换为红黑数结构存储冲突元素，故在扩容时如果当前索引中元素结构是红黑树且元素个数小于链表还原阈值时就会把树形结构缩小或直接还原为链表结构（其实现就是上面代码片段中的 split() 方法）。</p>
+<h3 id="get方法获取参数值"><a href="#get方法获取参数值" class="headerlink" title="get方法获取参数值"></a>get方法获取参数值</h3><p>get(Object key)方法根据指定的key值返回对应的value，<code>getNode(hash(key), key))</code>得到相应的Node对象e，然后返回e.value。因此getNode()是算法的核心。</p>
+<p><img src="/imag/javabases/image-202001291756416231.png" alt="image-20200129175641623"></p>
+<p>get方法源码部分：</p>
+<pre><code class="java">/**
+  * JDK1.8 get方法
+  * 通过key获取参数值
+  */
+public V get(Object key) {
+        Node&lt;K,V&gt; e;
+        return (e = getNode(hash(key), key)) == null ? null : e.value;
+}</code></pre>
+<p>通过hash值和key获取节点Node方法，源码部分：</p>
+<pre><code class="java">final Node&lt;K,V&gt; getNode(int hash, Object key) {
+        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;
+        if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+            (first = tab[(n - 1) &amp; hash]) != null) {
+            //1、判断第一个元素是否与key匹配
+            if (first.hash == hash &amp;&amp;
+                ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))
+                return first;
+            if ((e = first.next) != null) {
+                //2、判断链表是否红黑树结构
+                if (first instanceof TreeNode)
+                    return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);
+                //3、如果不是红黑树结构，直接循环判断
+                do {
+                    if (e.hash == hash &amp;&amp;
+                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                        return e;
+                } while ((e = e.next) != null);
+            }
+        }
+        return null;
+}</code></pre>
+<p>在红黑树中找到指定k的TreeNode，源码部分：</p>
+<pre><code class="java">/**
+  * 这里面情况分很多中，主要是因为考虑了hash相同但是key值不同的情况，查找的最核心还是落在key值上
+  */
+final TreeNode&lt;K,V&gt; find(int h, Object k, Class&lt;?&gt; kc) {
+            TreeNode&lt;K,V&gt; p = this;
+            do {
+                int ph, dir; K pk;
+                TreeNode&lt;K,V&gt; pl = p.left, pr = p.right, q;
+                //判断要查询元素的hash是否在树的左边
+                if ((ph = p.hash) &gt; h)
+                    p = pl;
+                //判断要查询元素的hash是否在树的右边
+                else if (ph &lt; h)
+                    p = pr;
+                //查询元素的hash与当前树节点hash相同情况
+                else if ((pk = p.key) == k || (k != null &amp;&amp; k.equals(pk)))
+                    return p;
+                //上面的三步都是正常的在二叉查找树中寻找对象的方法
+                //如果hash相等，但是内容却不相等
+                else if (pl == null)
+                    p = pr;
+                else if (pr == null)
+                    p = pl;
+                 //如果可以根据compareTo进行比较的话就根据compareTo进行比较
+                else if ((kc != null ||
+                          (kc = comparableClassFor(k)) != null) &amp;&amp;
+                         (dir = compareComparables(kc, k, pk)) != 0)
+                    p = (dir &lt; 0) ? pl : pr;
+                //根据compareTo的结果在右孩子上继续查询
+                else if ((q = pr.find(h, k, kc)) != null)
+                    return q;
+                //根据compareTo的结果在左孩子上继续查询
+                else
+                    p = pl;
+            } while (p != null);
+            return null;
+}</code></pre>
+<p>get方法，首先通过hash()函数得到对应数组下标，然后依次判断。</p>
+<ul>
+<li>1、判断第一个元素与key是否匹配，如果匹配就返回参数值；</li>
+<li>2、判断链表是否红黑树，如果是红黑树，就进入红黑树方法获取参数值；</li>
+<li>3、如果不是红黑树结构，直接循环判断，直到获取参数为止；</li>
+</ul>
+<h3 id="remove删除元素"><a href="#remove删除元素" class="headerlink" title="remove删除元素"></a>remove删除元素</h3><p>remove(Object key)的作用是删除key值对应的Node，该方法的具体逻辑是在<code>removeNode(hash(key), key, null, false, true)</code>里实现的。</p>
+<p><img src="/imag/javabases/fee4a55bb5684dc4a170e200304f6f0a1.png" alt="img"></p>
+<p>remove方法，源码部分：</p>
+<pre><code class="java">/**
+  * JDK1.8 remove方法
+  * 通过key移除对象
+  */
+public V remove(Object key) {
+        Node&lt;K,V&gt; e;
+        return (e = removeNode(hash(key), key, null, false, true)) == null ?
+            null : e.value;
+}</code></pre>
+<p>通过key移除Node节点方法，源码部分：</p>
+<pre><code class="java">/**
+  * 通过key移除Node节点
+  */
+final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
+                               boolean matchValue, boolean movable) {
+        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, index;
+        //1、判断要删除的元素，是否存在
+        if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+            (p = tab[index = (n - 1) &amp; hash]) != null) {
+            Node&lt;K,V&gt; node = null, e; K k; V v;
+            //2、判断第一个元素是不是我们要找的元素
+            if (p.hash == hash &amp;&amp;
+                ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+                node = p;
+            else if ((e = p.next) != null) {
+                //3、判断当前冲突链表是否红黑树结构
+                if (p instanceof TreeNode)
+                    node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);
+                else {
+                    //4、循环在链表中找到需要删除的元素
+                    do {
+                        if (e.hash == hash &amp;&amp;
+                            ((k = e.key) == key ||
+                             (key != null &amp;&amp; key.equals(k)))) {
+                            node = e;
+                            break;
+                        }
+                        p = e;
+                    } while ((e = e.next) != null);
+                }
+            }
+            //上面的逻辑，基本都是为了找到要删除元素的节点
+            if (node != null &amp;&amp; (!matchValue || (v = node.value) == value ||
+                                 (value != null &amp;&amp; value.equals(v)))) {
+                //5、如果当前冲突链表结构是红黑树，执行红黑树删除方法
+                if (node instanceof TreeNode)
+                    ((TreeNode&lt;K,V&gt;)node).removeTreeNode(this, tab, movable);
+                else if (node == p)
+                    tab[index] = node.next;
+                else
+                    p.next = node.next;
+                ++modCount;
+                --size;
+                afterNodeRemoval(node);
+                return node;
+            }
+        }
+        return null;
+}</code></pre>
+<p>removeTreeNode移除红黑树节点方法，源码部分：</p>
+<pre><code class="java">final void removeTreeNode(HashMap&lt;K,V&gt; map, Node&lt;K,V&gt;[] tab,
+                                  boolean movable) {
+            int n;
+            if (tab == null || (n = tab.length) == 0)
+                return;
+            int index = (n - 1) &amp; hash;
+            TreeNode&lt;K,V&gt; first = (TreeNode&lt;K,V&gt;)tab[index], root = first, rl;
+            TreeNode&lt;K,V&gt; succ = (TreeNode&lt;K,V&gt;)next, pred = prev;
+            if (pred == null)
+                tab[index] = first = succ;
+            else
+                pred.next = succ;
+            if (succ != null)
+                succ.prev = pred;
+            if (first == null)
+                return;
+            if (root.parent != null)
+                root = root.root();
+            if (root == null || root.right == null ||
+                (rl = root.left) == null || rl.left == null) {
+                tab[index] = first.untreeify(map);  // too small
+                return;
+            }
+            TreeNode&lt;K,V&gt; p = this, pl = left, pr = right, replacement;
+            if (pl != null &amp;&amp; pr != null) {
+                TreeNode&lt;K,V&gt; s = pr, sl;
+                while ((sl = s.left) != null) // find successor
+                    s = sl;
+                boolean c = s.red; s.red = p.red; p.red = c; // swap colors
+                TreeNode&lt;K,V&gt; sr = s.right;
+                TreeNode&lt;K,V&gt; pp = p.parent;
+                if (s == pr) { // p was s&#39;s direct parent
+                    p.parent = s;
+                    s.right = p;
+                }
+                else {
+                    TreeNode&lt;K,V&gt; sp = s.parent;
+                    if ((p.parent = sp) != null) {
+                        if (s == sp.left)
+                            sp.left = p;
+                        else
+                            sp.right = p;
+                    }
+                    if ((s.right = pr) != null)
+                        pr.parent = s;
+                }
+                p.left = null;
+                if ((p.right = sr) != null)
+                    sr.parent = p;
+                if ((s.left = pl) != null)
+                    pl.parent = s;
+                if ((s.parent = pp) == null)
+                    root = s;
+                else if (p == pp.left)
+                    pp.left = s;
+                else
+                    pp.right = s;
+                if (sr != null)
+                    replacement = sr;
+                else
+                    replacement = p;
+            }
+            else if (pl != null)
+                replacement = pl;
+            else if (pr != null)
+                replacement = pr;
+            else
+                replacement = p;
+            if (replacement != p) {
+                TreeNode&lt;K,V&gt; pp = replacement.parent = p.parent;
+                if (pp == null)
+                    root = replacement;
+                else if (p == pp.left)
+                    pp.left = replacement;
+                else
+                    pp.right = replacement;
+                p.left = p.right = p.parent = null;
+            }
+            //判断是否需要进行红黑树结构调整
+            TreeNode&lt;K,V&gt; r = p.red ? root : balanceDeletion(root, replacement);
+
+            if (replacement == p) {  // detach
+                TreeNode&lt;K,V&gt; pp = p.parent;
+                p.parent = null;
+                if (pp != null) {
+                    if (p == pp.left)
+                        pp.left = null;
+                    else if (p == pp.right)
+                        pp.right = null;
+                }
+            }
+            if (movable)
+                moveRootToFront(tab, r);
+}</code></pre>
+<p>jdk1.8的删除逻辑实现比较复杂，相比jdk1.7而言，多了红黑树节点删除和调整：</p>
+<ul>
+<li>1、默认判断链表第一个元素是否是要删除的元素；</li>
+<li>2、如果第一个不是，就继续判断当前冲突链表是否是红黑树，如果是，就进入红黑树里面去找；</li>
+<li>3、如果当前冲突链表不是红黑树，就直接在链表中循环判断，直到找到为止；</li>
+<li>4、将找到的节点，删除掉，如果是红黑树结构，会进行颜色转换、左旋、右旋调整，直到满足红黑树特性为止；</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>如果key是一个对象，记得在对象实体类里面，要重写equals和hashCode方法，不然在查询的时候，无法通过对象key来获取参数值！</p>
+</li>
+<li><p>相比JDK1.7，JDK1.8引入红黑树设计，当链表长度大于8的时候，链表会转化为红黑树结构，发生冲突的链表如果很长，红黑树的实现很大程度优化了HashMap的性能，使查询效率比JDK1.7要快一倍！</p>
+</li>
+<li><p>对于大数组的情况，可以提前给Map初始化一个容量，避免在插入的时候，频繁的扩容，因为扩容本身就比较消耗性能！</p>
+</li>
+</ol>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>深入浅出分析HashMap</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">6.7k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-01, 16:41:32</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-24, 11:07:24</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/01/java/JDK/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%88%86%E6%9E%90HashMap/" title="深入浅出分析HashMap">http://yoursite.com/2020/02/01/java/JDK/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%88%86%E6%9E%90HashMap/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019-2020 Ocean</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#AOP','#IOC','#jvm','#类加载器','#mysql','#日志系统','#索引','#事务','#垃圾','#算法','#反射','#缓存','#设计原则','#设计模式','#工厂模式','#SPI','#面试','#总结面试','#动态代理','#三次握手','#四次挥手','#java','#指令','#ThreadLocal','#arrayList','#hashmap','#线程池','#内存模型',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
