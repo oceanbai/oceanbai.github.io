@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>重载、重写的调用原理 | Ride the waves</title>
+  <meta name="keywords" content=" java , 多态 ">
+  <meta name="description" content="重载、重写的调用原理 | Ride the waves">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="11月的最后一天，既是结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 心存迷惘 则无法继续前行">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;about&#x2F;index.html">
+<meta property="og:site_name" content="Ride the waves">
+<meta property="og:description" content="11月的最后一天，既是结束又是开始。希望我们都能够努力学习，坚持不懈的去追逐自己的梦想。古之立大事者，不惟有超世之才，亦必有坚忍不拔之志 心存迷惘 则无法继续前行">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-21T03:41:40.400Z">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Ocean Bai</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/oceanbai" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(58)</small></div></li>
+    
+        
+            
+            <li><div data-rel="Spring">Spring<small>(8)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Redis">Redis<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="dubbo">dubbo<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="算法">算法<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="java基础"><i class="fold iconfont icon-right"></i>java基础<small>(16)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="JVM">JVM<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="JDK">JDK<small>(8)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="java并发">java并发<small>(3)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计原则">设计原则<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Mysql">Mysql<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="面试练习">面试练习<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="面试">面试<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="网络知识">网络知识<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="58">
+<input type="hidden" id="yelog_site_word_count" value="186.6k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AOP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Redis</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">动态代理</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">IOC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPI</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">SpringBoot常用注解</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">缓存</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">类加载器</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">设计原则</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">jvm</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">反射</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">垃圾</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">工厂模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">日志系统</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">事务</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">练习</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">总结面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">三次握手</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">四次挥手</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">arrayList</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">ThreadLocal</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">指令</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">线程池</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">多态</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">hashmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">synchronized</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Volatile</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">内存模型</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="java基础 JDK "
+           href="/2020/03/03/java/JDK/%E5%A4%9A%E6%80%81%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/"
+           data-tag="java,多态"
+           data-author="" >
+            <span class="post-title" title="重载、重写的调用原理">重载、重写的调用原理</span>
+            <span class="post-date" title="2020-03-03 12:41:32">2020/03/03</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/02/28/%E9%9D%A2%E8%AF%95/%E4%BA%94%E8%BD%AE%E9%98%BF%E9%87%8C%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="五轮阿里面试题及答案">五轮阿里面试题及答案</span>
+            <span class="post-date" title="2020-02-28 21:41:31">2020/02/28</span>
+        </a>
+        
+        <a  class="面试练习 "
+           href="/2020/02/26/%E7%BB%83%E4%B9%A0/2020-02-26%E7%BB%83%E4%B9%A0%E6%80%BB%E7%BB%93/"
+           data-tag="练习"
+           data-author="" >
+            <span class="post-title" title="2020-02-26练习总结">2020-02-26练习总结</span>
+            <span class="post-date" title="2020-02-26 09:41:31">2020/02/26</span>
+        </a>
+        
+        <a  class="java基础 java并发 "
+           href="/2020/02/23/java/%E5%B9%B6%E5%8F%91/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%B9%B6%E5%8F%91%E4%B9%8Bsynchronized%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"
+           data-tag="java,synchronized"
+           data-author="" >
+            <span class="post-title" title="深入理解Java并发之synchronized实现原理">深入理解Java并发之synchronized实现原理</span>
+            <span class="post-date" title="2020-02-23 10:41:31">2020/02/23</span>
+        </a>
+        
+        <a  class="java基础 java并发 "
+           href="/2020/02/23/java/%E5%B9%B6%E5%8F%91/Java%20Volatile/"
+           data-tag="java,Volatile"
+           data-author="" >
+            <span class="post-title" title="Java Volatile">Java Volatile</span>
+            <span class="post-date" title="2020-02-23 10:41:31">2020/02/23</span>
+        </a>
+        
+        <a  class="java基础 java并发 "
+           href="/2020/02/23/java/%E5%B9%B6%E5%8F%91/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/"
+           data-tag="java,内存模型"
+           data-author="" >
+            <span class="post-title" title="java内存模型">java内存模型</span>
+            <span class="post-date" title="2020-02-23 10:41:31">2020/02/23</span>
+        </a>
+        
+        <a  class="网络知识 "
+           href="/2020/02/22/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8Band%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/"
+           data-tag="三次握手,四次挥手"
+           data-author="" >
+            <span class="post-title" title="三次握手and四次挥手">三次握手and四次挥手</span>
+            <span class="post-date" title="2020-02-22 16:41:31">2020/02/22</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/20/Spring/AOP/"
+           data-tag="AOP"
+           data-author="" >
+            <span class="post-title" title="Spring AOP 简单流程与使用">Spring AOP 简单流程与使用</span>
+            <span class="post-date" title="2020-02-20 15:41:31">2020/02/20</span>
+        </a>
+        
+        <a  class="java基础 JDK "
+           href="/2020/02/19/java/JDK/JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%BA%90%E7%A0%81/"
+           data-tag="动态代理"
+           data-author="" >
+            <span class="post-title" title="JDK动态代理源码">JDK动态代理源码</span>
+            <span class="post-date" title="2020-02-19 16:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="java基础 JDK "
+           href="/2020/02/19/java/JDK/CGlib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"
+           data-tag="动态代理"
+           data-author="" >
+            <span class="post-title" title="CGlib动态代理源码">CGlib动态代理源码</span>
+            <span class="post-date" title="2020-02-19 16:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/19/Spring/IoC%20%E4%B9%8B%E5%BC%80%E5%90%AF%20Bean%20%E7%9A%84%E5%8A%A0%E8%BD%BD/"
+           data-tag="IOC"
+           data-author="" >
+            <span class="post-title" title="IoC 之开启 Bean 的加载">IoC 之开启 Bean 的加载</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/19/Spring/IoC%20%E4%B9%8B%E5%8A%A0%E8%BD%BD%20BeanDefinition/"
+           data-tag="IOC"
+           data-author="" >
+            <span class="post-title" title="IoC 之加载 BeanDefinition">IoC 之加载 BeanDefinition</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/19/Spring/IoC%20%E4%B9%8B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Spring%20IoC/"
+           data-tag="IOC"
+           data-author="" >
+            <span class="post-title" title="IoC 之深入理解 Spring IoC">IoC 之深入理解 Spring IoC</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/19/Spring/IoC%20%E4%B9%8B%E8%8E%B7%E5%8F%96%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%9E%8B/"
+           data-tag="IOC"
+           data-author="" >
+            <span class="post-title" title="IoC 之获取验证模型">IoC 之获取验证模型</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/19/Spring/Spring%20AOP%20%E4%B9%8B%20%E7%90%86%E8%AE%BA%E7%AF%87/"
+           data-tag="AOP"
+           data-author="" >
+            <span class="post-title" title="Spring AOP 之 理论篇">Spring AOP 之 理论篇</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2020/02/19/Spring/%E9%9D%A2%E8%AF%95%E9%97%AE%E7%83%82%E7%9A%84%20Spring%20IOC%20%E8%BF%87%E7%A8%8B/"
+           data-tag="IOC"
+           data-author="" >
+            <span class="post-title" title="面试问烂的 Spring IOC 过程">面试问烂的 Spring IOC 过程</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="java基础 JDK "
+           href="/2020/02/19/java/JDK/ThreadLocal%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"
+           data-tag="ThreadLocal"
+           data-author="" >
+            <span class="post-title" title="ThreadLocal源码解析">ThreadLocal源码解析</span>
+            <span class="post-date" title="2020-02-19 09:41:31">2020/02/19</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/02/18/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E6%8A%80%E6%9C%AF%E6%A0%88/"
+           data-tag="面试,总结面试"
+           data-author="" >
+            <span class="post-title" title="面试技术栈">面试技术栈</span>
+            <span class="post-date" title="2020-02-18 16:41:32">2020/02/18</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/17/dubbo/dubboSPI/"
+           data-tag="SPI"
+           data-author="" >
+            <span class="post-title" title="dubboSPI详解">dubboSPI详解</span>
+            <span class="post-date" title="2020-02-17 14:41:31">2020/02/17</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/02/17/%E9%9D%A2%E8%AF%95/%E7%BE%8E%E5%9B%A2%E7%A0%94%E7%A9%B6%E7%94%9F%E5%AE%9E%E4%B9%A0%E7%94%9F/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="美团研究生实习生">美团研究生实习生</span>
+            <span class="post-date" title="2020-02-17 11:41:31">2020/02/17</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/02/17/%E7%AE%97%E6%B3%95/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="算法/基本排序算法">算法/基本排序算法</span>
+            <span class="post-date" title="2020-02-17 10:46:52">2020/02/17</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="适配器模式----不兼容结构的协调----六">适配器模式----不兼容结构的协调----六</span>
+            <span class="post-date" title="2020-02-15 21:42:31">2020/02/15</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="桥接模式----处理多维变化----五">桥接模式----处理多维变化----五</span>
+            <span class="post-date" title="2020-02-15 21:42:31">2020/02/15</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/02/15/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="面试题">面试题</span>
+            <span class="post-date" title="2020-02-15 21:41:32">2020/02/15</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="模板方法模式--------四">模板方法模式--------四</span>
+            <span class="post-date" title="2020-02-14 16:38:31">2020/02/14</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="抽象工厂模式--------三">抽象工厂模式--------三</span>
+            <span class="post-date" title="2020-02-13 21:41:31">2020/02/13</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8(ClassLoader)/"
+           data-tag="类加载器"
+           data-author="" >
+            <span class="post-title" title="深入理解java类加载器(ClassLoader)">深入理解java类加载器(ClassLoader)</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 JVM "
+           href="/2020/02/12/java/JVM%E7%BB%84%E6%88%90%E8%A7%A3%E6%9E%90/"
+           data-tag="jvm"
+           data-author="" >
+            <span class="post-title" title="JVM组成解析">JVM组成解析</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/12/java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF(Class%E5%AF%B9%E8%B1%A1)%E4%B8%8E%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"
+           data-tag="反射"
+           data-author="" >
+            <span class="post-title" title="深入理解Java类型信息(Class对象)与反射机制">深入理解Java类型信息(Class对象)与反射机制</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="java基础 JVM "
+           href="/2020/02/12/java/java%E5%BC%95%E7%94%A8/"
+           data-tag="jvm"
+           data-author="" >
+            <span class="post-title" title="深入解析强引用、软引用、弱引用、幻象引用">深入解析强引用、软引用、弱引用、幻象引用</span>
+            <span class="post-date" title="2020-02-12 21:41:31">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%96%87%E6%95%B0/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="回文数">回文数</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E9%9D%A2%E8%AF%95%E9%A2%9803-%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="面试题03-数组中重复的数字">面试题03-数组中重复的数字</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2020/02/12/%E7%AE%97%E6%B3%95/%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95------FIFO%20%E3%80%81LRU%E3%80%81LFU/"
+           data-tag="缓存"
+           data-author="" >
+            <span class="post-title" title="缓存算法（FIFO、LRU、LFU）">缓存算法（FIFO、LRU、LFU）</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="工厂方法模式--------二">工厂方法模式--------二</span>
+            <span class="post-date" title="2020-02-12 10:22:00">2020/02/12</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/11/dubbo/dubbo%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="dubbo面试题">dubbo面试题</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="dubbo "
+           href="/2020/02/11/dubbo/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20RPC%20%E4%B9%8B%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%AF%87/"
+           data-tag="动态代理"
+           data-author="" >
+            <span class="post-title" title="深入理解 RPC 之动态代理篇">深入理解 RPC 之动态代理篇</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/02/11/java/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"
+           data-tag="垃圾"
+           data-author="" >
+            <span class="post-title" title="垃圾回收">垃圾回收</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/02/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式,工厂模式"
+           data-author="" >
+            <span class="post-title" title="简单工厂模式--------一">简单工厂模式--------一</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="java基础 JDK "
+           href="/2020/02/11/java/JDK/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%A7%A3%E6%9E%90/"
+           data-tag="线程池"
+           data-author="" >
+            <span class="post-title" title="线程池源码解析Executor">线程池源码解析Executor</span>
+            <span class="post-date" title="2020-02-11 21:41:31">2020/02/11</span>
+        </a>
+        
+        <a  class="Mysql "
+           href="/2020/02/01/mysql/02%7C%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E3%80%82redolog%E4%B8%8Ebinlog/"
+           data-tag="mysql,日志系统"
+           data-author="" >
+            <span class="post-title" title="02|日志系统。redolog与binlog">02|日志系统。redolog与binlog</span>
+            <span class="post-date" title="2020-02-01 16:41:32">2020/02/01</span>
+        </a>
+        
+        <a  class="Mysql "
+           href="/2020/02/01/mysql/03%20%7C%20%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/"
+           data-tag="mysql,事务"
+           data-author="" >
+            <span class="post-title" title="03 | 事务隔离">03 | 事务隔离</span>
+            <span class="post-date" title="2020-02-01 16:41:32">2020/02/01</span>
+        </a>
+        
+        <a  class="Mysql "
+           href="/2020/02/01/mysql/04%20%7C%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95/"
+           data-tag="mysql,索引"
+           data-author="" >
+            <span class="post-title" title="04 | 深入浅出索引">04 | 深入浅出索引</span>
+            <span class="post-date" title="2020-02-01 16:41:32">2020/02/01</span>
+        </a>
+        
+        <a  class="java基础 JDK "
+           href="/2020/02/01/java/JDK/ArrayList%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"
+           data-tag="java,arrayList"
+           data-author="" >
+            <span class="post-title" title="ArrayList源码解析">ArrayList源码解析</span>
+            <span class="post-date" title="2020-02-01 16:41:32">2020/02/01</span>
+        </a>
+        
+        <a  class="java基础 JDK "
+           href="/2020/02/01/java/JDK/%E6%9F%A5%E7%9C%8BJava%E7%9A%84%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/"
+           data-tag="java,指令"
+           data-author="" >
+            <span class="post-title" title="查看Java的汇编指令">查看Java的汇编指令</span>
+            <span class="post-date" title="2020-02-01 16:41:32">2020/02/01</span>
+        </a>
+        
+        <a  class="java基础 JDK "
+           href="/2020/02/01/java/JDK/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%88%86%E6%9E%90HashMap/"
+           data-tag="java,hashmap"
+           data-author="" >
+            <span class="post-title" title="深入浅出分析HashMap">深入浅出分析HashMap</span>
+            <span class="post-date" title="2020-02-01 16:41:32">2020/02/01</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/29/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/epoll%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3%E5%8F%8Aepoll%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%9E%8B/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="网络知识/epoll原理详解及epoll反应堆模型">网络知识/epoll原理详解及epoll反应堆模型</span>
+            <span class="post-date" title="2020-01-29 22:21:02">2020/01/29</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2019/11/30/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E5%A0%86/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="二叉堆">二叉堆</span>
+            <span class="post-date" title="2019-11-30 21:49:13">2019/11/30</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2019/11/30/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E8%A6%81%E6%B1%82/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="别人面试要求">别人面试要求</span>
+            <span class="post-date" title="2019-11-30 21:41:31">2019/11/30</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第二原则:依赖倒置原则">第二原则:依赖倒置原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第七原则:合成复用原则">第七原则:合成复用原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第一原则:开闭原则">第一原则:开闭原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第四原则:接口隔离原则">第四原则:接口隔离原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第五原则:迪米特法则">第五原则:迪米特法则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第六原则:里氏替换原则">第六原则:里氏替换原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="设计原则 "
+           href="/2019/05/26/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/"
+           data-tag="设计原则"
+           data-author="" >
+            <span class="post-title" title="第三原则:单一职责原则">第三原则:单一职责原则</span>
+            <span class="post-date" title="2019-05-26 17:07:00">2019/05/26</span>
+        </a>
+        
+        <a  class="Spring "
+           href="/2019/03/03/Spring/SpringBoot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/"
+           data-tag="SpringBoot常用注解"
+           data-author="" >
+            <span class="post-title" title="SpringBoot常用注解">SpringBoot常用注解</span>
+            <span class="post-date" title="2019-03-03 11:41:31">2019/03/03</span>
+        </a>
+        
+        <a  class="Redis "
+           href="/2019/03/01/Redis/Redis%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"
+           data-tag="面试,Redis"
+           data-author="" >
+            <span class="post-title" title="Redis之问几个你不了解的问题">Redis之问几个你不了解的问题</span>
+            <span class="post-date" title="2019-03-01 21:41:31">2019/03/01</span>
+        </a>
+        
+        <a  class="Redis "
+           href="/2019/03/01/Redis/Redis%E9%9D%A2%E8%AF%95%E5%87%A0%E9%97%AE/"
+           data-tag="面试,Redis"
+           data-author="" >
+            <span class="post-title" title="Redis之问几个你不了解的问题">Redis之问几个你不了解的问题</span>
+            <span class="post-date" title="2019-03-01 21:41:31">2019/03/01</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-java/JDK/多态的底层实现" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">重载、重写的调用原理</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="java基础">java基础</a>/
+            
+                <a  data-rel="JDK">JDK</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">java</a>
+            
+            <a class="color3">多态</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-03-03 16:33:04'>2020-03-03 12:41</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:5.4k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重载overload"><span class="toc-text">重载overload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重写override"><span class="toc-text">重写override</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-的方法调用方式"><span class="toc-text">Java 的方法调用方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常量池（constant-pool）"><span class="toc-text">常量池（constant pool）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CONSTANT-Utf8-info"><span class="toc-text">CONSTANT_Utf8_info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CONSTANT-Class-info"><span class="toc-text">CONSTANT_Class_info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CONSTANT-NameAndType-info"><span class="toc-text">CONSTANT_NameAndType_info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CONSTANT-InterfaceMethodref-info"><span class="toc-text">CONSTANT_InterfaceMethodref_info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CONSTANT-Methodref-info"><span class="toc-text">CONSTANT_Methodref_info</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法表"><span class="toc-text">方法表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言-1"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM的运行时结构"><span class="toc-text">JVM的运行时结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类引用调用invokevirtual"><span class="toc-text">类引用调用invokevirtual</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口引用调用invokeinterface"><span class="toc-text">接口引用调用invokeinterface</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重载overload"><span class="toc-text">重载overload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重写override"><span class="toc-text">重写override</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-的方法调用方式"><span class="toc-text">Java 的方法调用方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常量池（constant-pool）"><span class="toc-text">常量池（constant pool）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CONSTANT-Utf8-info"><span class="toc-text">CONSTANT_Utf8_info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CONSTANT-Class-info"><span class="toc-text">CONSTANT_Class_info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CONSTANT-NameAndType-info"><span class="toc-text">CONSTANT_NameAndType_info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CONSTANT-InterfaceMethodref-info"><span class="toc-text">CONSTANT_InterfaceMethodref_info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CONSTANT-Methodref-info"><span class="toc-text">CONSTANT_Methodref_info</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法表"><span class="toc-text">方法表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言-1"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM的运行时结构"><span class="toc-text">JVM的运行时结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类引用调用invokevirtual"><span class="toc-text">类引用调用invokevirtual</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口引用调用invokeinterface"><span class="toc-text">接口引用调用invokeinterface</span></a></li></ol></li></ol></div></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ol>
+<li>重载（overload）方法<br>对重载方法的调用主要看<strong>静态类型</strong>，静态类型是什么类型，就调用什么类型的参数方法。</li>
+<li>重写（override）方法<br>对重写方法的调用主要看<strong>实际类型</strong>。实际类型如果实现了该方法则直接调用该方法，如果没有实现，则在继承关系中从低到高搜索有无实现。</li>
+<li>java文件的编译过程中不存在传统编译的连接过程，一切方法调用在class文件中存放的只是符号引用，而不是方法在实际运行时内存布局中的入口地址。</li>
+</ol>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ol>
+<li>静态类型与实际类型，方法接收者</li>
+</ol>
+<pre><code class="java">Human man = new Man();
+man.foo();</code></pre>
+<p>上面这条语句中，man的静态类型为Human，实际类型为Man。所谓<code>方法接收者</code>，就是指将要执行<code>foo()</code>方法的所有者（在多态中，有可能是父类<code>Human</code>的对象，也可能是子类<code>Man</code>的对象）。</p>
+<ol start="2">
+<li>字节码的方法调用指令<ul>
+<li>（1）invokestatic：调用静态方法</li>
+<li>（2）invokespecial：调用实例构造器方法，私有方法和父类方法。</li>
+<li>（3）invokevirtual：调用所有的虚方法。</li>
+<li>（4）invokeinterface：调用接口方法，会在运行时再确定一个实现此接口的对象。</li>
+<li>（5）invokedynamic：先在运行时动态解析出调用点限定符所引用的方法，然后再执行该方法。</li>
+</ul>
+</li>
+</ol>
+<p>前2条指令（<code>invokestatic</code>, <code>invokespecial</code>），在<code>类加载</code>时就能把<code>符号引用</code>解析为<code>直接引用</code>，<strong>符合这个条件的有静态方法、实例构造器方法、私有方法、父类方法这4类，这4类方法叫非虚方法。</strong><br>非虚方法除了上面静态方法、实例构造器方法、私有方法、父类方法这4种方法之外，还包括final方法。虽然final方法使用invokevirtual指令来调用，但是final方法无法被覆盖，没有其他版本，无需对方法接收者进行多态选择，或者说多态选择的结果是唯一的。</p>
+<h3 id="重载overload"><a href="#重载overload" class="headerlink" title="重载overload"></a>重载overload</h3><p>上面说的静态类型和动态类型都是可以变化的。静态类型发生变化（强制类型转换）时，对于编译器是可知的，即编译器知道对象的最终静态类型。而实际类型变化（对象指向了其他对象）时，编译器是不可知的，只有在运行时才可知。</p>
+<pre><code class="java">//静态类型变化
+sr.sayHello((Man) man);
+sr.sayHello((Woman) man);
+//实际类型变化
+Human man = new Man();
+man = new Woman();</code></pre>
+<p>重载只涉及静态类型的选择。<br>测试代码如下：</p>
+<pre><code class="java">public class StaticDispatcher {
+
+    static class Human {}
+    static class Man extends Human {}
+    static class Woman extends Human {}
+
+    public void sayHello(Human human) {
+        System.out.println(&quot;Hello guy!&quot;);
+    }
+
+    public void sayHello(Man man) {
+        System.out.println(&quot;Hello man!&quot;);
+    }
+
+    public void sayHello(Woman woman) {
+        System.out.println(&quot;Hello woman!&quot;);
+    }
+
+    public static void main(String[] args) {
+        StaticDispatcher staticDispatcher = new StaticDispatcher();
+        Human man = new Man();
+        Human woman = new Woman();
+        staticDispatcher.sayHello(man);
+        staticDispatcher.sayHello(woman);
+        staticDispatcher.sayHello((Man)man);
+        staticDispatcher.sayHello((Woman)man);
+    }
+}</code></pre>
+<p>先看看执行结果：</p>
+<pre><code class="java">Hello guy!
+Hello guy!
+Hello man!
+Exception in thread &quot;main&quot; java.lang.ClassCastException: overr.StaticDispatcher$Man cannot be cast to overr.StaticDispatcher$Woman
+    at overr.StaticDispatcher.main(StaticDispatcher.java:41)</code></pre>
+<p>由此可见，当静态类型发生变化时，会调用相应类型的方法。但是，当将Man强制类型转换成Woman时，没有编译错误，却有运行时异常。“classCastException”类映射异常。<br>看看字节码指令：</p>
+<pre><code class="bash">javap -verbose -c StaticDispatcher</code></pre>
+<pre><code class="java">public static void main(java.lang.String[]);
+  Code:
+   Stack=2, Locals=4, Args_size=1
+   0:   new     #7; //class StaticDispatcher
+   3:   dup
+   4:   invokespecial   #8; //Method &quot;&lt;init&gt;&quot;:()V
+   7:   astore_1
+   8:   new     #9; //class StaticDispatcher$Man
+   11:  dup
+   12:  invokespecial   #10; //Method StaticDispatcher$Man.&quot;&lt;init&gt;&quot;:()V
+   15:  astore_2
+   16:  new     #11; //class StaticDispatcher$Woman
+   19:  dup
+   20:  invokespecial   #12; //Method StaticDispatcher$Woman.&quot;&lt;init&gt;&quot;:()V
+   23:  astore_3
+   24:  aload_1
+   25:  aload_2
+   26:  invokevirtual   #13; //Method sayHello:(LStaticDispatcher$Human;)V
+   29:  aload_1
+   30:  aload_3
+   31:  invokevirtual   #13; //Method sayHello:(LStaticDispatcher$Human;)V
+   34:  aload_1
+   35:  aload_2
+   36:  checkcast       #9; //class StaticDispatcher$Man
+   39:  invokevirtual   #14; //Method sayHello:(LStaticDispatcher$Man;)V
+   42:  aload_1
+   43:  aload_2
+   44:  checkcast       #11; //class StaticDispatcher$Woman
+   47:  invokevirtual   #15; //Method sayHello:(LStaticDispatcher$Woman;)V
+   50:  return</code></pre>
+<p>看到，在强制类型转换时，会有指令checkCast的调用，而且invokevirtual指令的调用方法也发生了变化<code>39: invokevirtual #14; //Method sayHello:(LStaticDispatcher$Man;)V</code> 。</p>
+<p><strong>虚拟机（准确说是编译器）在重载时是通过参数的静态类型而不是实际类型作为判定依据的。</strong><br>对于字面量类型，编译器会自动进行类型转换。转换的顺序为：<br>char-int-long-float-double-Character-Serializable-Object<br>转换成Character是因为发生了自动装箱，转换成Serializable是因为Character实现了Serializable接口。</p>
+<h3 id="重写override"><a href="#重写override" class="headerlink" title="重写override"></a>重写override</h3><p>测试代码如下：</p>
+<pre><code class="java">/**
+ * Created by fan on 2016/3/29.
+ */
+public class DynamicDispatcher {
+
+    static abstract class Human {
+        protected abstract void sayHello();
+    }
+
+    static class Man extends Human {
+
+        @Override
+        protected void sayHello() {
+            System.out.println(&quot;Man say hello&quot;);
+        }
+    }
+
+    static class Woman extends Human {
+
+        @Override
+        protected void sayHello() {
+            System.out.println(&quot;Woman say hello&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        Human man = new Man();
+        Human woman = new Woman();
+        man.sayHello();
+        woman.sayHello();
+        man = new Woman();
+        man.sayHello();
+    }
+
+}</code></pre>
+<p>执行结果：</p>
+<pre><code class="java">Man say hello
+Woman say hello
+Woman say hello</code></pre>
+<p>看下字节码指令：</p>
+<pre><code class="java">public static void main(java.lang.String[]);
+  Code:
+   Stack=2, Locals=3, Args_size=1
+   0:   new     #2; //class DynamicDispatcher$Man
+   3:   dup
+   4:   invokespecial   #3; //Method DynamicDispatcher$Man.&quot;&lt;init&gt;&quot;:()V
+   7:   astore_1
+   8:   new     #4; //class DynamicDispatcher$Woman
+   11:  dup
+   12:  invokespecial   #5; //Method DynamicDispatcher$Woman.&quot;&lt;init&gt;&quot;:()V
+   15:  astore_2
+   16:  aload_1
+   17:  invokevirtual   #6; //Method DynamicDispatcher$Human.sayHello:()V
+   20:  aload_2
+   21:  invokevirtual   #6; //Method DynamicDispatcher$Human.sayHello:()V
+   24:  new     #4; //class DynamicDispatcher$Woman
+   27:  dup
+   28:  invokespecial   #5; //Method DynamicDispatcher$Woman.&quot;&lt;init&gt;&quot;:()V
+   31:  astore_1
+   32:  aload_1
+   33:  invokevirtual   #6; //Method DynamicDispatcher$Human.sayHello:()V
+   36:  return</code></pre>
+<p>从字节码中可以看到，他们调用的都是相同的方法<code>invokevirtual #6; //Method DynamicDispatcher$Human.sayHello:()V</code>，但是执行的结果却显示调用了不同的方法。因为，在编译阶段，编译器只知道对象的静态类型，而不知道实际类型，所以在class文件中只能确定要调用父类的方法。但是在执行时却会判断对象的实际类型。如果实际类型实现这个方法，则直接调用，如果没有实现，则按照继承关系从下往上一次检索，只要检索到就调用，如果始终没有检索到，则抛异常（难道能编译通过）。</p>
+<p>（1）测试代码如下：</p>
+<pre><code class="java">/**
+ * Created by fan on 2016/3/29.
+ */
+public class Test {
+
+    static class Human {
+        protected void sayHello() {
+            System.out.println(&quot;Human say hello&quot;);
+        }
+        protected void sayHehe() {
+            System.out.println(&quot;Human say hehe&quot;);
+        }
+    }
+
+    static class Man extends Human {
+
+        @Override
+        protected void sayHello() {
+            System.out.println(&quot;Man say hello&quot;);
+        }
+
+//        protected void sayHehe() {
+//            System.out.println(&quot;Man say hehe&quot;);
+//        }
+    }
+
+    static class Woman extends Human {
+
+        @Override
+        protected void sayHello() {
+            System.out.println(&quot;Woman say hello&quot;);
+        }
+
+//        protected void sayHehe() {
+//            System.out.println(&quot;Woman say hehe&quot;);
+//        }
+    }
+
+    public static void main(String[] args) {
+        Human man = new Man();
+        man.sayHehe();
+    }
+
+}</code></pre>
+<p>测试结果如下：</p>
+<pre><code class="java">Human say hehe</code></pre>
+<p>字节码指令：</p>
+<pre><code class="java">public static void main(java.lang.String[]);
+  Code:
+   Stack=2, Locals=2, Args_size=1
+   0:   new     #2; //class Test$Man
+   3:   dup
+   4:   invokespecial   #3; //Method Test$Man.&quot;&lt;init&gt;&quot;:()V
+   7:   astore_1
+   8:   aload_1
+   9:   invokevirtual   #4; //Method Test$Human.sayHehe:()V
+   12:  return</code></pre>
+<p>字节码指令与上面代码的字节码指令没有本质区别。</p>
+<p>（2）测试代码如下：</p>
+<pre><code class="java">/**
+ * Created by fan on 2016/3/29.
+ */
+public class Test {
+
+    static class Human {
+        protected void sayHello() {
+        }
+    }
+
+    static class Man extends Human {
+
+        @Override
+        protected void sayHello() {
+            System.out.println(&quot;Man say hello&quot;);
+        }
+
+        protected void sayHehe() {
+            System.out.println(&quot;Man say hehe&quot;);
+        }
+    }
+
+    static class Woman extends Human {
+
+        @Override
+        protected void sayHello() {
+            System.out.println(&quot;Woman say hello&quot;);
+        }
+
+        protected void sayHehe() {
+            System.out.println(&quot;Woman say hehe&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        Human man = new Man();
+        man.sayHehe();
+    }
+
+}</code></pre>
+<p>结果：</p>
+<pre><code class="java">编译异常</code></pre>
+<p>这个例子说明了：<strong>Java编译器是基于静态类型进行检查的。</strong></p>
+<p>修改上面错误代码，如下所示：</p>
+<pre><code class="java">/**
+ * Created by fan on 2016/3/29.
+ */
+public class Test {
+
+    static class Human {
+        protected void sayHello() {
+            System.out.println(&quot;Human say hello&quot;);
+        }
+//        protected void sayHehe() {
+//            System.out.println(&quot;Human say hehe&quot;);
+//        }
+    }
+
+    static class Man extends Human {
+
+        @Override
+        protected void sayHello() {
+            System.out.println(&quot;Man say hello&quot;);
+        }
+
+        protected void sayHehe() {
+            System.out.println(&quot;Man say hehe&quot;);
+        }
+    }
+
+    static class Woman extends Human {
+
+        @Override
+        protected void sayHello() {
+            System.out.println(&quot;Woman say hello&quot;);
+        }
+
+        protected void sayHehe() {
+            System.out.println(&quot;Woman say hehe&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        Man man = new Man();
+        man.sayHehe();
+    }
+
+}</code></pre>
+<p>注意在Main方法中，改成了<code>Man man = new Man();</code><br>执行结果如下所示：</p>
+<pre><code class="java">Man say hehe</code></pre>
+<p>字节码指令如下所示：</p>
+<pre><code class="java">public static void main(java.lang.String[]);
+  Code:
+   Stack=2, Locals=2, Args_size=1
+   0:   new     #2; //class Test$Man
+   3:   dup
+   4:   invokespecial   #3; //Method Test$Man.&quot;&lt;init&gt;&quot;:()V
+   7:   astore_1
+   8:   aload_1
+   9:   invokevirtual   #4; //Method Test$Man.sayHehe:()V
+   12:  return</code></pre>
+<p>注意上面的字节码指令<code>invokevirtual #4; //Method Test$Man.sayHehe:()V</code> 。</p>
+<h2 id="Java-的方法调用方式"><a href="#Java-的方法调用方式" class="headerlink" title="Java 的方法调用方式"></a>Java 的方法调用方式</h2><p>Java 的方法调用有两类，<code>动态方法调用</code>与<code>静态方法调用</code>。</p>
+<ul>
+<li>静态方法调用是指对于类的静态方法的调用方式，是静态绑定的；</li>
+<li>动态方法调用需要有方法调用所作用的对象，是动态绑定的。</li>
+</ul>
+<p><code>类调用 (invokestatic)</code>是在编译时刻就已经确定好具体调用方法的情况，而<code>实例调用 (invokevirtual)</code>则是在调用的时候才确定具体的调用方法，这就是动态绑定，也是多态要解决的核心问题。</p>
+<p>JVM 的方法调用指令有四个，分别是<code>invokestatic</code>，<code>invokespecial</code>，<code>invokesvirtual</code> 和<code>invokeinterface</code>。前两个是静态绑定，后两个是动态绑定的。本文也可以说是对于 JVM 后两种调用实现的考察。</p>
+<h2 id="常量池（constant-pool）"><a href="#常量池（constant-pool）" class="headerlink" title="常量池（constant pool）"></a>常量池（constant pool）</h2><p>常量池中保存的是一个 Java 类引用的一些常量信息，包含一些字符串常量及对于类的符号引用信息等。</p>
+<blockquote>
+<p>Java 代码编译生成的类文件中的常量池是<code>静态常量池</code>，当类被载入到虚拟机内部的时候，在内存中产生类的常量池叫<code>运行时常量池</code>。</p>
+</blockquote>
+<p>常量池在逻辑上可以分成多个表，每个表包含一类的常量信息，本文只探讨对于 Java 调用相关的常量池表。</p>
+<h3 id="CONSTANT-Utf8-info"><a href="#CONSTANT-Utf8-info" class="headerlink" title="CONSTANT_Utf8_info"></a>CONSTANT_Utf8_info</h3><p>字符串常量表，该表包含该类所使用的所有字符串常量，比如代码中的<code>字符串引用</code>、<code>引用的类名</code>、<code>方法的名字</code>、<code>其他引用的类</code>与<code>方法的字符串描述</code>等等。其余常量池表中所涉及到的任何常量字符串都被索引至该表。</p>
+<h3 id="CONSTANT-Class-info"><a href="#CONSTANT-Class-info" class="headerlink" title="CONSTANT_Class_info"></a>CONSTANT_Class_info</h3><p>类信息表，包含任何被引用的类或接口的符号引用，每一个条目主要包含一个索引，指向 CONSTANT_Utf8_info 表，表示该类或接口的全限定名。</p>
+<h3 id="CONSTANT-NameAndType-info"><a href="#CONSTANT-NameAndType-info" class="headerlink" title="CONSTANT_NameAndType_info"></a>CONSTANT_NameAndType_info</h3><p>名字类型表，包含引用的任意方法或字段的名称和描述符信息在字符串常量表中的索引。</p>
+<h3 id="CONSTANT-InterfaceMethodref-info"><a href="#CONSTANT-InterfaceMethodref-info" class="headerlink" title="CONSTANT_InterfaceMethodref_info"></a>CONSTANT_InterfaceMethodref_info</h3><p>接口方法引用表，包含引用的任何接口方法的描述信息，主要包括类信息索引和名字类型索引。</p>
+<h3 id="CONSTANT-Methodref-info"><a href="#CONSTANT-Methodref-info" class="headerlink" title="CONSTANT_Methodref_info"></a>CONSTANT_Methodref_info</h3><p>类方法引用表，包含引用的任何类型方法的描述信息，主要包括类信息索引和名字类型索引。</p>
+<p><img src="/Users/ocean/Downloads/image005.jpg" alt="图 2. 常量池各表的关系"></p>
+<p>可以看到，给定任意一个方法的索引，在常量池中找到对应的条目后，可以得到该方法的类索引（class_index）和名字类型索引 (name_and_type_index), 进而得到该方法所属的类型信息和名称及描述符信息（参数，返回值等）。注意到所有的常量字符串都是存储在 CONSTANT_Utf8_info 中供其他表索引的。</p>
+<h2 id="方法表"><a href="#方法表" class="headerlink" title="方法表"></a>方法表</h2><h3 id="前言-1"><a href="#前言-1" class="headerlink" title="前言"></a>前言</h3><p><strong>基于基类的调用和基于接口的调用，从性能上来讲，基于基类的调用性能更高</strong> 。因为invokevirtual是基于偏移量的方式来查找方法的，而invokeinterface是基于搜索的。</p>
+<p><strong>方法表是动态调用的核心</strong>，也是 Java 实现动态调用的主要方式。它被存储于方法区中的类型信息，包含有该类型所定义的所有方法及指向这些方法代码的指针，注意这些具体的方法代码可能是被覆写的方法，也可能是继承自基类的方法。</p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>多态是面向对象程序设计的重要特性。多态允许基类的引用指向派生类的对象，而在具体访问时实现方法的动态绑定。<br>java对方法动态绑定的实现方法主要基于方法表，但是这里分两种调用方式<code>invokevirtual</code>和<code>invokeinterface</code>，即类引用调用和接口引用调用。类引用调用只需要修改方法表的指针就可以实现动态绑定（具有相同签名的方法，在父类、子类的方法表中具有相同的索引号），而接口引用调用需要扫描整个方法表才能实现动态绑定（因为，一个类可以实现多个接口，另外一个类可能只实现一个接口，无法具有相同的索引号。这句如果没有看懂，继续往下看，会有例子。写到这里，感觉自己看书时，有的时候也会不理解，看不懂，思考一段时间，还是不明白，做个标记，继续阅读吧，然后回头再看，可能就豁然开朗。）。</p>
+<p><strong>类引用调用的大致过程为：</strong>java编译器将java源代码编译成class文件，在编译过程中，会根据静态类型将调用的符号引用写到class文件中。在执行时，JVM根据class文件找到调用方法的符号引用，然后在静态类型的方法表中找到偏移量，然后根据this指针确定对象的实际类型，使用实际类型的方法表，偏移量跟静态类型中方法表的偏移量一样，如果在实际类型的方法表中找到该方法，则直接调用，否则，按照继承关系从下往上搜索。<br>下面对上面的描述做具体的分析讨论。</p>
+<h3 id="JVM的运行时结构"><a href="#JVM的运行时结构" class="headerlink" title="JVM的运行时结构"></a>JVM的运行时结构</h3><p><img src="/Users/ocean/Downloads/1583220868526.jpg" alt="JVM的运行时结构"></p>
+<p>从上图可以看出，当程序运行时，需要某个类时，类载入子系统会将相应的class文件载入到JVM中，并在内部建立该类的类型信息，这个类型信息其实就是class文件在JVM中存储的一种数据结构，他包含着java类定义的所有信息，包括<code>方法代码</code>，<code>类变量</code>、<code>成员变量</code>、以及本博文要重点讨论的<code>方法表</code>。这个类型信息就存储在方法区。</p>
+<p>注意：这个方法区中的类型信息跟在堆中存放的class对象是不同的。在方法区中，这个class的类型信息只有唯一的实例（所以是各个线程共享的内存区域），而在堆中可以有多个该class对象。可以通过堆中的class对象访问到方法区中类型信息。就像在java反射机制那样，通过class对象可以访问到该类的所有信息一样。<br>方法表是实现动态调用的核心。方法表存放在方法区中的类型信息中。方法表中存放有该类定义的所有方法及指向方法代码的指针。这些方法中包括从父类继承的所有方法以及自身重写（override）的方法。</p>
+<h3 id="类引用调用invokevirtual"><a href="#类引用调用invokevirtual" class="headerlink" title="类引用调用invokevirtual"></a>类引用调用invokevirtual</h3><p>代码如下：</p>
+<pre><code class="java">package org.fan.learn.methodTable;
+
+/**
+ * Created by fan on 2016/3/30.
+ */
+public class ClassReference {
+    static class Person {
+        @Override
+        public String toString(){
+            return &quot;I&#39;m a person.&quot;;
+        }
+        public void eat(){
+            System.out.println(&quot;Person eat&quot;);
+        }
+        public void speak(){
+            System.out.println(&quot;Person speak&quot;);
+        }
+
+    }
+
+    static class Boy extends Person{
+        @Override
+        public String toString(){
+            return &quot;I&#39;m a boy&quot;;
+        }
+        @Override
+        public void speak(){
+            System.out.println(&quot;Boy speak&quot;);
+        }
+        public void fight(){
+            System.out.println(&quot;Boy fight&quot;);
+        }
+    }
+
+    static class Girl extends Person{
+        @Override
+        public String toString(){
+            return &quot;I&#39;m a girl&quot;;
+        }
+        @Override
+        public void speak(){
+            System.out.println(&quot;Girl speak&quot;);
+        }
+        public void sing(){
+            System.out.println(&quot;Girl sing&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        Person boy = new Boy();
+        Person girl = new Girl();
+        System.out.println(boy);
+        boy.eat();
+        boy.speak();
+        //boy.fight();
+        System.out.println(girl);
+        girl.eat();
+        girl.speak();
+        //girl.sing();
+    }
+}
+</code></pre>
+<p>注意，<code>boy.fight();</code>和<code>girl.sing();</code>这两个是有问题的，在IDEA中会提示“Cannot resolve method ‘fight()’”。因为，方法的调用是有静态类型检查的，而boy和girl的静态类型都是Person类型的，在Person中没有fight方法和sing方法。因此，会报错。<br>执行结果如下：</p>
+<pre><code class="java">I&#39;m a boy
+Person eat&lt;-----
+Boy speak
+I&#39;m a girl
+Person eat&lt;-----
+Girl speak</code></pre>
+<p>从上图可以看到，<code>boy.eat()</code> 和 <code>girl.eat()</code> 调用产生的输出都是”Person eat”，因为Boy和Girl中没有override 父类的eat方法。<br>字节码指令：</p>
+<pre><code class="bash">public static void main(java.lang.String[]);
+  Code:
+   Stack=2, Locals=3, Args_size=1
+   0:   new     #2; //class ClassReference$Boy
+   3:   dup
+   4:   invokespecial   #3; //Method ClassReference$Boy.&quot;&lt;init&gt;&quot;:()V
+   7:   astore_1
+   8:   new     #4; //class ClassReference$Girl
+   11:  dup
+   12:  invokespecial   #5; //Method ClassReference$Girl.&quot;&lt;init&gt;&quot;:()V
+   15:  astore_2
+   16:  getstatic       #6; //Field java/lang/System.out:Ljava/io/PrintStream;
+   19:  aload_1
+   20:  invokevirtual   #7; //Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+   23:  aload_1
+   24:  invokevirtual   #8; //Method ClassReference$Person.eat:()V
+   27:  aload_1
+   28:  invokevirtual   #9; //Method ClassReference$Person.speak:()V
+   31:  getstatic       #6; //Field java/lang/System.out:Ljava/io/PrintStream;
+   34:  aload_2
+   35:  invokevirtual   #7; //Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+   38:  aload_2
+   39:  invokevirtual   #8; //Method ClassReference$Person.eat:()V
+   42:  aload_2
+   43:  invokevirtual   #9; //Method ClassReference$Person.speak:()V
+   46:  return</code></pre>
+<p>其中所有的invokevirtual调用的都是Person类中的方法。</p>
+<p>下面看看java对象的内存模型：</p>
+<p><img src="/Users/ocean/Downloads/1583221618068.jpg" alt="java对象的内存模型"></p>
+<p>从上图可以清楚地看到调用方法的指针指向。<strong>而且可以看出相同签名的方法在方法表中的偏移量是一样的</strong>。这个偏移量只是说Boy方法表中的继承自Object类的方法、继承自Person类的方法的偏移量与Person类中的相同方法的偏移量是一样的，与Girl是没有任何关系的。</p>
+<p>下面再看看调用过程，以<code>girl.speak()</code>方法的调用为例。在我的字节码中，这条指令对应43: invokevirtual #9; //Method ClassReference$Person.speak:()V ，为了便于使用IBM的图，这里采用跟IBM一致的符号引用：invokevirtual #12; 。调用过程图如下所示：<br><img src="/Users/ocean/Downloads/1583221802898.jpg" alt="调用过程"></p>
+<blockquote>
+<ul>
+<li>(1)在常量池中找到方法调用的<code>符号引用</code></li>
+<li>(2)查看Person的方法表，得到speak方法在该方法表的偏移量（假设为15），这样就得到该方法的<code>直接引用</code>。</li>
+<li>(3)根据this指针确定方法接收者(girl)的实际类型</li>
+<li>(4)根据对象的实际类型得到该实际类型对应的方法表，根据偏移量15查看有无重写（override）该方法，如果重写，则可以直接调用；如果没有重写，则需要拿到按照继承关系从下往上的基类（这里是Person类）的方法表，同样按照这个偏移量15查看有无该方法。</li>
+</ul>
+</blockquote>
+<h3 id="接口引用调用invokeinterface"><a href="#接口引用调用invokeinterface" class="headerlink" title="接口引用调用invokeinterface"></a>接口引用调用invokeinterface</h3><p>代码如下：</p>
+<pre><code class="java">package org.fan.learn.methodTable;
+
+/**
+ * Created by fan on 2016/3/29.
+ */
+public class InterfaceReference {
+    interface IDance {
+        void dance();
+    }
+
+    static class Person {
+        @Override
+        public String toString() {
+            return &quot;I&#39;m a person&quot;;
+        }
+        public void speak() {
+            System.out.println(&quot;Person speak&quot;);
+        }
+        public void eat() {
+            System.out.println(&quot;Person eat&quot;);
+        }
+    }
+
+    static class Dancer extends Person implements IDance {
+        @Override
+        public String toString() {
+            return &quot;I&#39;m a Dancer&quot;;
+        }
+        @Override
+        public void speak() {
+            System.out.println(&quot;Dancer speak&quot;);
+        }
+        public void dance() {
+            System.out.println(&quot;Dancer dance&quot;);
+        }
+    }
+
+    static class Snake implements IDance {
+        @Override
+        public String toString() {
+            return &quot;I&#39;m a Snake&quot;;
+        }
+        public void dance() {
+            System.out.println(&quot;Snake dance&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        IDance dancer = new Dancer();
+        System.out.println(dancer);
+        dancer.dance();
+        //dancer.speak();
+        //dancer.eat();
+        IDance snake = new Snake();
+        System.out.println(snake);
+        snake.dance();
+    }
+}
+</code></pre>
+<p>上面的代码中<code>dancer.speak(); dancer.eat();</code> 这两句同样不能调用。</p>
+<p>执行结果：</p>
+<pre><code class="java">I&#39;m a Dancer
+Dancer dance
+I&#39;m a Snake
+Snake dance</code></pre>
+<p>其字节码指令如下所示：</p>
+<pre><code class="java">public static void main(java.lang.String[]);
+  Code:
+   Stack=2, Locals=3, Args_size=1
+   0:   new     #2; //class InterfaceReference$Dancer
+   3:   dup
+   4:   invokespecial   #3; //Method InterfaceReference$Dancer.&quot;&lt;init&gt;&quot;:()V
+   7:   astore_1
+   8:   getstatic       #4; //Field java/lang/System.out:Ljava/io/PrintStream;
+   11:  aload_1
+   12:  invokevirtual   #5; //Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+   15:  aload_1
+   16:  invokeinterface #6,  1; //InterfaceMethod InterfaceReference$IDance.dance:()V
+   21:  new     #7; //class InterfaceReference$Snake
+   24:  dup
+   25:  invokespecial   #8; //Method InterfaceReference$Snake.&quot;&lt;init&gt;&quot;:()V
+   28:  astore_2
+   29:  getstatic       #4; //Field java/lang/System.out:Ljava/io/PrintStream;
+   32:  aload_2
+   33:  invokevirtual   #5; //Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+   36:  aload_2
+   37:  invokeinterface #6,  1; //InterfaceMethod InterfaceReference$IDance.dance:()V
+   42:  return</code></pre>
+<p>从上面的字节码指令可以看到，<code>dancer.dance();</code> 和<code>snake.dance();</code> 的字节码指令都是<code>invokeinterface #6, 1; //InterfaceMethod InterfaceReference$IDance.dance:()V</code> 。</p>
+<p><strong>为什么invokeinterface指令会有两个参数呢？</strong></p>
+<p>对象的内存模型如下所示：</p>
+<p><img src="/Users/ocean/Downloads/1583222491367.jpg" alt="对象的内存模型"></p>
+<p>从上图可以看到IDance接口中的方法<code>dance(）</code>在Dancer类的方法表中的偏移量跟在Snake类的方法表中的偏移量是不一样的，因此无法仅根据偏移量来进行方法的调用。（<strong>这句话在理解时，要注意，只是为了强调invokeinterface在查找方法时不再是基于偏移量来实现的，而是基于搜索的方式。</strong>）应该这么说，dance方法在IDance方法表（如果有的话）中的偏移量与在Dancer方法表中的偏移量是不一样的。<br>因此，要在Dancer的方法表中找到dance方法，必须搜索Dancer的整个方法表。</p>
+<p>下面写一个，如果Dancer中没有重写（override）toString方法，会发生什么？<br>代码如下：</p>
+<pre><code class="java">package org.fan.learn.methodTable;
+
+/**
+ * Created by fan on 2016/3/29.
+ */
+public class InterfaceReference {
+    interface IDance {
+        void dance();
+    }
+
+    static class Person {
+        @Override
+        public String toString() {
+            return &quot;I&#39;m a person&quot;;
+        }
+        public void speak() {
+            System.out.println(&quot;Person speak&quot;);
+        }
+        public void eat() {
+            System.out.println(&quot;Person eat&quot;);
+        }
+    }
+
+    static class Dancer extends Person implements IDance {
+//        @Override
+//        public String toString() {
+//            return &quot;I&#39;m a Dancer&quot;;
+//        }
+        @Override
+        public void speak() {
+            System.out.println(&quot;Dancer speak&quot;);
+        }
+        public void dance() {
+            System.out.println(&quot;Dancer dance&quot;);
+        }
+    }
+
+    static class Snake implements IDance {
+        @Override
+        public String toString() {
+            return &quot;I&#39;m a Snake&quot;;
+        }
+        public void dance() {
+            System.out.println(&quot;Snake dance&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        IDance dancer = new Dancer();
+        System.out.println(dancer);
+        dancer.dance();
+        //dancer.speak();
+        //dancer.eat();
+        IDance snake = new Snake();
+        System.out.println(snake);
+        snake.dance();
+    }
+}
+</code></pre>
+<p>执行结果如下：</p>
+<pre><code class="java">I&#39;m a person &lt;-----
+Dancer dance
+I&#39;m a Snake
+Snake dance</code></pre>
+<p>可以看到<code>System.out.println(dancer);</code> 调用的是Person的toString方法。<br>内存模型如下所示：</p>
+<p><img src="/Users/ocean/Downloads/1583222768344.jpg" alt="内存模型"></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 729535228@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>重载、重写的调用原理</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">5.4k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Ocean Bai">Ocean Bai</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-03-03, 12:41:32</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-03, 16:33:04</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/03/java/JDK/%E5%A4%9A%E6%80%81%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/" title="重载、重写的调用原理">http://yoursite.com/2020/03/03/java/JDK/%E5%A4%9A%E6%80%81%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019-2020 Ocean</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#AOP','#面试','#Redis','#动态代理','#IOC','#SPI','#算法','#SpringBoot常用注解','#缓存','#类加载器','#设计原则','#jvm','#反射','#垃圾','#设计模式','#工厂模式','#mysql','#日志系统','#事务','#索引','#练习','#总结面试','#三次握手','#四次挥手','#java','#arrayList','#ThreadLocal','#指令','#线程池','#多态','#hashmap','#synchronized','#Volatile','#内存模型',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
